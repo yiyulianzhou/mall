@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-02-07 05:51:22
+/* Smarty version 3.1.30, created on 2018-02-09 03:15:11
   from "D:\wamp64\www\mall_manage\application\views\home\index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a7a93da6d9f56_26042381',
+  'unifunc' => 'content_5a7d123f61fc12_70819247',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '83953f9449604e194698da463e3f8182eda029a7' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\home\\index.html',
-      1 => 1517981988,
+      1 => 1518146109,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,14 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
     'file:../public/header.html' => 1,
     'file:../public/left.html' => 1,
+    'file:../public/breadcrumb.html' => 1,
     'file:../public/page.html' => 1,
     'file:../public/page2.html' => 1,
     'file:../public/footer_page.html' => 1,
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5a7a93da6d9f56_26042381 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a7d123f61fc12_70819247 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -42,6 +43,9 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
 
 		<!-- Main content -->
 		<div class="content-wrapper">
+
+			<?php $_smarty_tpl->_subTemplateRender("file:../public/breadcrumb.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
 
 			<!-- Content area -->
 			<div class="content">

@@ -1,0 +1,10 @@
+
+<div class="page-header">
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a href="<{$base_url}>"><i class="icon-home2 position-left"></i> 首页</a></li>
+            <li ng-hide="'<{$data.base.class_name}>' == 'home'"><a href="<{site_url($data.base.module_url)}>"> <{$data.base.module_name}></a></li>
+            <li class="active"><{$data.common.method_name[$data.base.method_name]}></li>
+        </ul>
+    </div>
+</div>

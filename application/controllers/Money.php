@@ -41,6 +41,21 @@ class money extends MY_Controller
 		}
 		$this->returnResponse ();
 	}
+
+	/**
+	 * @copyright 买家充值
+	 * @return    [type]      [description]
+	 */
+	public function getRecharge() {
+
+		$this->response = $this->model->buyerRecharge();
+
+		if ($this->response) {
+			$this->response['msg_type'] = 'success';
+			$this->response['message'] = '获取买家充值列表成功';
+		}
+		$this->returnResponse ();
+	}
     public function seller()
     {
 		$this->display($this->data['file_path']);
@@ -79,23 +94,6 @@ class money extends MY_Controller
      */
     public function recharge()
     {
-    	$username = $this->input->get('username');
-    	$page = $this->input->get('per_page') > 1 ? $this->input->get('per_page') : 1;
-    	$searchbtn = "筛选 －";
-		$searchbox = "display:''";
-    	if( empty($username) )
-		{
-			$searchbtn = "筛选 ＋";
-			$searchbox = "display:none";
-		}
-    	$res = $this->model->recharge( $username,$page );
-        $this->assign('username', $username);
-        $this->assign('page', $page);
-        $this->assign('searchbtn', $searchbtn);
-        $this->assign('searchbox', $searchbox);
-        $this->assign('rechargeList', $res['list']);
-		$this->assign('permission_tree', $this->data['permission_tree'][$this->router->class]);
-        $this->assign('pager_links', $res['pager_links']);
 		$this->display($this->data['file_path']);
     }
     /**
@@ -134,6 +132,24 @@ class money extends MY_Controller
 		if ($this->response) {
 			$this->response['msg_type'] = 'success';
 			$this->response['message'] = '获取卖家提现金额成功';
+		}
+		$this->returnResponse ();
+	}
+
+	/**
+	 * @copyright 获取买家充值金额统计
+	 * @return    [type]      [description]
+	 */
+
+	public function getBuyerRecharge ()
+	{
+		// 查询条件
+		$search = $this->input->post(null, true);
+
+		$this->response['echarts_data'] = $this->model->getBuyerRecharge($search);
+		if ($this->response) {
+			$this->response['msg_type'] = 'success';
+			$this->response['message'] = '获取买家充值金额成功';
 		}
 		$this->returnResponse ();
 	}
@@ -190,6 +206,24 @@ class money extends MY_Controller
 
 
 	/**
+	 * @copyright 获取买家充值人数统计
+	 * @return    [type]      [description]
+	 */
+	public function getRechargeBuyer ()
+	{
+		// 查询条件
+		$search = $this->input->post(null, true);
+
+		$this->response['echarts_data'] = $this->model->getRechargeBuyer($search);
+		if($this->response) {
+			$this->response['msg_type'] = 'success';
+			$this->response['message'] = '获取提现卖家人数成功';
+		}
+		$this->returnResponse ();
+	}
+
+
+	/**
 	 * @copyright 统计头部提现卖家的数据
 	 * @return    [type]      [description]
 	 */
@@ -215,6 +249,21 @@ class money extends MY_Controller
 		if ($this->response) {
 			$this->response['msg_type'] = 'success';
 			$this->response['message'] = '获取买家头部统计成功';
+		}
+		$this->returnResponse ();
+	}
+
+	/**
+	 * @copyright 统计头部充值买家的数据
+	 * @return    [type]      [description]
+	 */
+	public function countBuyerRecharge ()
+	{
+
+		$this->response['count'] = $this->model->countBuyerRecharge();
+		if ($this->response) {
+			$this->response['msg_type'] = 'success';
+			$this->response['message'] = '获取买家充值统计成功';
 		}
 		$this->returnResponse ();
 	}

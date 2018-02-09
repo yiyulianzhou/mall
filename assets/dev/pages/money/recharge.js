@@ -1,25 +1,13 @@
 
 /* ------------------------------------------------------------------------------
  *
- * money 财务JS
+ * money 财务充值JS
  *
  * ---------------------------------------------------------------------------- */
-var Satus = {1: "待审核",3: "审核未通过",12: "待打款",13: "提现完成"};
-app.filter("StatusDesc", function () {
-    return function (e) {
-        return Satus[e];
-    }
-})
 app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common', function($scope, $http,appService, appFactory,common) {
 
     //所有列表
     $scope.alllist = [];
-
-    // 反馈列表数据变量初始化
-    $scope.list = [];
-
-    // 提现列表
-    $scope.applylist = [];
 
     //头部统计数据
     $scope.lists = [];
@@ -27,7 +15,7 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
     //统计头部卖家提现相关数据
     var countSellerCash = function ()
     {
-        var url =  common.count_seller_cash;
+        var url =  common.count_buyer_recharge;
         $http({
             url: url,
             method: 'POST',
@@ -40,7 +28,7 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
     }
     countSellerCash();
 
-    //卖家提现列表数据
+    //买家充值列表数据
     var getList = function (page){
         var formData = {};
 
@@ -48,7 +36,7 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
 
         // loading 开
         appFactory.loadingToggle(1);
-        var url = page > 1 ? common.get_seller + page : common.get_seller;
+        var url = page > 1 ? common.get_recharge + page : common.get_recharge;
         $http({
             url:url,
             method:'POST',
@@ -209,10 +197,10 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
 
                 formData.s_day = $scope.s_day;
 
-                //提现金额统计
+                //充值金额统计
                 var getSellerCashData = function() {
                     $http({
-                        url: common.get_seller_cash,
+                        url: common.get_buyer_recharge,
                         method: 'POST',
                         data:$.param(formData),
                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -268,14 +256,14 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
                 getSellerCashData();
 
                 var stacked2_lines = ec.init(document.getElementById('stacked2_lines'),macarons);
-                //提现卖家
+                //充值买家
                 var getCashSellerData = function() {
                     formData = {};
                     formData.s_start_time2 = $scope.s_start_time2;
                     formData.s_end_time2 = $scope.s_end_time2;
                     formData.s_day2 = $scope.s_day2;
                     $http({
-                        url: common.get_cash_seller,
+                        url: common.get_recharge_buyer,
                         method: 'POST',
                         data:$.param(formData),
                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
