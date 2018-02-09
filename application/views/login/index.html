@@ -1,0 +1,46 @@
+<{include file="../public/auth_header.html" }>
+	<!-- Page container -->
+	<div class="page-container login-container" ng-controller="appCtrl">
+		<!-- Page content -->
+		<div class="page-content">
+			<div class="content-wrapper">
+				<div class="content">
+					<ng-form name="userLoginForm">
+						<div class="panel panel-body login-form">
+							<div class="text-center">
+								<div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
+								<h5 class="content-group">用户登录 <small class="display-block">请输入您的身份信息</small></h5>
+							</div>
+
+							<div class="form-group has-feedback has-feedback-left">
+								<input type="text" class="form-control" name="username" ng-model="username" placeholder="用户名" required>
+								<div class="form-control-feedback">
+									<i class="icon-user text-muted"></i>
+								</div>
+							</div>
+
+							<div class="form-group has-feedback has-feedback-left">
+								<input type="password" class="form-control" name="password" ng-model="password" placeholder="密码" required>
+								<div class="form-control-feedback">
+									<i class="icon-lock2 text-muted"></i>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<button type="button" ng-click="save()" ng-disabled="userLoginForm.username.$invalid ||userLoginForm.password.$invalid" class="btn btn-primary btn-block">登录 <i class="icon-circle-right2 position-right"></i></button>
+							</div>
+
+						</div>
+					</ng-form>
+				</div>
+				<!-- Footer -->
+                <{include file="../public/bottom.html" }>
+                <!-- /footer -->
+            </div>
+        </div>
+    </div>
+    <!-- /page container -->
+<!-- Footer -->
+<{include file="../public/footer.html" }>
+<!-- /footer -->
+

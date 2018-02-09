@@ -1,0 +1,120 @@
+<{include file="../public/header.html" }>
+<!-- /main navbar --> 
+<!-- Page container -->
+<div class="page-container"> 
+  
+  <!-- Page content -->
+  <div class="page-content"> 
+      <{include file="../public/left.html" }>
+    <div class="content-wrapper">
+      <!-- Content area -->
+      <div class="content">
+        <div class="panel panel-flat">
+          <div class="panel-heading">
+            <h5 class="panel-title">买家管理<span class="ml10">
+              <input name="" type="button"  value="<{$searchbtn}>"  class="btn btn-xs bg-grey-100 text-xg flitbtn" id="searchbtn" onclick="btn()" >
+              </span></h5>
+            <!--<div class="heading-elements"><a href="#adduser" class="btn btn-primary" data-toggle="modal" data-target="#adduser"><i class="icon-plus-circle2"></i> 新增用户</a></div>-->
+            <div class="heading-elements"></div>
+          </div>
+          <form action="" method="GET" class="form-container">
+            <div class="panel-body br-t pt20" id="searchbox" style="<{$searchbox}>">
+              <div class="row">
+                <div class="col-md-2 col-sm-4 m-ss">
+                  <input type="text" class="form-control" placeholder="用户名" name="username" value="<{$username}>">
+                </div>
+                <div class="col-md-1 col-sm-4 m-ss">
+                  <select name="status" class="form-control">
+                    <option value="-1"<{if $status eq -1}> selected="selected"<{/if}>>状态</option>
+                    <option value="0"<{if $status eq 0}> selected="selected"<{/if}>>正常</option>
+                    <option value="2"<{if $status eq 2}> selected="selected"<{/if}>>禁言</option>
+                  </select>
+                </div>
+                <div class="col-md-1 m-ss">
+                  <input type="submit" class=" btn btn-block bg-grey-300" value="筛选">
+                </div>
+              </div>
+            </div>
+          </form>
+          <table class="table datatable-basic table-hover">
+            <thead class="bg-grey-100">
+              <tr>
+                <th>昵称</th>
+                <th>头像</th>
+                <th>手机</th>
+                <th>邮箱</th>
+                <th>性别</th>
+                <th>状态</th>
+                <{if isset($permission_tree.detail) || isset($permission_tree.lock)}>
+                <th class="text-center">操作</th>
+                <{/if}>
+              </tr>
+            </thead>
+            <tbody><!-- danger -->
+              <{foreach from=$buyerList item=v}>
+              <tr>
+                <td><{$v.username}></td>
+                <td> <img src="<{$v.avatarUrl}>" style="width:60px;height:60px;"></td>
+                <td><{$v.phone}></td>
+                <td><{$v.email}></td>
+                <td><{($v.gender == '1')?'男':(($v.gender == '2')?'女':'未知')}></td>
+                <td><span class="label label-<{($v.status == '0') ? 'success' : 'danger'}>"><{($v.status == '0')?'正常':'禁言'}></span></td>
+                <{if isset($permission_tree.detail) || isset($permission_tree.lock)}>
+                <td class="text-center">
+                  <ul class="icons-list">
+                    <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-menu9"></i> </a>
+                      <ul class="dropdown-menu dropdown-menu-right mnw100">
+                        <{if isset($permission_tree.lock)}>
+                        <li><a href='<{site_url("buyer/lock?id=<{$v.id}>&username=<{$username}>&status=<{$v.status}>")}>&per_page=<{$page}>' ><i class="icon-compose"></i> <{($v.status == '0')?'禁言':'解禁'}></a> 
+                        </li>
+                        <{/if}>
+                        <{if isset($permission_tree.detail)}>
+                        <li>
+                          <a href='<{site_url("buyer/detail?id=<{$v.id}>&per_page=<{$page}>&username=<{$username}>&status=<{$v.status}>")}>'><i class="icon-inbox"></i> 详情</a>
+                        </li>
+                        <{/if}>
+                      </ul>
+                    </li>
+                  </ul>
+                </td>
+                <{/if}>
+              </tr>
+              <{/foreach}>
+            </tbody>
+          </table>
+          <{include file="../public/pager.html"}>
+        </div>
+        
+        <{include file="../public/footer_page.html" }>
+        
+      </div>
+      <!-- /content area --> 
+      
+    </div>
+    <!-- /main content --> 
+    
+  </div>
+  <!-- /page content --> 
+  
+</div>
+</div>
+<!-- /page container --> 
+<!-- /page JS files -->
+<script type="text/javascript" src="<{$base_url}>assets/js/pages/modals_option.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/forms/styling/uniform.min.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/forms/styling/switch.min.js"></script>
+
+<script type="text/javascript">
+  var btn1=document.getElementById('searchbtn');
+  var box1=document.getElementById('searchbox');
+  function btn(){ 
+    if(btn1.value=="筛选 －"){
+      box1.style.display='none';
+      btn1.value="筛选 ＋";
+    }else{
+      box1.style.display='';
+      btn1.value="筛选 －";
+    }
+  }
+</script>
+<{include file="../public/footer.html" }>

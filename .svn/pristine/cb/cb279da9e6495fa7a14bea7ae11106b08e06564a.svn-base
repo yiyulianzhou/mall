@@ -1,0 +1,32 @@
+<?php
+if(!defined('BASEPATH')) exit();
+
+// 模块URL
+$config['base']['module_url']  = "money/";
+
+// 模块名
+$config['base']['module_name'] = '订单';
+
+// 列表数据访问链接
+$config['url']['money_url']               = $config['base']['module_url'].'money/';
+
+//提现状态
+$config['money']['state'] = array(
+								"1"=>"待审核",
+								"3"=>"审核未通过",
+								"12"=>"待打款",
+								"13"=>"提现完成"
+							);
+
+//卖家提现列表数据
+$config['url']['get_seller'] = $config['base']['module_url'] . 'getSeller/';
+
+//统计头部卖家提现的相关数据连接
+$config['url']['count_seller_cash'] = $config['base']['module_url'] . 'countSellerCash/';
+
+
+//卖家提现金额报表数据连接
+$config['url']['get_seller_cash'] = $config['base']['module_url'] . 'getSellerCash/';
+
+//提现卖家人数报表数据连接
+$config['url']['get_cash_seller'] = $config['base']['module_url'] . 'getCashSeller/';

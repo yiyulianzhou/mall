@@ -1,0 +1,150 @@
+<{include file="../public/header.html" }>
+<!-- /main navbar --> 
+<!-- Page container -->
+<div class="page-container"> 
+  
+  <!-- Page content -->
+  <div class="page-content"> 
+      <{include file="../public/left.html" }>
+    <div class="content-wrapper">
+      <!-- Content area -->
+      <div class="content">
+        <div class="panel panel-flat">
+          <div class="panel-heading">
+            <h5 class="panel-title">商品管理<span class="ml10">
+              <input name="" type="button"  value="<{$searchbtn}>"  class="btn btn-xs bg-grey-100 text-xg flitbtn" id="searchbtn" onclick="btn()" >
+              </span></h5>
+            <!--<div class="heading-elements"><a href="#adduser" class="btn btn-primary" data-toggle="modal" data-target="#adduser"><i class="icon-plus-circle2"></i> 新增用户</a></div>-->
+            <div class="heading-elements"></div>
+          </div>
+          <form action="" method="GET" class="form-container">
+            <div class="panel-body br-t pt20" id="searchbox" style="<{$searchbox}>">
+              <div class="row">
+                <div class="col-md-2 col-sm-4 m-ss">
+                  <input type="text" class="form-control" placeholder="商品名称" name="name" value="<{$name}>">
+                </div>
+                <div class="col-md-2 col-sm-6 m-ss">
+                  <select name="categoryId" class="form-control">
+                    <option value="-1"<{if $categoryId eq -1}> selected="selected"<{/if}>>商品分类</option>
+                    <{foreach from=$categoryList item=category key=key}>
+                      <option value="<{$key}>"<{if $categoryId eq $key}> selected="selected"<{/if}>><{$category}></option>
+                    <{/foreach}>
+                  </select>
+                </div>
+                <div class="col-md-2 col-sm-6 m-ss">
+                  <select name="sales_type" class="form-control">
+                    <option value="-1"<{if $sales_type eq -1}> selected="selected"<{/if}>>销售方式</option>
+                    <option value="1"<{if $sales_type eq 1}> selected="selected"<{/if}>>普通</option>
+                    <option value="2"<{if $sales_type eq 2}> selected="selected"<{/if}>>团购</option>
+                  </select>
+                </div>
+                <div class="col-md-2 col-sm-6 m-ss">
+                  <select name="orderBy" class="form-control">
+                    <option value="-1"<{if $orderBy eq -1}> selected="selected"<{/if}>>排序</option>
+                    <option value="1"<{if $orderBy eq 1}> selected="selected"<{/if}>>销量从高到低</option>
+                    <option value="2"<{if $orderBy eq 2}> selected="selected"<{/if}>>销量从低到高</option>
+                    <option value="3"<{if $orderBy eq 3}> selected="selected"<{/if}>>活跃从高到低</option>
+                    <option value="4"<{if $orderBy eq 4}> selected="selected"<{/if}>>活跃从低到高</option>
+                  </select>
+                </div>
+                <div class="col-md-1 m-ss">
+                  <input type="submit" class=" btn btn-block bg-grey-300" value="筛选">
+                </div>
+              </div>
+            </div>
+          </form>
+          <table class="table datatable-basic table-hover">
+            <thead class="bg-grey-100">
+              <tr>
+                <th>商品名称</th>
+                <th>商品图片</th>
+                <th>商品分类</th>
+                <th>销售方式</th>
+                <th>产地直销</th>
+                <th>物流方式</th>
+                <th>运费/配送范围</th>
+                <th>状态</th>
+                <{if isset($permission_tree.detail) || isset($permission_tree.verify) || isset($permission_tree.nosales)}>
+                <th class="text-center">操作</th>
+                <{/if}>
+              </tr>
+            </thead>
+            <tbody><!-- danger -->
+              <{foreach from=$goodsList item=v}>
+              <tr>
+                <td><{$v.name}></td>
+                <td> <img src="<{$data.common.upload_images}><{$v.img}>" style="width:60px;height:60px;"></td>
+                <td><{$categoryList[$v.category]}></td>
+                <td><{($v.sales_type == '1') ? '普通' : '团购'}></td>
+                <td><{($v.direct_sales == '1') ? '是' : '否'}></td>
+                <td><{($v.logistics == '1')?'第三方快递':'卖家送货上门'}></td>
+                <{if $v.logistics == '2'}>
+                <td><{($v.ship_cost=='0')?'1公里内':(($v.ship_cost=='1')?'2公里内':(($v.ship_cost=='2')?'3公里内':'距离不限'))}></td>
+                <{else}>
+                <td><{$v.ship_cost}></td>
+                <{/if}>
+                <td><{$goodsState[$v.state]}></td>
+                <{if isset($permission_tree.detail) || isset($permission_tree.verify) || isset($permission_tree.nosales)}>
+                <td class="text-center">
+                  <ul class="icons-list">
+                    <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-menu9"></i> </a>
+                      <ul class="dropdown-menu dropdown-menu-right mnw100">
+                        <{if isset($permission_tree.verify) && $v.state == '1'}>
+                        <li><a href='<{site_url("goods/detail?id=<{$v.id}>")}>&per_page=<{$page}>&categoryId=<{$categoryId}>&sales_type=<{$sales_type}>&orderBy=<{$orderBy}>&name=<{$name}>&type=1' ><i class="icon-compose"></i> 商品审核</a> 
+                        </li>
+                        <{/if}>
+                        <{if isset($permission_tree.detail)}>
+                        <li>
+                          <a href='<{site_url("goods/detail?id=<{$v.id}>&per_page=<{$page}>")}>&categoryId=<{$categoryId}>&sales_type=<{$sales_type}>&orderBy=<{$orderBy}>&name=<{$name}>&type=2'><i class="icon-inbox"></i> 商品详情</a>
+                        </li>
+                        <{/if}>
+                        <{if isset($permission_tree.nosales) && $v.state == '5'}>
+                        <li>
+                          <a href='<{site_url("goods/nosales?id=<{$v.id}>&state=<{$v.state}>")}>&categoryId=<{$categoryId}>&sales_type=<{$sales_type}>&per_page=<{$page}>&orderBy=<{$orderBy}>&name=<{$name}>'><i class="icon-inbox"></i> 商品下架</a>
+                        </li>
+                        <{/if}>
+                      </ul>
+                    </li>
+                  </ul>
+                </td>
+                <{/if}>
+              </tr>
+              <{/foreach}>
+            </tbody>
+          </table>
+          <{include file="../public/pager.html"}>
+        </div>
+        
+        <{include file="../public/footer_page.html" }>
+        
+      </div>
+      <!-- /content area --> 
+      
+    </div>
+    <!-- /main content --> 
+    
+  </div>
+  <!-- /page content --> 
+  
+</div>
+</div>
+<!-- /page container --> 
+<!-- /page JS files -->
+<script type="text/javascript" src="<{$base_url}>assets/js/pages/modals_option.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/forms/styling/uniform.min.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/forms/styling/switch.min.js"></script>
+
+<script type="text/javascript">
+  var btn1=document.getElementById('searchbtn');
+  var box1=document.getElementById('searchbox');
+  function btn(){ 
+    if(btn1.value=="筛选 －"){
+      box1.style.display='none';
+      btn1.value="筛选 ＋";
+    }else{
+      box1.style.display='';
+      btn1.value="筛选 －";
+    }
+  }
+</script>
+<{include file="../public/footer.html" }>

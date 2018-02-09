@@ -1,0 +1,121 @@
+/**
+ * @CreateTime:  2016-09-21 10:14:30
+ * @UpdateTime:  2016-09-21 10:14:30
+ * @Description: 以下代码自定义修改局部样式
+ */
+.panel-footer {
+    border-left: 0 !important;
+    border-radius: 0 !important;
+    border-right: 0 !important;
+    box-shadow: 0 !important;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 0;
+}
+
+.content {
+    position: relative;
+}
+
+.label {
+    font-size: 13px;
+}
+.content-wrapper{
+  position: relative;
+  padding-bottom: 10px;
+}
+.footer {
+    display: block;
+    text-align: center;
+    width: 100%;
+    left: 0;
+    bottom: 10px;
+}
+.loading-wrapper{
+	position: fixed;
+	top: 0;
+    left: 0;
+    max-width: 100%;
+	height: 100%;
+    width: 100%;
+    z-index: 999999999;
+	background: rgba(255,255,255,0.5);
+}
+.loading-img{
+	background: url(../images/loading-lg.gif) no-repeat center center;
+	height: 64px;
+	width: 64px;
+    margin-left: -32px;
+    margin-top: -32px;
+    position: fixed;
+    top: 50%;
+ 	left: 50%;
+    z-index: 999;
+}
+
+.page_input{
+	background-color: #fff;
+    background-image: none;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #333;
+    display: block;
+    font-size: 13px;
+    height: 36px;
+    line-height: 1.53846;
+    padding: 7px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+    max-width: 100px;
+    display:inline-block;
+}
+
+.stepy-navigator{
+	padding: 20px;
+}
+#interest-tree ul{
+	padding-left: 0;
+}
+#interest-tree > ul > li{
+	margin-bottom: 15px;
+}
+#interest-tree > ul > li > a {
+	display: block;
+	padding: 10px 15px;
+	background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    color: #333;
+}
+#interest-tree ul  .dropdown-menu{
+	right: auto;
+    width: 100%;
+}
+
+.dataTables_info,.dataTables_paginate{
+    margin: 0;
+}
+.paginate_button.previous,
+.paginate_button.next{
+    background: none;
+}
+
+.category_checked{
+    border: 1px solid #2196f3 !important;
+    color: #2196f3 !important;
+}
+
+.stepy-step > legend{
+    display: none;
+}
+
+.custom-inline .radio,
+.custom-inline .checkbox{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#view_task_time_range .dateselbox ul.subbox li {
+    width: 4.1%;
+}
