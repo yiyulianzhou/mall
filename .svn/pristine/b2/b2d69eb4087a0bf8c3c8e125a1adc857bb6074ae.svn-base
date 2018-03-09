@@ -1,6 +1,0 @@
-<div class="footer text-muted">众邻市集管理平台 Copyright © 2017-<{date('Y')}> CCIT All rights reserved.</div>
-<div class="loading-wrapper" ng-if="loading">
-	<div class="loading-container">
-		<div class="loading-img"></div>
-	</div>
-</div>
