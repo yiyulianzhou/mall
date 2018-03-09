@@ -110,7 +110,6 @@ class MY_Model extends CI_Model
 		$this->db->where('b.controller_name', $controller);
 		$this->db->where('b.model_name', $method);
 		$res = $this->db->get()->row_array();
-		//echo $this->db->last_query();
 		return $res;
     }
 

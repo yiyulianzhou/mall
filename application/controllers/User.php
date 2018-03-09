@@ -95,6 +95,7 @@ class user extends MY_Controller
         	$my_permission = $this->model->my_permission($this->user_session['uid']);
 
         	$result = array_diff($permission, $my_permission);
+
         	if(empty($result))
         	{
         		$input['username']  = $this->input->post('username');
@@ -115,7 +116,8 @@ class user extends MY_Controller
 	            	{
 	            		foreach($permission as $val)
 	            		{
-	            			$data = ['admin_id'=>$id, 'permission_id'=>$val];
+	            			$data = ['admin_id'=>$id,'permission_id'=>$val];
+
 	            			$this->model->insert('admin_permission', $data);
 	            		}
             			$this->response['msg_type'] = 'success';

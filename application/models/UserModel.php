@@ -91,7 +91,9 @@ class UserModel extends MY_Model
         $total_rows = $this->db->count_all_results('', false);
 
         $pager = $this->setPager($total_rows, $page);
+
         $this->db->limit($pager['per_page'], $pager['start_page']);
+
         $this->db->order_by('create_time', 'DESC');
 
         // 获取结果集

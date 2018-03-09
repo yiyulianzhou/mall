@@ -76,12 +76,14 @@ class order extends MY_Controller
     public function getOrderData()
     {
         $search = $this->input->post();
+
         $this->response['echarts_data'] = $this->model->getOrderData($search);
 
         if ($this->response){
             $this->response['msg_type'] = 'success';
             $this->response['message'] = '获取订单金额前10报表成功';
         }
+
         $this->returnResponse();
     }
 

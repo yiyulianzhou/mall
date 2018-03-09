@@ -112,11 +112,15 @@ class OrderModel extends MY_Model
     public function getOrderData ($search)
 
     {
+
         $this->db->select('a.money,a.create_time');
         $this->db->from('order a');
+
         //订单状态为已完成或待发货
         $where ='a.status =7 or a.status=9';
+
         $this->db->where($where);
+
         $this->db->join('goods b','b.id = a.gid','left');
         //自选时间
         if (isset($search['s_start_time']) && isset($search['s_end_time']) && !empty($search['s_start_time']) && !empty($search['s_end_time']) ){
@@ -201,6 +205,7 @@ class OrderModel extends MY_Model
     {
         $this->db->select('a.money,a.create_time');
         $this->db->from('order a');
+
         //订单状态为已完成或待发货
         $where ='a.status =7 or a.status=9';
         $this->db->where($where);
