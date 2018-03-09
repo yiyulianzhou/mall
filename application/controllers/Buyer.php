@@ -8,41 +8,12 @@ class buyer extends MY_Controller
     {
         parent::__construct();
     }
+
     public function index()
     {
 		$this->display($this->data['file_path']);
     }
-    /**
-     * @DateTime  2017-12-20
-     * @copyright 买家禁言与解禁
-     * @return    [type]      [description]
-     */
-    public function lock()
-    {
-    	$id = $this->input->get('id');
-        $status = $this->input->get('status');
-    	$username = $this->input->get('username');
-    	$page = $this->input->get('per_page');
-    	$res = $this->model->buyerLock( $id, $status );
-    	redirect("buyer/index?per_page=$page&username=$username");
-    }
-    /**
-     * @DateTime  2017-12-20
-     * @copyright 买家详情
-     * @return    [type]      [description]
-     */
-    public function detail(){
-        $id = $this->input->get( 'id' );
-        $username = $this->input->get( 'username' );
-    	$status = $this->input->get( 'status' );
-        $page = $this->input->get('per_page');
-        $res = $this->model->buyerDetail( $id );
-        $this->assign('detail',$res);
-        $this->assign('page',$page);
-        $this->assign('username',$username);
-        $this->assign('status',$status);
-        $this->display($this->data['file_path']);
-    }
+
 
     /**
      * @copyright 卖家顶部统计数据
@@ -101,11 +72,11 @@ class buyer extends MY_Controller
      * @return    [type]      [description]
      */
 
-    public function getBuyerUsers()
+    public function getBuyerOrders()
     {
         $search = $this->input->post();
 
-        $this->response['echarts_data'] = $this->model->getBuyerUsers($search);
+        $this->response['echarts_data'] = $this->model->getBuyerOrders($search);
 
         if ($this->response){
             $this->response['msg_type'] = 'success';

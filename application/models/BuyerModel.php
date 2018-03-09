@@ -165,7 +165,7 @@ class BuyerModel extends MY_Model
      * @return    [type]          [description]
      */
 
-    public function getBuyerUsers($search)
+    public function getBuyerOrders($search)
     {
         $this->db->select('count(a.id) num, b.username');
         $this->db->from('order a');
@@ -246,6 +246,7 @@ class BuyerModel extends MY_Model
      * @param     [type]      $id [description]
      * @return    [type]          [description]
      */
+
     public function buyerDetail( $id )
     {
         $this->db->select('a.id,a.username,a.avatarUrl,a.districtId,a.gender,a.create_time,a.phone,a.money,a.status,b.title con_address');

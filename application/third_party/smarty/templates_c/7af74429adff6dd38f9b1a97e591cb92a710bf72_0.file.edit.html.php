@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-09 13:46:39
+/* Smarty version 3.1.30, created on 2018-03-09 15:32:45
   from "D:\wamp64\www\mall_manage\application\views\user\edit.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa21fbf04b626_81883221',
+  'unifunc' => 'content_5aa2389daeabc2_96316711',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7af74429adff6dd38f9b1a97e591cb92a710bf72' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\user\\edit.html',
-      1 => 1520574396,
+      1 => 1520580665,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5aa21fbf04b626_81883221 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa2389daeabc2_96316711 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -494,7 +494,7 @@ user" class="btn btn-primary">返回用户列表</a></div>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['buyer']['getBuyerCost'])) {?>
 															<li id="67">买家消费统计</li>
 															<?php }?>
-															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['buyer']['getBuyerUsers'])) {?>
+															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['buyer']['getBuyerOrders'])) {?>
 															<li id="68">买家订单数量</li>
 															<?php }?>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['buyer']['getBuyerList'])) {?>

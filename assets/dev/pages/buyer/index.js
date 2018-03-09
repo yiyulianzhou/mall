@@ -400,7 +400,7 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
                     formData.s_end_time2 = $scope.s_end_time2;
                     formData.s_day2 = $scope.s_day2;
                     $http({
-                        url: common.get_buyer_users,
+                        url: common.get_buyer_orders,
                         method: 'POST',
                         data:$.param(formData),
                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }

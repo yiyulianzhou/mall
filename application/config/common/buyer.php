@@ -20,7 +20,7 @@ $config['url']['get_buyer_list']               = $config['base']['module_url'].'
 $config['url']['get_buyer_cost']               = $config['base']['module_url'].'getBuyerCost/';
 
 //买家分布统计报表
-$config['url']['get_buyer_users']               = $config['base']['module_url'].'getBuyerUsers/';
+$config['url']['get_buyer_orders']               = $config['base']['module_url'].'getBuyerOrders/';
 
 // 操作链接
 $config['url']['get_buyer_info'] = $config['base']['module_url'] . 'getBuyerInfo/';
