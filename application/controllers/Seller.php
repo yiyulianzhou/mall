@@ -17,6 +17,7 @@ class seller extends MY_Controller
      * @copyright 卖家详情
      * @return    [type]      [description]
      */
+
     public function getSellerInfo($id='')
     {
         $this->validationId($id);
@@ -30,10 +31,12 @@ class seller extends MY_Controller
        $this->returnResponse();
 
     }
+
     /**
      * @copyright 店铺实名和健康审核
      * @return    [type]      [description]
      */
+
     public function verify($id='')
     {
         $this->validationId($id);

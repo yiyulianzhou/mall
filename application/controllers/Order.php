@@ -16,24 +16,8 @@ class order extends MY_Controller
     {
 		$this->display($this->data['file_path']);
     }
-    /**
-     * @copyright 订单详情
-     * @return    [state]      [description]
-     */
-    public function detail()
-    {
-        $orderStatus = $this->config->item('order')['status'];//订单状态列表
-    	$id = $this->input->get( 'id' );
-    	$status = $this->input->get( 'status' );
-    	$page = $this->input->get( 'per_page' );
-    	$res = $this->model->orderDetail( $id );
-    	$this->assign('detail', $res);
-    	$this->assign('page', $page);
-    	$this->assign('status', $status);
-        $this->assign('orderStatus', $orderStatus);
-        $this->assign('data', $this->data);
-		$this->display($this->data['file_path']);
-    }
+
+
     /**
      * @copyright 删除订单
      * @return    [type]      [description]

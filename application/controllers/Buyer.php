@@ -97,24 +97,28 @@ class buyer extends MY_Controller
     }
 
     /**
-     * @copyright 买家分布统计数据
+     * @copyright 买家订单排行
      * @return    [type]      [description]
      */
 
     public function getBuyerUsers()
     {
-        $this->response['echarts_data'] = $this->model->getBuyerUsers();
+        $search = $this->input->post();
+
+        $this->response['echarts_data'] = $this->model->getBuyerUsers($search);
 
         if ($this->response){
             $this->response['msg_type'] = 'success';
-            $this->response['message'] = '获取买家分布统计成功';
+            $this->response['message'] = '获取买家订单排行成功';
         }
         $this->returnResponse();
     }
+
     /**
      * @copyright 买家详情
      * @return    [type]      [description]
      */
+
     public function getBuyerInfo($id='')
     {
         $this->validationId($id);

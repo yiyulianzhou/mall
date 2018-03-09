@@ -164,20 +164,64 @@ class BuyerModel extends MY_Model
      * @param     [type]      $id [description]
      * @return    [type]          [description]
      */
-    public function getBuyerUsers()
+
+    public function getBuyerUsers($search)
     {
-
-        $this->db->select('count(a.id) num,a.districtId,b.title dist');
-        $this->db->from('user a');
+        $this->db->select('count(a.id) num, b.username');
+        $this->db->from('order a');
         $this->db->where('a.id >',10);
-        $this->db->join('building b','b.id = a.districtId','left');
 
-        $this->db->group_by('a.districtId');
+        $this->db->join('user b','b.id = a.buyer_id','left');
+
+        //自选时间
+        if (isset($search['s_start_time2']) && isset($search['s_end_time2']) && !empty($search['s_start_time2']) && !empty($search['s_end_time2'])){
+            $search['s_day2'] = '';
+            $start_time = $search['s_start_time2'];
+            $end_time = $search['s_end_time2'];
+            $today = !empty($end_time) ? strtotime(str_replace('／', '-', $end_time)) : strtotime(date("Y-m-d"));
+            $start = !empty($start_time) ? strtotime(str_replace('／', '-', $start_time)) : ($today - 86400);
+        }
+        //固定时间区间
+
+        if (isset($search['s_day2']) && !empty($search['s_day2'])) {
+            $day = $search['s_day2'];
+
+            switch ($day) {
+                //今日
+                case 'day2':
+                    $today = strtotime(date('Y-m-d H:i:s'), time());
+                    $start = $today - 86400;
+                    break;
+                //本周
+                case 'week2':
+                    $today = strtotime(date('Y-m-d H:i:s'), time());
+                    $start = $today - (6 * 86400);
+                    break;
+                //本月
+                case 'month2':
+                    $today = strtotime(date('Y-m-d H:i:s'), time());
+                    //本月第一天
+                    $start = strtotime(date('Y-m-01'));
+                    break;
+            }
+
+        }
+        //时间
+        $this->db->where('a.create_time >=',$start);
+        $this->db->where('a.create_time <=',$today);
+
+        $this->db->group_by('a.buyer_id');
+
         $this->db->order_by('num','DESC');
+
         $this->db->limit(5);
+
         $res = $this->db->get()->result_array();
+
         $res['mons'] = array_column($res,'num');
-        $res['names'] = array_column($res,'dist');
+
+        $res['names'] = array_column($res,'username');
+
         return $res;
     }
 

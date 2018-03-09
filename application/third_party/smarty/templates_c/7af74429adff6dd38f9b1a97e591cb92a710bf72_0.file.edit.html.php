@@ -1,29 +1,30 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-09 12:19:15
+/* Smarty version 3.1.30, created on 2018-03-09 13:46:39
   from "D:\wamp64\www\mall_manage\application\views\user\edit.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa20b43e9ffd0_47657420',
+  'unifunc' => 'content_5aa21fbf04b626_81883221',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7af74429adff6dd38f9b1a97e591cb92a710bf72' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\user\\edit.html',
-      1 => 1520569130,
+      1 => 1520574396,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
     'file:../public/left.html' => 1,
+    'file:../public/breadcrumb.html' => 1,
     'file:../public/footer_page.html' => 1,
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5aa20b43e9ffd0_47657420 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa21fbf04b626_81883221 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -216,7 +217,11 @@ assets/js/plugins/trees/fancytree_childcounter.js"><?php echo '</script'; ?>
 
             <!-- /main sidebar -->
             <!-- Main content -->
-            <div class="content-wrapper">    
+            <div class="content-wrapper">
+
+				<?php $_smarty_tpl->_subTemplateRender("file:../public/breadcrumb.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
+
                 <!-- Content area -->
                 <div class="content">
                     <div class="panel panel-flat">
