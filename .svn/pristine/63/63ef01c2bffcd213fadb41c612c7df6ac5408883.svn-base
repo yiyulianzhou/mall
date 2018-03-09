@@ -1,0 +1,7 @@
+	<!-- page JS files -->
+	<{if isset($data.base.page_angularjs_url) && !empty($data.base.page_angularjs_url)}>
+    	<script type="text/javascript" src="<{$data.base.page_angularjs_url}>"></script>
+    <{/if}>
+    <!-- /page JS files -->
+  </body>
+</html>

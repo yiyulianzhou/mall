@@ -1,0 +1,131 @@
+<{include file="../public/header.html" }>
+<!-- /main navbar --> 
+<!-- Page container -->
+<div class="page-container"> 
+  
+  <!-- Page content -->
+  <div class="page-content"> 
+      <{include file="../public/left.html" }>
+    <div class="content-wrapper">
+      
+      <!-- Content area -->
+      <div class="content">
+        <div class="panel panel-flat">
+          <div class="panel-heading">
+            <h5 class="panel-title">卖家管理<span class="ml10">
+              <input name="" type="button"  value="<{$searchbtn}>"  class="btn btn-xs bg-grey-100 text-xg flitbtn" id="searchbtn" onclick="btn()" >
+              </span></h5>
+            <div class="heading-elements"></div>
+          </div>
+          <form action="" method="GET" class="form-container">
+            <div class="panel-body br-t pt20" id="searchbox" style="<{$searchbox}>">
+              <div class="row">
+                <div class="col-md-2 col-sm-4 m-ss">
+                  <input type="text" class="form-control" placeholder="店铺名称" name="shop" value="<{$shop}>">
+                </div><div class="col-md-2 col-sm-4 m-ss">
+                  <input type="text" class="form-control" placeholder="店铺小区" name="title" value="<{$title}>">
+                </div>
+                <div class="col-md-1 col-sm-4 m-ss">
+                  <select name="lock" class="form-control">
+                    <option value="-1"<{if $lock eq -1}> selected="selected"<{/if}>>状态</option>
+                    <option value="0"<{if $lock eq 0}> selected="selected"<{/if}>>正常</option>
+                    <option value="1"<{if $lock eq 1}> selected="selected"<{/if}>>已封</option>
+                  </select>
+                </div>
+                <div class="col-md-1 m-ss">
+                  <input type="submit" class=" btn btn-block bg-grey-300" value="筛选">
+                </div>
+              </div>
+            </div>
+          </form>
+          <table class="table datatable-basic table-hover">
+            <thead class="bg-grey-100">
+              <tr>
+                <th>店铺名称</th>
+                <th>店铺小区</th>
+                <th>手机</th>
+                <th>实名认证</th>
+                <th>健康认证</th>
+                <th>状态</th>
+                <th>创建时间</th>
+                <{if isset($permission_tree.detail) || isset($permission_tree.lock)}>
+                <th class="text-center">操作</th>
+                <{/if}>
+              </tr>
+            </thead>
+            <tbody><!-- danger -->
+              <{foreach from=$sellerList item=v}>
+              <tr>
+                <td><{$v.shop}></td>
+                <td><{$v.title}></td>
+                <td><{$v.phone}></td>
+                <td>
+                  <span class="<{($v.is_real == '0') ? '' : (($v.is_real == '1') ? 'label-success' : (($v.is_real == '2') ? 'label-info' : 'label-danger'))}>"<{if $v.is_real !== '0'}> style="color:white;" <{/if}> ><{($v.is_real == '0') ? '未认证' : (($v.is_real == '1') ? '审核通过' : (($v.is_real == '2') ? '待审核' : '未通过'))}>
+                  </span>
+                </td>
+                <td>
+                  <span class="<{($v.is_health == '0') ? '' : (($v.is_health == '1') ? 'label-success' : (($v.is_health == '2') ? 'label-info' : 'label-danger'))}>"  <{if $v.is_health !== '0'}> style="color:white;" <{/if}> ><{($v.is_health == '0') ? '未认证' : (($v.is_health == '1') ? '审核通过' : (($v.is_health == '2') ? '待审核' : '未通过'))}>
+                  </span>
+                </td>
+                <td>
+                  <span class="label label-<{($v.lock == '0') ? 'success' : 'danger'}>"><{($v.lock == '0')?'正常':'已封'}></span>
+                </td>
+                <td><{date("Y-m-d H:i:s",$v.create_time)}></td>
+                <{if isset($permission_tree.detail) || isset($permission_tree.lock)}>
+                <td class="text-center"><ul class="icons-list">
+                    <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-menu9"></i> </a>
+                      <ul class="dropdown-menu dropdown-menu-right mnw100">
+                        <{if isset($permission_tree.lock)}>
+                        <li><a href='<{site_url("seller/lock?id=<{$v.id}>&shop=<{$shop}>&title=<{$title}>&lock=<{$v.lock}>")}>&per_page=<{$page}>' ><i class="icon-compose"></i> <{($v.lock == '0')?'封禁':'解封'}></a> 
+                        </li>
+                        <{/if}>
+                        <{if isset($permission_tree.detail) && ($v.is_real == '2' || $v.is_health == '2')}>
+                        <li>
+                          <a href='<{site_url("seller/detail?id=<{$v.id}>&per_page=<{$page}>&shop=<{$shop}>&title=<{$title}>&lock=<{$lock}>")}>'><i class="icon-inbox"></i> 审核</a>
+                        </li>
+                        <{/if}>
+                      </ul>
+                    </li>
+                  </ul>
+                </td>
+                <{/if}>
+              </tr>
+              <{/foreach}>
+            </tbody>
+          </table>
+          <{include file="../public/pager.html"}>
+        </div>
+        
+        <{include file="../public/footer_page.html" }>
+        
+      </div>
+      <!-- /content area --> 
+      
+    </div>
+    <!-- /main content --> 
+    
+  </div>
+  <!-- /page content --> 
+  
+</div>
+</div>
+<!-- /page container --> 
+<!-- /page JS files -->
+<script type="text/javascript" src="<{$base_url}>assets/js/pages/modals_option.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/forms/styling/uniform.min.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/forms/styling/switch.min.js"></script>
+
+<script type="text/javascript">
+  var btn1=document.getElementById('searchbtn');
+  var box1=document.getElementById('searchbox');
+  function btn(){ 
+    if(btn1.value=="筛选 －"){
+      box1.style.display='none';
+      btn1.value="筛选 ＋";
+    }else{
+      box1.style.display='';
+      btn1.value="筛选 －";
+    }
+  }
+</script>
+<{include file="../public/footer.html" }>

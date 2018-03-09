@@ -1,0 +1,101 @@
+<?php
+
+/**
+ * 商品管理
+ */
+class GoodsModel extends MY_Model
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    /**
+     * @copyright 商品列表
+     * @param     [type]      $state    [description]
+     * @param     [type]      $sales_type    [description]
+     * @param     [type]      $page    [description]
+     * @param     [type]      $orderBy [description]
+     * @return    [type]               [description]
+     */
+    public function goodsList( $state,$sales_type,$page,$orderBy,$category,$name )
+    {
+        $this->db->select( 'a.*,b.img' );
+        $this->db->from( 'goods a' );
+        if($state !== -1){
+            $this->db->where( 'state', $state );
+        }
+        if(!empty($sales_type) && $sales_type > -1){
+            $this->db->where( 'sales_type', $sales_type );
+        }
+        if(!empty($category) && $category > -1){
+            $this->db->where( 'category', $category );
+        }
+        if(!empty($name)){
+            $this->db->where( 'name', $name );
+        }
+        $this->db->where('number','1');
+        $this->db->join('goods_img b','b.gid = a.id','left');
+        $total_rows = $this->db->count_all_results('', false);
+        $pager = $this->setPager($total_rows, $page);
+        $this->db->limit($pager['per_page'], $pager['start_page']);
+        if(!empty($orderBy) && $orderBy > -1){
+            if( $orderBy == 1 ){
+                $this->db->order_by('a.amount', 'DESC');
+            }elseif( $orderBy == 2 ){
+                $this->db->order_by('a.amount', 'ASC');
+            }elseif( $orderBy == 3 ){
+                $this->db->order_by('a.msg', 'DESC');
+            }elseif( $orderBy == 4 ){
+                $this->db->order_by('a.msg', 'ASC');
+            }
+        }else{
+            $this->db->order_by('a.id', 'DESC');
+        }
+        $res['list'] = $this->db->get()->result_array();
+        $res['pager_links'] = $this->pagination->create_links();
+        return $res;
+    }
+    /**
+     * @copyright 商品详情
+     * @param     [type]      $id [description]
+     * @return    [type]          [description]
+     */
+    public function goodsDetail( $id )
+    {
+        $this->db->select( 'a.*,b.username,c.img' );
+        $this->db->from( 'goods a' );
+        $this->db->where( 'a.id', $id );
+        $this->db->join( 'admin b', 'b.id = a.verify_user','left' );
+        $this->db->join( 'goods_img c', 'c.gid = a.id','left' );
+        $res = $this->db->get()->row_array();
+        return $res;
+    }
+    /**
+     * @copyright 商品审核
+     * @param     [type]      $id     [description]
+     * @param     [type]      $state [description]
+     * @return    [type]              [description]
+     */
+    public function goodsVarify( $id, $state, $verify_remark )
+    {
+        $verify_user = $this->user_session['uid'];
+        $verify_time = time();
+        $res = $this->db->update( 'goods', array('state'=>$state,'verify_user'=>$verify_user,'verify_time'=>$verify_time,'verify_remark'=>$verify_remark),array('id'=>$id) );
+        if($res){
+            return true;
+        }
+    }
+    /**
+     * @copyright 商品下架
+     * @param     [type]      $id [description]
+     * @return    [type]          [description]
+     */
+    public function goodsNosales( $id )
+    {
+        $res = $this->db->update( 'goods',array('state'=>'2'),array('id'=>$id) );
+        if($res){
+            return true;
+        }
+    }
+}

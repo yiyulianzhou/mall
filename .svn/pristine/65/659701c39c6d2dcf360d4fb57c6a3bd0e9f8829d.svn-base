@@ -1,0 +1,12 @@
+<?php
+if(!defined('BASEPATH')) exit();
+
+// 模块URL
+$config['base']['module_url']  = "home/";
+
+// 模块名
+$config['base']['module_name'] = '权限';
+
+
+// 获取卖家top5报表数据链接
+$config['url']['show_line'] = $config['base']['module_url'] . 'showLine/';

@@ -1,0 +1,150 @@
+<?php
+
+/**
+ * @Description: 首页模型
+ */
+class HomeModel extends MY_Model
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * @function getData 各表新增数据汇总
+     * @return   array $data   结果集
+     */
+    public function getData()
+    {
+    	$data = ['buyer'=>0, 'seller'=>0, 'order'=>0, 'goods'=>0];
+
+    	// 新增买家
+    	$this->db->select('count(*) as buyer');
+        $this->db->from('user');
+        $today = strtotime(date('Y-m-d'));
+        $this->db->where('create_time >= ', $today);
+        $tmp = $this->db->get()->row_array();
+
+        $data['buyer'] = $tmp['buyer'];
+        $this->db->reset_query();
+
+        // 新增卖家
+    	$this->db->select('count(*) as seller');
+        $this->db->from('user_shop');
+        $this->db->where('create_time >= ', $today);
+        $tmp = $this->db->get()->row_array();
+        $data['seller'] = $tmp['seller'];
+        $this->db->reset_query();
+
+        // 新增订单
+    	$this->db->select('count(*) as orders');
+        $this->db->from('order');
+        $this->db->where('create_time >= ', $today);
+        $tmp = $this->db->get()->row_array();
+        $data['order'] = $tmp['orders'];
+        $this->db->reset_query();
+
+        // 新增商品
+        $this->db->select('count(*) as goods');
+        $this->db->from('goods');
+        $this->db->where('add_time >= ', $today);
+        $tmp = $this->db->get()->row_array();
+        $data['goods'] = $tmp['goods'];
+        $this->db->reset_query();
+        return $data;
+    }
+    public function getData2() {
+        //卖家top5数据
+        $this->db->select('sum(shop_order.money) as mon,user_shop.shop,user_shop.address_id',FALSE);
+        $this->db->from('order');
+        $today = strtotime(date('Y-m-d'));
+        $this->db->where('order.create_time <= ',$today);
+
+        //查出卖家店铺的相关信息
+        $this->db->join('user_shop','user_shop.uid = order.sellers_id','left');
+
+        $this->db->group_by('order.sellers_id');
+        //计算订单总金额前5的卖家
+        $this->db->order_by('mon','desc')->limit(5);
+        $res = $this->db->get()->result_array();
+        return $res;
+    }
+
+    public function getData3() {
+        //买家top5数据
+        $this->db->select('sum(shop_order.money) as mon,user.username,user.districtId',FALSE);
+        $this->db->from('order');
+        $today = strtotime(date('Y-m-d'));
+        $this->db->where('order.create_time <= ',$today);
+
+        //查出买家的相关信息
+        $this->db->join('user','user.id = order.buyer_id','left');
+
+        $this->db->group_by('order.buyer_id');
+        //计算订单消费总金额前5的买家
+        $this->db->order_by('mon','desc')->limit(5);
+        $res = $this->db->get()->result_array();
+        return $res;
+    }
+
+    public function getData4() {
+        //商品销量top5数据
+        $this->db->select('sum(shop_goods.amount) as total,sum(shop_order_goods.money) as mon',FALSE);
+        $this->db->from('goods');
+
+        //查出有该商品订单的相关信息
+        $this->db->join('order_goods','order_goods.gid = goods.id','left');
+
+        $this->db->group_by('order_goods.gid');
+        //计算商品销量前5的商品，销售金额
+        $this->db->order_by('mon','desc')->limit(5);
+        $res = $this->db->get()->result_array();
+        return $res;
+    }
+    public function showLine(){
+        $res = Array
+        (
+            'days' => Array
+            (
+                0 => '01-24',
+                1 => '01-25',
+                2 => '01-26',
+
+            ),
+
+        'shop' => Array
+            (
+                0 => 100,
+                1 => 200,
+                2 => 300,
+            ),
+
+        'district' => Array
+            (
+                0 => 500,
+                1 => 1000,
+                2 => 600,
+
+            ) ,
+
+        'type' => Array
+            (
+                0 => 1,
+                1 => 2,
+                2 => 3,
+            ),
+
+        'money' => Array
+            (
+                0 => 500,
+                1 => 900,
+                2 => 820
+
+            )
+
+    );
+        return $res;
+    }
+
+}

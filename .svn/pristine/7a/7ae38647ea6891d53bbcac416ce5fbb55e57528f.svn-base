@@ -1,0 +1,183 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class money extends MY_Controller
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    /**
+     * @copyright 卖家提现
+     * @return    [type]      [description]
+     */
+    public function seller()
+    {
+    	$cashState = $this->config->item('money')['state'];//提现状态列表
+        $username = $this->input->get('username');
+    	$page = $this->input->get('per_page') > 1 ? $this->input->get('per_page') : 1;
+    	$state = (empty($this->input->get('state') || ($this->input->get('state') == '-1' ))? -1 : $this->input->get('state'));
+    	$searchbtn = "筛选 －";
+		$searchbox = "display:''";
+    	if( empty($username) && $state == -1 )
+		{
+			$searchbtn = "筛选 ＋";
+			$searchbox = "display:none";
+		}
+    	$res = $this->model->sellerCash( $username,$page,$state );
+        $this->assign('username', $username);
+        $this->assign('page', $page);
+        $this->assign('cashState', $cashState);
+        $this->assign('state', $state);
+        $this->assign('searchbtn', $searchbtn);
+        $this->assign('searchbox', $searchbox);
+        $this->assign('sellerCash', $res['list']);
+		$this->assign('permission_tree', $this->data['permission_tree'][$this->router->class]);
+        $this->assign('pager_links', $res['pager_links']);
+		$this->display($this->data['file_path']);
+    }
+    /**
+     * @copyright 买家提现
+     * @return    [type]      [description]
+     */
+    public function buyer()
+    {
+    	$cashState = $this->config->item('money')['state'];//提现状态列表
+        $username = $this->input->get('username');
+    	$page = $this->input->get('per_page') > 1 ? $this->input->get('per_page') : 1;
+    	$state = (empty($this->input->get('state') || ($this->input->get('state') == '-1' ))? -1 : $this->input->get('state'));
+    	$searchbtn = "筛选 －";
+		$searchbox = "display:''";
+    	if( empty($username) && $state == -1 )
+		{
+			$searchbtn = "筛选 ＋";
+			$searchbox = "display:none";
+		}
+    	$res = $this->model->buyerCash( $username,$page,$state );
+        $this->assign('username', $username);
+        $this->assign('page', $page);
+        $this->assign('cashState', $cashState);
+        $this->assign('state', $state);
+        $this->assign('searchbtn', $searchbtn);
+        $this->assign('searchbox', $searchbox);
+        $this->assign('buyerCash', $res['list']);
+		$this->assign('permission_tree', $this->data['permission_tree'][$this->router->class]);
+        $this->assign('pager_links', $res['pager_links']);
+		$this->display($this->data['file_path']);
+    }
+    /**
+     * @copyright 提现审核
+     * @return    [type]      [description]
+     */
+    public function verify()
+    {
+    	$id = $this->input->post( 'id' );
+    	$username = $this->input->post( 'username' );
+    	$status = $this->input->post( 'status' );
+    	$type = $this->input->post( 'type' );
+    	$verify = $this->input->post( 'verify' );
+        $page = $this->input->post( 'per_page' );
+        $res = $this->model->verify( $id, $status, $verify );
+        if( $type == 1 ){
+        	redirect("money/seller?per_page=$page&username=$username");
+        }else{
+        	redirect("money/buyer?per_page=$page&username=$username");
+        }
+        
+    }
+    /**
+     * @copyright 充值列表
+     * @return    [type]      [description]
+     */
+    public function recharge()
+    {
+    	$username = $this->input->get('username');
+    	$page = $this->input->get('per_page') > 1 ? $this->input->get('per_page') : 1;
+    	$searchbtn = "筛选 －";
+		$searchbox = "display:''";
+    	if( empty($username) )
+		{
+			$searchbtn = "筛选 ＋";
+			$searchbox = "display:none";
+		}
+    	$res = $this->model->recharge( $username,$page );
+        $this->assign('username', $username);
+        $this->assign('page', $page);
+        $this->assign('searchbtn', $searchbtn);
+        $this->assign('searchbox', $searchbox);
+        $this->assign('rechargeList', $res['list']);
+		$this->assign('permission_tree', $this->data['permission_tree'][$this->router->class]);
+        $this->assign('pager_links', $res['pager_links']);
+		$this->display($this->data['file_path']);
+    }
+    /**
+     * @copyright 详情
+     * @return    [type]      [description]
+     */
+    public function detail()
+    {
+    	$cashState = $this->config->item('money')['state'];//提现状态列表
+    	$id = $this->input->get('id');
+    	$type = $this->input->get('type');
+    	$username = $this->input->get('username');
+    	$state = $this->input->get('state');
+    	$res = $this->model->detail( $id );
+    	$this->assign('detail',$res);
+    	$this->assign('type',$type);
+    	$this->assign('state',$state);
+    	$this->assign('username',$username);
+        $this->assign('cashState', $cashState);
+    	$this->display($this->data['file_path']);
+    }
+
+	/**
+	 * @copyright 获取卖家提现金额数据统计
+	 * @return    [type]      [description]
+	 */
+
+	public function getSellerCash ()
+	{
+		// 查询条件
+		$search = $this->input->post(null, true);
+		echo 111;
+		print_r($search);exit();
+		echo 2222;
+		$this->response['echarts_data'] = $this->model->getSellerCash($search);
+		if ($this->response) {
+			$this->response['msg_type'] = 'success';
+			$this->response['message'] = '获取卖家提现金额成功';
+		}
+		$this->returnResponse ();
+	}
+
+	/**
+	 * @copyright 获取提现卖家的人数统计
+	 * @return    [type]      [description]
+	 */
+	public function getCashSeller ()
+	{
+		$this->response['echarts_data'] = $this->model->getCashSeller();
+		if($this->response) {
+			$this->response['msg_type'] = 'success';
+			$this->response['message'] = '获取提现卖家人数成功';
+		}
+		$this->returnResponse ();
+	}
+
+	/**
+	 * @copyright 统计头部提现卖家的数据
+	 * @return    [type]      [description]
+	 */
+	public function countSellerCash ()
+	{
+		
+		$this->response['count'] = $this->model->countSellerCash();
+		if ($this->response) {
+			$this->response['msg_type'] = 'success';
+			$this->response['message'] = '获取头部统计数据成功';
+		}
+		$this->returnResponse ();
+	}
+
+}

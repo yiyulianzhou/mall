@@ -1,0 +1,145 @@
+<{include file="../public/header.html" }>
+<!-- Page container -->
+<div class="page-container">
+
+	<!-- Page content -->
+	<div class="page-content">
+
+		<{include file="../public/left.html" }>
+
+		<!-- Main content -->
+		<div class="content-wrapper">
+
+			<!-- Content area -->
+			<div class="content" ng-controller="appCtrl">
+				<div class="row">
+					<div class=" col-md-12">
+						<div class="panel panel-flat">
+							<div class="panel-heading">
+								<h6 class="panel-title">今日数据<span class="pull-right"><{date('Y-m-d')}></span></h6>
+							</div>
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-3">
+										<div class="panel bg-teal-400">
+											<div class="panel-body pb20 homgicon-01">
+												<h4 class="no-margin">新增买家</h4>
+												<h2 class="mv10"><{$list.buyer}>个</h2>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-3">
+										<div class="panel bg-pink-400 ">
+											<div class="panel-body pb20 homgicon-02">
+												<h4 class="no-margin">新增卖家</h4>
+												<h2 class="mv10"><{$list.seller}>个</h2>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-3">
+										<div class="panel bg-blue-400">
+											<div class="panel-body pb20 homgicon-03">
+												<h4 class="no-margin">新增订单</h4>
+												<h2 class=" mv10"><{$list.order}>个</h2>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-3">
+										<div class="panel bg-brown-400">
+											<div class="panel-body pb20 homgicon-04">
+												<h4 class="no-margin">新增商品</h4>
+												<h2 class="mv10"><{$list.goods}>个</h2>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="panel panel-primary col-md-6">
+						<div class="panel-heading">
+							<span class="panel-title">您有两条用户反馈请及时处理</span>
+						</div>
+						<div class="panel-body">
+							<div class="col-md-10 pt5">2018年1月31日 12:43:56 王大锤的商品还没有收到</div>
+							<div class="col-md-2 pt5"><button class="btn">处理</button></div>
+							<div class="col-md-10 pt5">2018年1月31日 12:43:56 王大锤的商品还没有收到</div>
+							<div class="col-md-2 pt5"><button class="btn">处理</button></div>
+						</div>
+					</div>
+					<div class="panel panel-primary col-md-6">
+						<div class="panel-heading">
+							<span class="panel-title">您有两条提现申请请及时处理</span>
+						</div>
+						<div class="panel-body">
+							<div class="col-md-10 pt5">2018年1月31日 12:43:56 王大锤申请提现500元</div>
+							<div class="col-md-2 pt5"><button class="btn">处理</button></div>
+							<div class="col-md-10 pt5">2018年1月31日 12:43:56 王大锤申请提现500元</div>
+							<div class="col-md-2 pt5"><button class="btn">处理</button></div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="panel panel-danger col-md-6">
+
+						<div class="panel-heading">
+							<span class="panel-title">买家Top5</span>
+						</div>
+						<div class="panel-body br-t" >
+							<div class="chart-container">
+								<div class="chart has-fixed-height" id="stacked_lines"></div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-danger col-md-6">
+						<div class="panel-heading">
+							<span class="panel-title">卖家Top5</span>
+						</div>
+						<div class="panel-body br-t" >
+							<div class="chart-container">
+								<div class="chart has-fixed-height" id="stacked2_lines"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="panel panel-warning col-md-6">
+						<div class="panel-heading">
+							<span class="panel-title">商品Top5</span>
+						</div>
+						<div class="panel-body br-t" >
+							<div class="chart-container">
+								<div class="chart has-fixed-height" id="stacked3_lines"></div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-warning col-md-6">
+						<div class="panel-heading">
+							<span class="panel-title">活跃小区Top5</span>
+						</div>
+						<div class="panel-body br-t" >
+							<div class="chart-container">
+								<div class="chart has-fixed-height" id="stacked4_lines"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /content area -->
+			</div>
+			<!-- /main content -->
+			<{*这里只加载echats库文件，图表配置项在assets/dev/pages/home/index.js中*}>
+			<script type="text/javascript" src="<{$base_url}>assets/js/plugins/visualization/echarts/echarts.js"></script>
+		</div>
+		<{include file="../public/footer_page.html" }>
+		<!-- /page content -->
+	</div>
+	<!-- /page container -->
+</div>
+
+<{include file="../public/footer.html" }>
