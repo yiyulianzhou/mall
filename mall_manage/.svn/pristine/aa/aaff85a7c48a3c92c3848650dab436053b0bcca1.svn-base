@@ -1,0 +1,91 @@
+<div id="info_modal" class="modal fade">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title">活动详情</h5>
+            </div>
+            <form action="#" class="form-horizontal">
+
+                <div class="modal-body">
+
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">活动名称：</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.shop}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">单个红包金额：</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.com_id}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">拆分人数:</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.address}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">红包上限个数:</label>
+                        <div class="col-sm-9 form-control-static">
+                            </div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">个人红包金额上限:</label>
+                        <div class="col-sm-9 form-control-static">
+                        </div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">红包使用范围:</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.name}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">红包使用条件:</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.phone}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">红包使用有效期:</label>
+                        <div class="col-sm-9 form-control-static">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">红包转发限制:</label>
+                        <div class="col-sm-9 form-control-static">
+                        </div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">红包领用限制:</label>
+                        <div class="col-sm-9 form-control-static">
+                        </div>
+                    </div>
+
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">活动开始时间:</label>
+                        <div class="col-sm-9 form-control-static">
+
+                        </div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">活动结束时间:</label>
+                        <div class="col-sm-9 form-control-static">
+                        </div>
+                    </div>
+
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">上传活动封面图片:</label>
+                        <div class="col-sm-9 form-control-static"></div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">规则描述:</label>
+                        <div class="col-sm-9 form-control-static">
+                            <textarea class="form-control" name="verify_remark" ng-model="verify_remark" style="height:80px"></textarea>
+                            <span class="text-danger">必填项</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">返回</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

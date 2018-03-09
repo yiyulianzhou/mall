@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><{$data.common.site_title}></title>
+<link href="<{$base_url}>assets/css/custom.css" rel="stylesheet" type="text/css">
+<link href="<{$base_url}>assets/css/minified/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<{$base_url}>assets/css/minified/core.min.css" rel="stylesheet" type="text/css">
+<link href="<{$base_url}>assets/css/minified/components.min.css" rel="stylesheet" type="text/css">
+<link href="<{$base_url}>assets/css/minified/colors.min.css" rel="stylesheet" type="text/css">
+<link href="<{$base_url}>assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+<!-- Core JS files -->
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/loaders/pace.min.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/core/libraries/jquery.min.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/dev/libraries/angular.min.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/core/libraries/bootstrap.min.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/dev/libraries/ui-bootstrap-tpls.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/dev/libraries/ui-bootstrap-tpls-0.13.0.min.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/loaders/blockui.min.js"></script>
+<!-- Core JS files -->
+
+
+
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/ui/moment/moment.min.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/pickers/daterangepicker.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/pickers/pickadate/picker.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/pickers/pickadate/picker.date.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/forms/selects/select2.min.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/notifications/sweet_alert.min.js"></script>
+
+<script type="text/javascript" src="<{$base_url}>assets/js/core/app.js"></script>
+<!-- angularjsfiles -->
+
+<script type="text/javascript" src="<{$base_url}>assets/dev/angularjs_app_module.js"></script>
+<script type="text/javascript">
+    app.value('common',<{$data.json_urls}>);
+    <{if isset($permission)}>app.value('permission',<{$permission}>);<{/if}>
+</script>
+<!-- angularjsfiles -->
+    <script type="text/javascript" src="<{$base_url}>assets/dev/angularjs_app_factory.js"></script>
+    <script type="text/javascript" src="<{$base_url}>assets/dev/angularjs_app_service.js"></script>
+    <script type="text/javascript" src="<{$base_url}>assets/dev/angularjs_header.js"></script>
+</head>
+
+<body ng-app="myApp">
+
+<!-- Main navbar -->
+<div class="navbar navbar-inverse">
+    <div class="navbar-header"> <a class="navbar-brand" href="javascript:void(0);"><img src="<{$base_url}>assets/images/logo_light.png" alt=""></a>
+        <ul class="nav navbar-nav visible-xs-block">
+            <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+            <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+        </ul>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar-mobile">
+        <ul class="nav navbar-nav">
+            <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown dropdown-user"> 
+				<a class="dropdown-toggle" data-toggle="dropdown"> 
+					<img src="<{$base_url}>assets/images/placeholder_user.jpg" >
+					<span><{$data.base.username}></span>
+					<i class="caret"></i> 
+				</a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="<{$base_url}>my/info"><i class="icon-cog5"></i> 帐号信息</a></li>
+                    <li><a href="<{$base_url}>my/passwd"><i class="icon-cog5"></i> 密码修改</a></li>
+                    <li><a href="<{$base_url}>login/logout"><i class="icon-switch2"></i> 退出</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /main navbar -->

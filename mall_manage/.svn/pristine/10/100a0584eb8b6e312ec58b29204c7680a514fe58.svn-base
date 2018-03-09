@@ -1,0 +1,8 @@
+<div ng-if="total_rows > 0">
+    <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">显示 {{start_page + 1}} 至 {{start_page+list_count}} ，全部 {{total_rows}} 条数据</div>
+    <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+        <button type="button" class="paginate_button previous" ng-disabled="curpage <= 1" ng-class="{disabled:curpage <= 1}" ng-click="changePager((curpage-1),'tips')">←</button>
+        <span><a href="javascript:;" class="paginate_button current" >{{curpage}}</a></span>
+        <button type="button" class="paginate_button next" id="DataTables_Table_0_next" ng-disabled="curpage >= pages" ng-class="{disabled:curpage  >= pages}" ng-click="changePager((curpage+1),'tips')">→</button>
+    </div>
+</div>

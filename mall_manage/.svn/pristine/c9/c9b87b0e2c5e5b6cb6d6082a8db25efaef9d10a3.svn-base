@@ -1,0 +1,183 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class goods extends MY_Controller
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    /**
+     * @copyright 商品列表
+     * @return    [state]      [description]
+     */
+    public function index()
+    {
+		$this->display($this->data['file_path']);
+    }
+    /**
+     * @copyright 商品详情
+     * @return    [state]      [description]
+     */
+    public function detail()
+    {
+        $categoryList = $this->config->item('goods')['category'];//商品分类列表
+        $goodsStatus = $this->config->item('goods')['state'];//商品状态
+    	$type = $this->input->get('type');
+    	$id = $this->input->get( 'id' );
+    	$categoryId = $this->input->get( 'categoryId' );
+    	$sales_type = $this->input->get( 'sales_type' );
+    	$orderBy = $this->input->get( 'orderBy' );
+    	$name = $this->input->get( 'name' );
+    	$page = $this->input->get( 'per_page' );
+    	$res = $this->model->goodsDetail( $id );
+    	if($type == 1){
+    		$title = "商品审核";
+    	}else{
+    		$title = "商品详情";
+    	}
+    	$this->assign('detail', $res);
+    	$this->assign('page', $page);
+        $this->assign('title', $title);
+    	$this->assign('goodsStatus', $goodsStatus);
+        $this->assign('categoryList', $categoryList);
+    	$this->assign('categoryId', $categoryId);
+    	$this->assign('sales_type', $sales_type);
+    	$this->assign('orderBy', $orderBy);
+    	$this->assign('name', $name);
+    	$this->assign('type', $type);
+        $this->assign('data', $this->data);
+		$this->display($this->data['file_path']);
+    }
+    /**
+     * @copyright 商品审核
+     * @return    [state]      [description]
+     */
+    public function verify()
+    {
+    	$id = $this->input->post('id');
+    	$state = $this->input->post('state');
+    	$verify_remark = $this->input->post('verify_remark');
+    	$page = $this->input->post('page');
+    	$orderBy = $this->input->post('orderBy');
+    	$categoryId = $this->input->post('categoryId');
+    	$sales_type = $this->input->post('sales_type');
+    	$name = $this->input->post('name');
+    	$res = $this->model->goodsVarify( $id, $state, $verify_remark );
+    	redirect( "goods/index?per_page=$page&categoryId=$categoryId&sales_type=$sales_type&orderBy=$orderBy&name=$name" );
+    }
+    /**
+     * @copyright 商品下架
+     * @return    [state]      [description]
+     */
+    public function nosales()
+    {
+    	$categoryId = $this->input->get( 'categoryId' );
+    	$sales_type = $this->input->get( 'sales_type' );
+    	$orderBy = $this->input->get( 'orderBy' );
+    	$name = $this->input->get( 'name' );
+    	$id = $this->input->get( 'id' );
+    	$page = $this->input->get( 'per_page' );
+    	$res = $this->model->goodsNosales( $id );
+    	redirect("goods/index?per_page=$page&categoryId=$categoryId&sales_type=$sales_type&orderBy=$orderBy&name=$name");
+    }
+
+	/**
+	 * @copyright 商品顶部统计信息
+	 * @return    [state]      [description]
+	 */
+	public function countGoods()
+	{
+		$this->response = $this->model->countGoodsData();
+		if ($this->response){
+			$this->response['msg_type'] = 'success';
+			$this->response['message'] = '获取商品顶部统计信息成功';
+		}
+
+		$this->returnResponse();
+	}
+
+	/**
+	 * @copyright 商品列表信息
+	 * @return    [state]      [description]
+	 */
+	public function getGoods()
+	{
+		$search = $this->input->post();
+
+		$this->response = $this->model->getGoods($search);
+		if ($this->response){
+			$this->response['msg_type'] = 'success';
+			$this->response['message'] = '获取商品列表信息成功';
+		}
+
+		$this->returnResponse ();
+	}
+
+	/**
+	 * @copyright 单品销售信息
+	 * @return    [state]      [description]
+	 */
+	public function getSales()
+	{
+		$search = $this->input->post();
+		$this->response['echarts_data'] = $this->model->getSalesData($search);
+		if ($this->response){
+			$this->response['msg_type'] = 'success';
+			$this->response['message'] = '获取单品销售信息成功';
+		}
+
+		$this->returnResponse();
+
+	}
+
+	/**
+	 * @copyright 类目销售信息
+	 * @return    [state]      [description]
+	 */
+	public function getCates()
+	{
+		$search = $this->input->post();
+		$this->response['echarts_data'] = $this->model->getCatesData($search);
+		if ($this->response){
+			$this->response['msg_type'] = 'success';
+			$this->response['message'] = '获取类目销售信息成功';
+		}
+
+		$this->returnResponse();
+	}
+
+	/**
+	 * @copyright 单品访问统计信息
+	 * @return    [state]      [description]
+	 */
+	public function getVisit()
+	{
+		$search = $this->input->post();
+		$this->response['echarts_data'] = $this->model->getVisitData($search);
+		if ($this->response){
+			$this->response['msg_type'] = 'success';
+			$this->response['message'] = '获取单品访问统计信息成功';
+		}
+
+		$this->returnResponse();
+	}
+
+	/**
+	 * @copyright 单品分享统计信息
+	 * @return    [state]      [description]
+	 */
+	public function getShare()
+	{
+		$search = $this->input->post();
+		$this->response['echarts_data'] = $this->model->getShareData($search);
+		if ($this->response){
+			$this->response['msg_type'] = 'success';
+			$this->response['message'] = '获取单品分享统计信息成功';
+		}
+
+		$this->returnResponse();
+	}
+
+}

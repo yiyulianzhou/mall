@@ -1,0 +1,160 @@
+<{include file="../public/header.html" }>
+<div class="page-container"> 
+  
+  <!-- Page content -->
+  <div class="page-content"> 
+      <{include file="../public/left.html" }>
+    <div class="content-wrapper"> 
+      <!-- Content area -->
+      <div class="content">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 form-horizontal"> 
+            <!-- <form class="form-horizontal"> -->
+              <{form_open('seller/verify')}>
+              <div class="panel panel-flat">
+                <div class="panel-heading pv10 mb20 br-b">
+                  <h5 class="panel-title">卖家信息</h5>
+                  </div>
+                <div class="panel-body">
+                  <input name="id" value="<{$detail.id}>"  style="display:none" >
+                  <input name="page" value="<{$page}>"  style="display:none" >
+                  <input name="shop" value="<{$shop}>"  style="display:none" >
+                  <input name="title" value="<{$title}>"  style="display:none" >
+                  <input name="lock" value="<{$lock}>"  style="display:none" >
+                  <div class=" form-group">
+                    <label class="col-sm-2 control-label">店铺名称:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly="readonly" placeholder="" value="<{$detail.shop}>">
+                    </div>
+                  </div>
+                  <div class=" form-group">
+                    <label class="col-sm-2 control-label">店铺小区:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly="readonly" placeholder="" value="<{$detail.com_address}>">
+                    </div>
+                  </div>
+                  <div class=" form-group">
+                    <label class="col-sm-2 control-label">店铺地址:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly="readonly" placeholder="" value="<{$detail.address}>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">头像:</label>
+                    <div class="col-sm-10">
+                    <img src="<{$detail.pic}>" alt="图片链接已失效" onerror="this.style.display='none'" style="width:60px;height:60px;">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">背景图:</label>
+                    <div class="col-sm-10">
+                    <img src="<{$detail.bg_img}>" alt="图片链接已失效" onerror="this.style.display='none'" style="width:60px;height:60px;">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">真实姓名:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control"  readonly="readonly" placeholder="暂无数据" value="<{$detail.name}>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">联系电话:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control"  readonly="readonly" placeholder="暂无数据" value="<{$detail.phone}>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">正面:</label>
+                    <div class="col-sm-10">
+                    <img src="<{$data.common.upload_images}><{$detail.img1}>" alt="图片链接已失效" onerror="this.style.display='none'" style="width:60px;height:60px;">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">反面:</label>
+                    <div class="col-sm-10">
+                    <img src="<{$data.common.upload_images}><{$detail.img2}>" alt="图片链接已失效" onerror="this.style.display='none'" style="width:60px;height:60px;">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">健康证照片:</label>
+                    <div class="col-sm-10">
+                    <img src="<{$data.common.upload_images}><{$detail.img3}>" alt="图片链接已失效" onerror="this.style.display='none'" style="width:60px;height:60px;">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">实名认证状态:</label>
+                    <div class=" col-sm-4 ">
+                      <select name="is_real" class="form-control" <{if $detail.is_real !== '2'}>  disabled="disabled" <{/if}>>
+                        <option value="0"<{if $detail.is_real eq 0}> selected="selected"<{/if}>>未认证</option>
+                        <option value="1"<{if $detail.is_real eq 1}> selected="selected"<{/if}>>通过</option>
+                        <option value="2"<{if $detail.is_real eq 2}> selected="selected"<{/if}>>待审核</option>
+                        <option value="3"<{if $detail.is_real eq 3}> selected="selected"<{/if}>>不通过</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">健康证状态:</label>
+                    <div class=" col-sm-4 ">
+                      <select name="is_health" class="form-control" <{if $detail.is_health !== '2'}>  disabled="disabled" <{/if}>>
+                        <option value="0"<{if $detail.is_health eq 0}> selected="selected"<{/if}>>未认证</option>
+                        <option value="1"<{if $detail.is_health eq 1}> selected="selected"<{/if}>>通过</option>
+                        <option value="2"<{if $detail.is_health eq 2}> selected="selected"<{/if}>>待审核</option>
+                        <option value="3"<{if $detail.is_health eq 3}> selected="selected"<{/if}>>不通过</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">账户余额:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control"  readonly="readonly" placeholder="" value="<{$detail.money}>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">未出货订单:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control"  readonly="readonly" placeholder="" value="<{$detail.money1}>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">出货待打款:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control"  readonly="readonly" placeholder="" value="<{$detail.money2}>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">已体现金额:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control"  readonly="readonly" placeholder="" value="<{$detail.money3}>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">状态:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control"  readonly="readonly" placeholder="" value="<{($detail.lock == '0')?'正常':'已封'}>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">创建时间:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control"  readonly="readonly" placeholder="" value="<{date('Y-m-d H:i:s',$detail.create_time)}>">
+                    </div>
+                  </div>
+                  <div class="text-right" style="text-align: center !important">
+                    <button class="btn btn-primary" type="submit" style="color: white;">提交</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p class="btn btn-primary"><a href='<{site_url("seller/index?per_page=<{$page}>&shop=<{$shop}>&title=<{$title}>&lock=<{$lock}>")}>' style="color: white;">返回</a></p>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <!-- /basic layout --> 
+          </div>
+        </div>
+          <{include file="../public/footer_page.html" }>
+      </div>
+      <!-- /content area --> 
+    </div>
+    <!-- /main content --> 
+  </div>
+  <!-- /page content --> 
+</div>
+<{include file="../public/footer.html" }>

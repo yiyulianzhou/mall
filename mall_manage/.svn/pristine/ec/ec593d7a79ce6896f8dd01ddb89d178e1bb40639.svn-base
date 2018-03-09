@@ -1,0 +1,71 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+
+/**
+ * @Description: 首页
+ */
+class Home extends MY_Controller
+{
+
+    public function __construct ()
+    {
+        parent::__construct();
+    }
+
+    public function index ()
+    {
+        $list= $this->model->getData();
+        $this->assign('list',$list);
+        $this->assign('data', $this->data);
+		$this->display($this->data['file_path']);
+
+    }
+    //获取卖家统计数据
+    public function showLine ()
+    {
+        $this->response['echarts_data'] = $this->model->getSeller();
+
+        $this->returnResponse ();
+    }
+
+    //获取买家统计数据
+    public function showBuyer ()
+    {
+        $this->response['echarts_data'] = $this->model->getBuyer();
+
+        $this->returnResponse();
+    }
+
+    //获取商品统计数据
+    public function showGoods ()
+    {
+        $this->response['echarts_data'] = $this->model->getGoods();
+
+        $this->returnResponse ();
+    }
+
+    public function showLine4 ()
+    {
+        $this->response['echarts_data'] = $this->model->showLine();
+
+        $this->returnResponse();
+    }
+
+    //用户的反馈信息
+    public function showTips ()
+    {
+        $this->response = $this->model->showTips();
+
+        $this->returnResponse ();
+    }
+
+    //用户提现申请
+    public function cashApply ()
+    {
+        $this->response = $this->model->cashApply();
+
+        $this->returnResponse ();
+    }
+
+}

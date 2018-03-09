@@ -1,0 +1,42 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2018/3/6
+ * Time: 10:02
+ */
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Promote extends MY_Controller
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    public function index()
+    {
+        $this->display($this->data['file_path']);
+    }
+
+    public function countPromote()
+    {
+
+    }
+
+    public function getPromoteList()
+    {
+
+    }
+
+    public function getRedBags()
+    {
+
+    }
+
+    public function getPromoteMoney()
+    {
+
+    }
+}

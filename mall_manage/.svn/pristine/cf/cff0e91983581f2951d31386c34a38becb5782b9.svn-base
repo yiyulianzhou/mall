@@ -1,0 +1,79 @@
+<{include file="../public/header.html" }>
+<!-- /main navbar -->
+<!-- Page container -->
+<div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+        <{include file="../public/left.html" }>
+        <div class="content-wrapper">
+
+            <{include file="../public/breadcrumb.html" }>
+            <!-- Content area -->
+            <div class="content" ng-controller="appCtrl">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-flat">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <button  class='col-md-2 ml10' ng-click="filterList('all')" ng-class="all ? 'btn btn-success' : 'btn'">全部</button>
+                                    <button  class='col-md-2 ml20' ng-click="filterList('open')" ng-class="open ? 'btn btn-success' : 'btn'">开放</button>
+                                    <button  class='col-md-2 ml20' ng-click="filterList('off')" ng-class="off ? 'btn btn-success' : 'btn'">关闭</button>
+                                    <button  class='col-md-offset-3 col-md-2 btn btn-warning' href="#cate_modal" data-toggle="modal" data-target="#cate_modal" ng-click="addCate()">新增商品分类</button>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table datatable datatable-basic table-hover">
+                                    <thead class="bg-grey-100">
+                                    <tr>
+                                        <th>商品类型</th>
+                                        <th>介绍</th>
+                                        <th>商品数</th>
+                                        <th>商铺数</th>
+                                        <th>开放状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="item in alllist track by $index" id="tr_{{item.id}}">
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.info}}</td>
+                                        <td>{{item.goods_num}}</td>
+                                        <td>{{item.shop_num}}</td>
+                                        <td>{{item.state}}</td>
+                                        <td>
+                                            <a href="#info_modal" data-toggle="modal" data-target="#info_modal" ng-click="getData(item.id)"><i class="icon-task"></i> 详情</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="panel-footer">
+                                <{include file="../public/page.html"}>
+                            </div>
+                        </div>
+                    </div>
+                    <{include file="goods/addCate.html" }>
+                    <{include file="goods/cateInfo.html" }>
+                </div>
+                <{include file="../public/footer_page.html" }>
+
+            </div>
+            <!-- /content area -->
+
+        </div>
+        <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+</div>
+<!-- /page container -->
+<!-- /page JS files -->
+<script type="text/javascript" src="<{$base_url}>assets/js/pages/modals_option.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/forms/styling/uniform.min.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/forms/styling/switch.min.js"></script>
+
+<!-- 日期范围选择配置 -->
+<script type="text/javascript" src="<{$base_url}>assets/js/pages/picker_date.js"></script>
+<{include file="../public/footer.html" }>

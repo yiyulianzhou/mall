@@ -1,0 +1,396 @@
+<?php
+
+/**
+ * 商品管理
+ */
+class GoodsModel extends MY_Model
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    /**
+     * @copyright 商品列表
+     * @param     [type]      $state    [description]
+     * @param     [type]      $sales_type    [description]
+     * @param     [type]      $page    [description]
+     * @param     [type]      $orderBy [description]
+     * @return    [type]               [description]
+     */
+    public function goodsList( $state,$sales_type,$page,$orderBy,$category,$name )
+    {
+        $this->db->select( 'a.*,b.img' );
+        $this->db->from( 'goods a' );
+        if($state !== -1){
+            $this->db->where( 'state', $state );
+        }
+        if(!empty($sales_type) && $sales_type > -1){
+            $this->db->where( 'sales_type', $sales_type );
+        }
+        if(!empty($category) && $category > -1){
+            $this->db->where( 'category', $category );
+        }
+        if(!empty($name)){
+            $this->db->where( 'name', $name );
+        }
+        $this->db->where('number','1');
+        $this->db->join('goods_img b','b.gid = a.id','left');
+        $total_rows = $this->db->count_all_results('', false);
+        $pager = $this->setPager($total_rows, $page);
+        $this->db->limit($pager['per_page'], $pager['start_page']);
+        if(!empty($orderBy) && $orderBy > -1){
+            if( $orderBy == 1 ){
+                $this->db->order_by('a.amount', 'DESC');
+            }elseif( $orderBy == 2 ){
+                $this->db->order_by('a.amount', 'ASC');
+            }elseif( $orderBy == 3 ){
+                $this->db->order_by('a.msg', 'DESC');
+            }elseif( $orderBy == 4 ){
+                $this->db->order_by('a.msg', 'ASC');
+            }
+        }else{
+            $this->db->order_by('a.id', 'DESC');
+        }
+        $res['list'] = $this->db->get()->result_array();
+        $res['pager_links'] = $this->pagination->create_links();
+        return $res;
+    }
+    /**
+     * @copyright 商品详情
+     * @param     [type]      $id [description]
+     * @return    [type]          [description]
+     */
+    public function goodsDetail( $id )
+    {
+        $this->db->select( 'a.*,b.username,c.img' );
+        $this->db->from( 'goods a' );
+        $this->db->where( 'a.id', $id );
+        $this->db->join( 'admin b', 'b.id = a.verify_user','left' );
+        $this->db->join( 'goods_img c', 'c.gid = a.id','left' );
+        $res = $this->db->get()->row_array();
+        return $res;
+    }
+    /**
+     * @copyright 商品审核
+     * @param     [type]      $id     [description]
+     * @param     [type]      $state [description]
+     * @return    [type]              [description]
+     */
+    public function goodsVarify( $id, $state, $verify_remark )
+    {
+        $verify_user = $this->user_session['uid'];
+        $verify_time = time();
+        $res = $this->db->update( 'goods', array('state'=>$state,'verify_user'=>$verify_user,'verify_time'=>$verify_time,'verify_remark'=>$verify_remark),array('id'=>$id) );
+        if($res){
+            return true;
+        }
+    }
+    /**
+     * @copyright 商品下架
+     * @param     [type]      $id [description]
+     * @return    [type]          [description]
+     */
+    public function goodsNosales( $id )
+    {
+        $res = $this->db->update( 'goods',array('state'=>'2'),array('id'=>$id) );
+        if($res){
+            return true;
+        }
+    }
+
+    /**
+     * @copyright 顶部统计信息
+     * @param     [type]      $id [description]
+     * @return    [type]          [description]
+     */
+    public function countGoodsData()
+    {
+        $array = array('new_goods'=>0,'goods_total'=>0,'goods_item'=>0);
+        $this->db->select('new_goods,goods_total,goods_item');
+        $this->db->from('goods_today_info');
+        $today = strtotime(date('Y-m-d'));
+        $this->db->where('logdate = ',$today);
+        $tmp = $this->db->get()->row_array();
+
+        if (!empty($tmp)){
+            $res['list'] = $tmp;
+        } else {
+            $res['list'] = $array;
+        }
+        return $res;
+    }
+
+    /**
+     * @copyright 商品列表
+     * @param     [type]      $id [description]
+     * @return    [type]          [description]
+     */
+    public function getGoods($search)
+    {
+        $this->db->select('a.*');
+        $this->db->from('goods_data a');
+
+        //按状态进行筛选
+        if (!empty($search['state'])){
+            $state = $search['state'];
+            $this->db->where('a.state',$state);
+        }
+
+
+        $this->db->order_by('id', 'ASC');
+
+        //计算总记录条数
+        $total_rows = $this->db->count_all_results('',false);
+        // 翻页设置
+        $per_page   = isset($this->data['base']['per_page']) ? $this->data['base']['per_page'] : $this->data['common']['per_page'];
+        $uri_segment = isset($this->data['base']['uri_segment']) ? $this->data['base']['uri_segment'] : $this->data['common']['uri_segment'];
+        $curpage     = $this->uri->segment($uri_segment) ? $this->uri->segment($uri_segment) : 1;
+        $start_page  = ($curpage && is_numeric($curpage) && $curpage > 1) ? ($curpage - 1) * $per_page : 0;
+
+        $this->db->limit($per_page, $start_page);
+
+        $data['list'] = $this->db->get()->result_array();
+
+        // 启始页
+        $data['start_page'] = $start_page;
+        // 总条数
+        $data['total_rows'] = $total_rows;
+        // 每页多少条
+        $data['per_page'] = $per_page;
+        // 当前页
+        $data['curpage'] = $curpage;
+        // 当前页查询结果总条数
+        $data['list_count'] = count($data['list']);
+        // 总页数，有小数进1
+        $data['pages'] = ceil($total_rows / $per_page);
+
+        return $data;
+    }
+
+    /**
+     * @copyright 单品销售信息
+     * @param     [type]      $id [description]
+     * @return    [type]          [description]
+     */
+    public function getSalesData($search)
+    {
+
+        $this->db->select('name,amount,sales_price,,total_money,logdate');
+        $this->db->from('goods_data');
+
+        //自选时间
+        if (!empty($search['s_start_time']) && !empty($search['s_end_time'])) {
+            $search['s_day'] = '';
+            $start_time = $search['s_start_time'];
+            $end_time = $search['s_end_time'];
+            $today = !empty($end_time) ? strtotime(str_replace('／', '-', $end_time)) : strtotime(date("Y-m-d"));
+            $start = !empty($start_time) ? strtotime(str_replace('／', '-', $start_time)) : ($today - 86400);
+
+        }
+
+        //按天搜索
+        if (isset($search['s_day']) && !empty($search['s_day'])) {
+            $day = $search['s_day'];
+            switch ($day) {
+                //今日
+                case 'day':
+                    $today = strtotime(date('Y-m-d'),time());
+                    $start = $today - 86400;
+                    break;
+                //本周
+                case 'week':
+                    $today = strtotime(date('Y-m-d'),time());
+                    $start = $today - (6*86400);
+                    break;
+                //本月
+                case 'month':
+                    $today = strtotime(date('Y-m-d'),time());
+                    //本月第一天
+                    $start = strtotime(date('Y-m-01'));
+                    break;
+            }
+        }
+        $this->db->where('logdate >=',$start);
+        $this->db->where('logdate <=',$today);
+        $this->db->order_by('total_money','DESC');
+        $this->db->limit(10);
+        $res = $this->db->get()->result_array();
+        $res['names'] = array_column($res, 'name');
+        $res['amount'] = array_column($res, 'amount');
+        $res['sales_price'] = array_column($res, 'sales_price');
+        $res['mons'] = array_column($res, 'total_money');
+        $res['logdate'] = array_column($res, 'logdate');
+        return $res;
+
+    }
+
+    /**
+     * @copyright 类目销售信息
+     * @param     [type]      $id [description]
+     * @return    [type]          [description]
+     */
+    public function getCatesData($search)
+    {
+
+        $this->db->select('category,sum(total_money) as mon,sales_price,logdate');
+        $this->db->from('goods_data');
+
+        //自选时间
+        if (!empty($search['s_start_time']) && !empty($search['s_end_time'])) {
+            $search['s_day'] = '';
+            $start_time = $search['s_start_time'];
+            $end_time = $search['s_end_time'];
+            $today = !empty($end_time) ? strtotime(str_replace('／', '-', $end_time)) : strtotime(date("Y-m-d"));
+            $start = !empty($start_time) ? strtotime(str_replace('／', '-', $start_time)) : ($today - 86400);
+
+        }
+
+        //按天搜索
+        if (isset($search['s_day2']) && !empty($search['s_day2'])) {
+            $day = $search['s_day2'];
+            switch ($day) {
+                //今日
+                case 'day2':
+                    $today = strtotime(date('Y-m-d'),time());
+                    $start = $today - 86400;
+                    break;
+                //本周
+                case 'week2':
+                    $today = strtotime(date('Y-m-d'),time());
+                    $start = $today - (6*86400);
+                    break;
+                //本月
+                case 'month2':
+                    $today = strtotime(date('Y-m-d'),time());
+                    //本月第一天
+                    $start = strtotime(date('Y-m-01'));
+                    break;
+            }
+        }
+        $this->db->where('logdate >=',$start);
+        $this->db->where('logdate <=',$today);
+        $this->db->group_by('category');
+        $this->db->order_by('mon','DESC');
+        $this->db->limit(10);
+        $res = $this->db->get()->result_array();
+        $res['amounts'] = array_column($res, 'amounts');
+        $res['cates'] = array_column($res, 'category');
+        $res['sales_price'] = array_column($res, 'sales_price');
+        $res['mons'] = array_column($res, 'mon');
+        $res['logdate'] = array_column($res, 'logdate');
+        return $res;
+    }
+
+    /**
+     * @copyright 单品访问统计信息
+     * @param     [type]      $id [description]
+     * @return    [type]          [description]
+     */
+    public function getVisitData($search)
+    {
+        $this->db->select('name,visit,logdate');
+        $this->db->from('goods_data');
+
+        //自选时间
+        if (!empty($search['s_start_time3']) && !empty($search['s_end_time3'])) {
+            $search['s_day3'] = '';
+            $start_time = $search['s_start_time3'];
+            $end_time = $search['s_end_time3'];
+            $today = !empty($end_time) ? strtotime(str_replace('／', '-', $end_time)) : strtotime(date("Y-m-d"));
+            $start = !empty($start_time) ? strtotime(str_replace('／', '-', $start_time)) : ($today - 86400);
+
+        }
+
+        //按天搜索
+        if (isset($search['s_day3']) && !empty($search['s_day3'])) {
+            $day = $search['s_day3'];
+            switch ($day) {
+                //今日
+                case 'day3':
+                    $today = strtotime(date('Y-m-d'),time());
+                    $start = $today - 86400;
+                    break;
+                //本周
+                case 'week3':
+                    $today = strtotime(date('Y-m-d'),time());
+                    $start = $today - (6*86400);
+                    break;
+                //本月
+                case 'month3':
+                    $today = strtotime(date('Y-m-d'),time());
+                    //本月第一天
+                    $start = strtotime(date('Y-m-01'));
+                    break;
+            }
+        }
+        $this->db->where('logdate >=',$start);
+        $this->db->where('logdate <=',$today);
+        $this->db->order_by('visit','DESC');
+        $this->db->limit(10);
+        $res = $this->db->get()->result_array();
+        $res['names'] = array_column($res, 'name');
+        $res['visits'] = array_column($res, 'visit');
+        $res['logdate'] = array_column($res, 'logdate');
+        return $res;
+    }
+
+    /**
+     * @copyright 单品分享统计信息
+     * @param     [type]      $id [description]
+     * @return    [type]          [description]
+     */
+
+    public function getShareData($search)
+    {
+        $this->db->select('name,share,logdate');
+        $this->db->from('goods_data');
+
+        //自选时间
+        if (!empty($search['s_start_time4']) && !empty($search['s_end_time4'])) {
+            $search['s_day4'] = '';
+            $start_time = $search['s_start_time4'];
+            $end_time = $search['s_end_time4'];
+            $today = !empty($end_time) ? strtotime(str_replace('／', '-', $end_time)) : strtotime(date("Y-m-d"));
+            $start = !empty($start_time) ? strtotime(str_replace('／', '-', $start_time)) : ($today - 86400);
+
+        }
+
+        //按天搜索
+        if (isset($search['s_day4']) && !empty($search['s_day4'])) {
+            $day = $search['s_day4'];
+            switch ($day) {
+                //今日
+                case 'day4':
+                    $today = strtotime(date('Y-m-d'),time());
+                    $start = $today - 86400;
+                    break;
+                //本周
+                case 'week4':
+                    $today = strtotime(date('Y-m-d'),time());
+                    $start = $today - (6*86400);
+                    break;
+                //本月
+                case 'month4':
+                    $today = strtotime(date('Y-m-d'),time());
+                    //本月第一天
+                    $start = strtotime(date('Y-m-01'));
+                    break;
+            }
+        }
+        $this->db->where('logdate >=',$start);
+        $this->db->where('logdate <=',$today);
+        $this->db->order_by('share','DESC');
+        $this->db->limit(10);
+        $res = $this->db->get()->result_array();
+        $res['names'] = array_column($res, 'name');
+        $res['shares'] = array_column($res, 'share');
+        $res['logdate'] = array_column($res, 'logdate');
+        return $res;
+    }
+
+    public function verifyItem(){
+
+    }
+
+}

@@ -1,0 +1,108 @@
+/* ------------------------------------------------------------------------------
+ *
+ * home 首页JS
+ *
+ * ---------------------------------------------------------------------------- */
+app.controller('appCtrl', ['$scope', '$http', 'common', function($scope, $http, common) {
+    // Echat 设置，配置Echats相关文件路径
+    // ------------------------------
+    require.config({
+        paths: {
+            echarts: common.base_url + 'assets/js/plugins/visualization/echarts'
+        }
+    });
+
+    var showLine = function ()
+    {
+        require(
+            [
+                'echarts',
+                'echarts/theme/limitless',
+                'echarts/chart/bar',
+                'echarts/chart/line'
+            ],function(ec, limitless) {
+
+                var stacked_lines = ec.init(document.getElementById('stacked_lines'), limitless);
+
+                var getDaysData = function() {
+                    $http({
+                        url: common.show_line,
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                    }).success(function(response) {
+
+                        stacked_lines_options = {
+
+                            // Setup grid
+                            grid: {
+                                x: 80,
+                                x2: 30,
+                                y: 30,
+                                y2: 80
+                            },
+
+                            // Add tooltip
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+
+                            // Add legend
+                            legend: {
+                                data: ['商铺名称','所在小区','商铺类型','销售金额']
+                            },
+
+                            // Enable drag recalculate
+                            calculable: false,
+
+                            // Hirozontal axis
+                            xAxis: [{
+                                type: 'category',
+                                boundaryGap: false,
+                                data: angular.fromJson(response.echarts_data.days)
+                            }],
+
+                            // Vertical axis
+                            yAxis: [{
+                                type: 'value'
+                            }],
+
+                            // Add series
+                            series: [{
+                                name: '商铺名称',
+                                type: 'line',
+                                stack: 'Total',
+                                data: angular.fromJson(response.echarts_data.shop)
+                            },{
+                                name: '所在小区',
+                                type: 'line',
+                                stack: 'Total',
+                                data: angular.fromJson(response.echarts_data.district)
+                            },{
+                                name: '商铺类型',
+                                type: 'line',
+                                stack: 'Total',
+                                data: angular.fromJson(response.echarts_data.type)
+                            },{
+                                name: '销售金额',
+                                type: 'line',
+                                stack: 'Total',
+                                data: angular.fromJson(response.echarts_data.money)
+                            }
+                            ]
+                        };
+                        stacked_lines.setOption(stacked_lines_options,true);
+                    });
+                };
+                getDaysData();
+                // Resize charts
+                // ------------------------------
+                window.onresize = function() {
+                    setTimeout(function() {
+                        stacked_lines.resize();
+                    }, 200);
+                }
+            })
+    }
+    //加载图表
+    showLine();
+}]);

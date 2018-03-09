@@ -1,0 +1,197 @@
+<{include file="../public/header.html" }>
+<!-- /main navbar --> 
+<!-- Page container -->
+<div class="page-container"> 
+  
+  <!-- Page content -->
+  <div class="page-content">
+      <{include file="../public/left.html" }>
+    <div class="content-wrapper">
+
+      <{include file="../public/breadcrumb.html" }>
+      <!-- Content area -->
+      <div class="content" ng-controller="appCtrl">
+        <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-flat">
+                <div class="panel-heading">
+                  <h6 class="panel-title">今日数据<span class="pull-right"><{date('Y-m-d')}></span></h6>
+                </div>
+                <div class="container-fluid">
+                  <div class="row col-md-offset-1">
+                    <div class="col-md-3">
+                      <div class="panel bg-teal-400">
+                        <div class="panel-body pb20 homgicon-01">
+                          <h4 class="no-margin">买家提现总额</h4>
+                          <h2 class="mv10">{{lists.totalMoney}}元</h2>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-md-offset-1">
+                      <div class="panel bg-pink-400 ">
+                        <div class="panel-body pb20 homgicon-02">
+                          <h4 class="no-margin">买家提现总次数</h4>
+                          <h2 class="mv10">{{lists.totalTimes}}次</h2>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-md-offset-1">
+                      <div class="panel bg-blue-400">
+                        <div class="panel-body pb20 homgicon-03">
+                          <h4 class="no-margin">买家提现总人数</h4>
+                          <h2 class=" mv10">{{lists.totalPeople}}人</h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-info col-md-6">
+                  <div class="panel-heading" >
+                    <div class="panel-title row">
+                      <div class="col-md-6 pt10">提现金额统计
+                        <button  ng-click="getDateList('day')" ng-class="day ? 'btn btn-success' : 'btn'">今日</button>
+                        <button  ng-click="getDateList('week')" ng-class="week ? 'btn btn-success' : 'btn'">本周</button>
+                        <button  ng-click="getDateList('month')" ng-class="month ? 'btn btn-success' : 'btn'">本月</button>
+                      </div>
+                      <div class="col-md-4 col-sm-4 m-ss" >
+                        指定日期
+                        <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                          <input type="text" name="s_start_time" ng-model="s_start_time" class="form-control pickadate"  placeholder="请选择开始时间">
+                        </div>
+                        <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                          <input type="text" name="s_end_time" ng-model="s_end_time" class="form-control pickadate"  placeholder="请选择结束时间">
+                        </div>
+
+                      </div>
+                      <div class="col-md-2 pt20">
+                        <button class="btn btn-success" ng-click="searchAction()">筛选</button>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="panel-body br-t" >
+                    <div class="chart-container">
+                      <div class="chart has-fixed-height" id="stacked_lines"></div>
+                    </div>
+                  </div>
+            </div>
+            <div class="panel panel-info col-md-6">
+                  <div class="panel-heading">
+                    <div class="panel-title row">
+                      <div class="col-md-6 pt10">
+                        提现买家统计
+                        <button  ng-click="getSellerList('day2')" ng-class="day2 ? 'btn btn-success' : 'btn'">今日</button>
+                        <button  ng-click="getSellerList('week2')" ng-class="week2 ? 'btn btn-success' : 'btn'">本周</button>
+                        <button  ng-click="getSellerList('month2')" ng-class="month2 ? 'btn btn-success' : 'btn'">本月</button>
+                      </div>
+                      <div class="col-md-4 col-sm-4 m-ss" >
+                        指定日期
+                        <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                          <input type="text" name="s_start_time2" ng-model="s_start_time2" class="form-control pickadate"  placeholder="请选择开始时间">
+                        </div>
+                        <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                          <input type="text" name="s_end_time2" ng-model="s_end_time2" class="form-control pickadate"  placeholder="请选择结束时间">
+                        </div>
+
+                      </div>
+                      <div class="col-md-2 pt20">
+                        <button class="btn btn-success" ng-click="searchAction2()">筛选</button>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="panel-body br-t" >
+                    <div class="chart-container">
+                      <div class="chart has-fixed-height" id="stacked2_lines"></div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-flat">
+              <div class="panel-heading">
+                <div class="row">
+                  <button  class='col-md-2 ml10' ng-click="filterList('all')" ng-class="all ? 'btn btn-success' : 'btn'">全部</button>
+                  <button  class='col-md-2 ml20 ' ng-click="filterList('verify')" ng-class="verify ? 'btn btn-success' : 'btn'">待审批</button>
+                  <button  class='col-md-2 ml20 ' ng-click="filterList('pay')" ng-class="pay ? 'btn btn-success' : 'btn'">待付款</button>
+                  <button  class='col-md-2 ml20 ' ng-click="filterList('done')" ng-class="done ? 'btn btn-success' : 'btn'">已付款</button>
+                  <button  class='col-md-3 ml20' ng-click="filterList('fail')" ng-class="fail ? 'btn btn-success' : 'btn'">审核未通过</button>
+                </div>
+
+              </div>
+              <div class="panel-body">
+                <table class="table datatable datatable-basic table-hover">
+                  <thead class="bg-grey-100">
+                  <tr>
+                    <th>编号</th>
+                    <th>用户名</th>
+                    <th>头像</th>
+                    <th>提现金额</th>
+                    <th>申请时间</th>
+                    <th>审批人</th>
+                    <th>审批时间</th>
+                    <th>付款人</th>
+                    <th>付款时间</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng-repeat="item in alllist track by $index" id="tr_{{item.id}}">
+                    <td>{{item.id}}</td>
+                    <td>{{item.username}}</td>
+                    <td> <img ng-src="{{item.avatarUrl}}" width=60px,height=60px /></td>
+                    <td>{{item.money}}</td>
+                    <td>{{item.create_time*1000|date:'yyyy-MM-dd HH:mm'}}</td>
+                    <td>{{item.verify_name}}</td>
+                    <td>{{item.verify_time*1000|date:'yyyy-MM-dd HH:mm'}}</td>
+                    <td>{{item.pay_name}}</td>
+                    <td>{{item.pay_time*1000|date:'yyyy-MM-dd HH:mm'}}</td>
+                    <td>{{item.status | StatusDesc}}</td>
+                    <td>
+                      <a ng-if="item.status == 1" href="<{site_url($data.page_url.action_url)}>{{item.id}}"><i class="icon-list3"></i> 审核</a>
+                      <a ng-if="item.status != 1" href="<{site_url($data.page_url.action_url)}>{{item.id}}"><i class="icon-list3"></i> 详情</a>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="panel-footer">
+                <{include file="../public/page.html"}>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <{include file="../public/footer_page.html" }>
+        
+
+      <!-- /content area --> 
+      
+      </div>
+    <!-- /main content --> 
+    
+    </div>
+  <!-- /page content --> 
+
+  </div>
+</div>
+<!-- /page container --> 
+<!-- /page JS files -->
+<script type="text/javascript" src="<{$base_url}>assets/js/pages/modals_option.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/forms/styling/uniform.min.js"></script>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/forms/styling/switch.min.js"></script>
+
+<{*这里只加载echats库文件，图表配置项在assets/dev/pages/report/index.js中*}>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/visualization/echarts/echarts.js"></script>
+<!-- 日期范围选择配置 -->
+<script type="text/javascript" src="<{$base_url}>assets/js/pages/picker_date.js"></script>
+<{include file="../public/footer.html" }>

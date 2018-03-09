@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * @Description: 首页模型
+ */
+class HomeModel extends MY_Model
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * @function getData 各表数据汇总,删除的不统计
+     * @return   array $data   结果集
+     */
+    public function getData($uid)
+    {
+    	$data = ['task'=>0, 'material'=>0, 'site'=>0, 'interest'=>0];
+        $res = $this->getUserRelation($uid, $column = 0, $merge = 1,$self = 1);
+        if(empty($res['childrenGather']))
+        {
+            $res['childrenGather'][0] = 0;
+        }
+
+    	// 任务
+    	$this->db->select('count(*) as task');
+        $this->db->from('task');
+        $this->db->where('task_status != ', 8);
+        $this->db->where_in('create_author', $res['childrenGather']);
+        $tmp = $this->db->get()->row_array();
+        $data['task'] = $tmp['task'];
+        $this->db->reset_query();
+
+        // 素材
+    	$this->db->select('count(*) as material');
+        $this->db->from('material');
+        $this->db->where('material_status != ', 4);
+        $this->db->where_in('create_author', $res['childrenGather']);
+        $tmp = $this->db->get()->row_array();
+        $data['material'] = $tmp['material'];
+        $this->db->reset_query();
+
+        // 网址
+        $res['childrenGather'][18] = 18;
+    	$this->db->select('count(*) as site');
+        $this->db->from('site');
+        $this->db->where('delete', 0);
+        $this->db->where_in('create_author', $res['childrenGather']);
+        $tmp = $this->db->get()->row_array();
+        $data['site'] = $tmp['site'];
+        $this->db->reset_query();
+        return $data;
+    }
+
+}

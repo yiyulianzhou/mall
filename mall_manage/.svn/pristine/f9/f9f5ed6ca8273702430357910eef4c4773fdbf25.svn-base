@@ -1,0 +1,61 @@
+<div id="info_modal" class="modal fade">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title">订单信息详情</h5>
+            </div>
+            <form action="#" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">订单号</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.order_id}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">商品名称</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.goods_name}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">规格</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.gname}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">订单总价</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.money}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">所属商铺</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.shop}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">买家</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.username}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">下单时间</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.create_time*1000|date:'yyyy-MM-dd HH:mm'}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">发货时间</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.send_time*1000|date:'yyyy-MM-dd HH:mm'}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">配送方式</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.logi | logisticsDesc}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">订单状态</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.status | StateDesc}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">创建时间</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.create_time*1000|date:'yyyy-MM-dd HH:mm'}}</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">返回</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

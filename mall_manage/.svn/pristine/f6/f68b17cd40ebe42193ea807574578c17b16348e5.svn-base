@@ -1,0 +1,112 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class buyer extends MY_Controller
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    public function index()
+    {
+		$this->display($this->data['file_path']);
+    }
+    /**
+     * @DateTime  2017-12-20
+     * @copyright 买家禁言与解禁
+     * @return    [type]      [description]
+     */
+    public function lock()
+    {
+    	$id = $this->input->get('id');
+        $status = $this->input->get('status');
+    	$username = $this->input->get('username');
+    	$page = $this->input->get('per_page');
+    	$res = $this->model->buyerLock( $id, $status );
+    	redirect("buyer/index?per_page=$page&username=$username");
+    }
+    /**
+     * @DateTime  2017-12-20
+     * @copyright 买家详情
+     * @return    [type]      [description]
+     */
+    public function detail(){
+        $id = $this->input->get( 'id' );
+        $username = $this->input->get( 'username' );
+    	$status = $this->input->get( 'status' );
+        $page = $this->input->get('per_page');
+        $res = $this->model->buyerDetail( $id );
+        $this->assign('detail',$res);
+        $this->assign('page',$page);
+        $this->assign('username',$username);
+        $this->assign('status',$status);
+        $this->display($this->data['file_path']);
+    }
+
+    /**
+     * @copyright 卖家顶部统计数据
+     * @return    [type]      [description]
+     */
+
+    public function countBuyer()
+    {
+        $this->response['count'] = $this->model->countBuyer();
+
+        if ($this->response){
+            $this->response['msg_type'] = 'success';
+            $this->response['message'] = '获取买家顶部统计成功';
+        }
+        $this->returnResponse();
+    }
+
+
+
+    /**
+     * @copyright 买家列表数据
+     * @return    [type]    [description]
+     */
+
+    public function getBuyerList()
+    {
+        $this->response = $this->model->getBuyerList();
+
+        if ($this->response){
+            $this->response['msg_type'] = 'success';
+            $this->response['message'] = '获取买家列表成功';
+        }
+        $this->returnResponse();
+    }
+
+    /**
+     * @copyright 买家消费统计数据
+     * @return    [type]      [description]
+     */
+
+    public function getBuyerCost()
+    {
+        $this->response['echarts_data'] = $this->model->getBuyerCost();
+
+        if ($this->response){
+            $this->response['msg_type'] = 'success';
+            $this->response['message'] = '获取买家消费统计成功';
+        }
+        $this->returnResponse();
+    }
+
+    /**
+     * @copyright 买家分布统计数据
+     * @return    [type]      [description]
+     */
+
+    public function getBuyerUsers()
+    {
+        $this->response['echarts_data'] = $this->model->getBuyerUsers();
+
+        if ($this->response){
+            $this->response['msg_type'] = 'success';
+            $this->response['message'] = '获取买家分布统计成功';
+        }
+        $this->returnResponse();
+    }
+}
