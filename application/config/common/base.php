@@ -1,11 +1,11 @@
 <?php if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
-
+date_default_timezone_set('PRC');
 // 网站标题
 $config['common']['site_title'] = '众邻市集管理平台';
 
-// 上传图片年引用域名
+// 上传图片引用域名
 $config['common']['upload_images'] = 'https://upload.yangxun.com/';
 
 // 方法中文名，用于面包屑导航条
@@ -21,8 +21,23 @@ $config['common']['method_name'] = array(
     'view'       => '查看',
     'account'    => '个人信息',
     'changepass' => '密码修改',
+    'category' => '商品类目',
 );
 
+// 商品分类
+$config['common']['category']  = array(
+    "1"=>"新鲜水果",
+    "2"=>"产地直供",
+    "3"=>"车厘子",
+    "4"=>"奇异果",
+    "5"=>"菠萝凤梨",
+    "6"=>"橙柑橘柚",
+    "7"=>"蓝莓草莓",
+    "8"=>"葡萄提子",
+    "9"=>"桃李杏梅",
+    "10"=>"热带水果",
+    "11"=>"苹果香蕉梨"
+);
 
 /*
  * 全局翻页配置，可在单独模块配置中替换
@@ -39,6 +54,8 @@ $config['common']['use_page_numbers'] = true;
 // 放在你当前页码的前面和后面的“数字”链接的数量。比方说值为 2 就会在每一边放置两个数字链接， 就像此页顶端的示例链接那样。
 $config['common']['num_links'] = 5;
 
+// 每页显示数据数量
+$config['common']['per_page1'] = 10;
 
 /**
  * 全局数组

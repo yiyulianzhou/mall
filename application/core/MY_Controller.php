@@ -22,7 +22,6 @@ class MY_Controller extends CI_Controller
 		$urls                   = $this->config->item('url');
 		$this->data['page_url'] = $urls;
 
-
 		//echo $page_angularjs_path;
 
         // 页面 angularjs 文件是否存在
@@ -160,4 +159,5 @@ class MY_Controller extends CI_Controller
 			$this->returnResponse();
 		}
 	}
+
 }

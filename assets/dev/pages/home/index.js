@@ -3,7 +3,7 @@
  * home 首页JS
  *
  * ---------------------------------------------------------------------------- */
-app.controller('appCtrl', ['$scope', '$http', 'appService', 'appFactory', 'common', function($scope, $http,appService, appFactory,common) {
+app.controller('appCtrl', ['$scope', '$interval','$http', 'appService', 'appFactory', 'common', function($scope, $interval,$http,appService, appFactory,common) {
 
     // 反馈列表数据变量初始化
     $scope.list = [];
@@ -11,10 +11,29 @@ app.controller('appCtrl', ['$scope', '$http', 'appService', 'appFactory', 'commo
     // 提现列表
     $scope.applylist = [];
 
-    //待处理反馈信息
+    // 顶部统计
+    $scope.toplist = [];
+
+    //顶部统计信息
+
+    var topcount = function ()
+    {
+        var url = common.top_count;
+        $http({
+            url: url,
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }).success(function(response) {
+            // 待处理的反馈列表数据
+            $scope.toplist = response.list;
+
+        });
+    }
+    topcount();
+
+
     var feedback = function (page)
     {
-        //var url = common.show_tips;
         // loading 开
         appFactory.loadingToggle(1);
         var url = page > 1 ? common.show_tips + page : common.show_tips;
@@ -26,15 +45,20 @@ app.controller('appCtrl', ['$scope', '$http', 'appService', 'appFactory', 'commo
             // 待处理的反馈列表数据
             $scope.list = response.list;
 
+            $scope.pages = response.pages;
+
+            $scope.curpage = response.curpage;
             // 翻页数据
             appFactory.pagerInit(response);
 
             // loading 关
             appFactory.loadingToggle(0);
         });
+
     }
     //页面初始化首次获取列表
     feedback(1);
+
 
     //待处理提现信息
     var cashapply = function (page)
@@ -59,6 +83,24 @@ app.controller('appCtrl', ['$scope', '$http', 'appService', 'appFactory', 'commo
     }
     cashapply(1);
 
+    //定时任务轮播提示信息
+    //var n =1;
+
+    // var settime = function(){
+    //     //feedback(n);
+    //     //cashapply(n);
+    //     n++;
+    //     if(n>=$scope.pages){
+    //         n = 1;
+    //     }
+    // }
+    //设置定时
+    //var timer = $interval(settime,3000);
+
+    //清除定时
+    // $scope.$on('$destroy',function(){
+    //     $interval.cancel(timer);
+    // });
     // 翻页
     $scope.changePager = function(page, $event) {
         if($event =='tips') feedback(page);
@@ -103,7 +145,7 @@ app.controller('appCtrl', ['$scope', '$http', 'appService', 'appFactory', 'commo
                                 data:['销售金额']
                             },
                             toolbox: {
-                                show : true,
+                                show : false,
                                 feature : {
                                     mark : {show: true},
                                     dataView : {show: true, readOnly: false},
@@ -162,7 +204,7 @@ app.controller('appCtrl', ['$scope', '$http', 'appService', 'appFactory', 'commo
                                 data:['消费金额']
                             },
                             toolbox: {
-                                show : true,
+                                show : false,
                                 feature : {
                                     mark : {show: true},
                                     dataView : {show: true, readOnly: false},
@@ -208,8 +250,8 @@ app.controller('appCtrl', ['$scope', '$http', 'appService', 'appFactory', 'commo
                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                     }).success(function(response) {
 
-                        var aa =angular.fromJson(response.echarts_data.total);
-                        var bb =angular.fromJson(response.echarts_data.name);
+                        var aa =angular.fromJson(response.echarts_data.mons);
+                        var bb =angular.fromJson(response.echarts_data.names);
                         $scope.list_goods = response.echarts_data;
                         stacked_lines_options = {
                             color: ['#D15FEE'],
@@ -217,10 +259,10 @@ app.controller('appCtrl', ['$scope', '$http', 'appService', 'appFactory', 'commo
                                 trigger: 'axis'
                             },
                             legend: {
-                                data:['销量']
+                                data:['销售金额']
                             },
                             toolbox: {
-                                show : true,
+                                show : false,
                                 feature : {
                                     mark : {show: true},
                                     dataView : {show: true, readOnly: false},
@@ -247,7 +289,7 @@ app.controller('appCtrl', ['$scope', '$http', 'appService', 'appFactory', 'commo
                             ],
                             series : [
                                 {
-                                    name:'销量',
+                                    name:'销售金额',
                                     type:'bar',
                                     data: aa
 
@@ -258,58 +300,57 @@ app.controller('appCtrl', ['$scope', '$http', 'appService', 'appFactory', 'commo
                     });
                 };
                 getGoodsData();
+
                 var stacked4_lines = ec.init(document.getElementById('stacked4_lines'), macarons);
                 var getDistrictData = function() {
                     $http({
-                        url: common.show_district,
+                        url: common.show_items,
                         method: 'POST',
                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                     }).success(function(response) {
 
-                        stacked_lines_options  = {
+                        var aa =angular.fromJson(response.echarts_data.mons);
+                        var bb =angular.fromJson(response.echarts_data.names);
+                        stacked_lines_options = {
+                            color: ['#FF1493'],
                             tooltip : {
-                                trigger: 'item',
-                                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                                trigger: 'axis'
                             },
                             legend: {
-                                orient : 'vertical',
-                                x : 'left',
-                                data:['杨浦小区','央讯小区','永和家园','美兰嘉园']
+                                data:['销售金额']
                             },
                             toolbox: {
-                                show : true,
+                                show : false,
                                 feature : {
                                     mark : {show: true},
                                     dataView : {show: true, readOnly: false},
-                                    magicType : {
-                                        show: true,
-                                        type: ['pie', 'funnel'],
-                                        option: {
-                                            funnel: {
-                                                x: '25%',
-                                                width: '50%',
-                                                funnelAlign: 'left',
-                                                max: 1548
-                                            }
-                                        }
-                                    },
+                                    magicType : {show: true, type: ['line', 'bar']},
                                     restore : {show: true},
                                     saveAsImage : {show: true}
                                 }
                             },
                             calculable : true,
+                            xAxis : [
+                                {
+                                    type : 'category',
+                                    data : bb ,
+                                    axisLabel:{
+                                        interval:0,//横轴信息全部显示
+                                        rotate:-30,//-30度角倾斜显示
+                                    }
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value'
+                                }
+                            ],
                             series : [
                                 {
-                                    name:'访问来源',
-                                    type:'pie',
-                                    radius : '55%',
-                                    center: ['50%', '60%'],
-                                    data:[
-                                        {value:335, name:'杨浦小区'},
-                                        {value:310, name:'央讯小区'},
-                                        {value:135, name:'永和家园'},
-                                        {value:1548, name:'美兰嘉园'}
-                                    ]
+                                    name:'销售金额',
+                                    type:'bar',
+                                    data: aa
+
                                 }
                             ]
                         };

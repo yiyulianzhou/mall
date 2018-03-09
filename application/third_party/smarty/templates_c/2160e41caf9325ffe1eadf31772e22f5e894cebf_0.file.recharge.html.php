@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-02-09 12:23:29
+/* Smarty version 3.1.30, created on 2018-03-06 13:55:34
   from "D:\wamp64\www\mall_manage\application\views\money\recharge.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a7d2241137670_33498989',
+  'unifunc' => 'content_5a9e2d56ca8563_80755825',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2160e41caf9325ffe1eadf31772e22f5e894cebf' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\money\\recharge.html',
-      1 => 1518150182,
+      1 => 1520315729,
       2 => 'file',
     ),
   ),
@@ -26,7 +26,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5a7d2241137670_33498989 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a9e2d56ca8563_80755825 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -162,23 +162,25 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
                   <table class="table datatable datatable-basic table-hover">
                     <thead class="bg-grey-100">
                     <tr>
-                      <th>编号</th>
-                      <th>买家姓名</th>
+                      <th>用户名</th>
                       <th>头像</th>
                       <th>充值金额</th>
                       <th>充值时间</th>
+                      <?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money']['info'])) {?>
                       <th>操作</th>
+                      <?php }?>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="item in alllist track by $index" id="tr_{{item.id}}">
-                      <td>{{item.id}}</td>
                       <td>{{item.username}}</td>
                       <td> <img ng-src="{{item.avatarUrl}}" width=60px,height=60px /></td>
                       <td>{{item.money}}</td>
-                      <td>{{item.create_time}}</td>
-                      <td><a href="<?php echo site_url($_smarty_tpl->tpl_vars['data']->value['page_url']['action_url']);?>
+                      <td>{{item.create_time*1000|date:'yyyy-MM-dd HH:mm'}}</td>
+                      <?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money']['info'])) {?>
+                      <td><a href="<?php echo site_url($_smarty_tpl->tpl_vars['data']->value['page_url']['info_url']);?>
 {{item.id}}"><i class="icon-list3"></i> 详情</a></td>
+                      <?php }?>
                     </tr>
                     </tbody>
                   </table>

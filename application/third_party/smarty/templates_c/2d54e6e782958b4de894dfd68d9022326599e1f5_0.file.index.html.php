@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-02-08 07:30:03
+/* Smarty version 3.1.30, created on 2018-03-09 09:49:04
   from "D:\wamp64\www\mall_manage\application\views\user\index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a7bfc7b194c62_75011499',
+  'unifunc' => 'content_5aa1e810055f75_48242732',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2d54e6e782958b4de894dfd68d9022326599e1f5' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\user\\index.html',
-      1 => 1517981988,
+      1 => 1520560137,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5a7bfc7b194c62_75011499 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa1e810055f75_48242732 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -73,10 +73,9 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
 								</div>
 								<div class="col-md-2 col-sm-6 m-ss">
 									<select name="status" class="form-control">
-									<option value="-1"<?php if ($_smarty_tpl->tpl_vars['state']->value == -1) {?> selected="selected"<?php }?>>用户状态</option>
-									<option value="0"<?php if ($_smarty_tpl->tpl_vars['state']->value == 0) {?> selected="selected"<?php }?>>全部</option>
+									<option value="-1"<?php if ($_smarty_tpl->tpl_vars['state']->value == -1) {?> selected="selected"<?php }?>>全部</option>
 									<option value="1"<?php if ($_smarty_tpl->tpl_vars['state']->value == 1) {?> selected="selected"<?php }?>>正常</option>
-									<option value="2"<?php if ($_smarty_tpl->tpl_vars['state']->value == 2) {?> selected="selected"<?php }?>>禁用</option>
+									<option value="0"<?php if ($_smarty_tpl->tpl_vars['state']->value == 0) {?> selected="selected"<?php }?>>禁用</option>
 									</select>
 								</div>
 								<div class="col-md-2 m-ss">

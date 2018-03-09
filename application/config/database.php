@@ -5,10 +5,10 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	   => 'mysql:host=127.0.0.1;port=3306;dbname=mall',
-	'hostname' => '127.0.0.1',
+	'dsn'	   => 'mysql:host=10.10.10.205;port=3306;dbname=mall',
+	'hostname' => '10.10.10.205',
 	'username' => 'root',
-	'password' => '123456',
+	'password' => 'ccit132456',
 	'database' => 'mall',
 	'dbdriver' => 'pdo',
 	'dbprefix' => 'shop_',

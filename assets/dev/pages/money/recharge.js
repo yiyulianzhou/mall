@@ -1,7 +1,7 @@
 
 /* ------------------------------------------------------------------------------
  *
- * money 财务充值JS
+ * money 财务买家充值JS
  *
  * ---------------------------------------------------------------------------- */
 app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common', function($scope, $http,appService, appFactory,common) {
@@ -215,7 +215,7 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
                                 data:['充值金额']
                             },
                             toolbox: {
-                                show : true,
+                                show : false,
                                 feature : {
                                     mark : {show: true},
                                     dataView : {show: true, readOnly: false},
@@ -271,6 +271,7 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
                         var aa =angular.fromJson(response.echarts_data.username);
                         var bb =angular.fromJson(response.echarts_data.mon);
                         stacked_lines_options = {
+                            color: ['#6398DB'],
                             tooltip : {
                                 trigger: 'axis'
                             },
@@ -278,7 +279,7 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
                                 data:['充值金额']
                             },
                             toolbox: {
-                                show : true,
+                                show : false,
                                 feature : {
                                     mark : {show: true},
                                     dataView : {show: true, readOnly: false},

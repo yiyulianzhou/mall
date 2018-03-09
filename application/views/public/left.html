@@ -4,7 +4,7 @@
 		<div class="sidebar-category sidebar-category-visible">
 			<div class="category-content no-padding">
 				<ul class="navigation navigation-main navigation-accordion ptn">
-					<li class="active"><a href="<{$base_url}>home"><i class="icon-home4"></i> <span>首页</span></a></li>
+					<li><a href="<{$base_url}>home"><i class="icon-home4"></i> <span>首页</span></a></li>
 					<{if isset($data['permission_tree']['money'])}>
 					<li> <a href="javascript:void(0);"><i class="icon-price-tags"></i> <span>财务管理</span></a>
 						<ul>
@@ -29,7 +29,19 @@
 
 					<{if isset($data['permission_tree']['goods'])}>					
 					<li<{if $data.base.class_name eq 'goods'}> class="active"<{/if}>> 
-						<a href="<{$base_url}>goods"><i class="icon-pie-chart3"></i> <span>商品管理</span></a>
+						<a href="javascript:void(0);"><i class="icon-pie-chart3"></i> <span>商品管理</span></a>
+						<ul>
+							<{if isset($data['permission_tree']['goods']['index'])}>
+							<li<{if $data.base.class_name eq 'goods' && $data.base.method_name eq 'index'}> class="active"<{/if}>>
+							<a href="<{$base_url}>goods/index">商品列表</a>
+							</li>
+							<{/if}>
+							<{if isset($data['permission_tree']['goods']['category'])}>
+							<li<{if $data.base.class_name eq 'goods' && $data.base.method_name eq 'category'}> class="active"<{/if}>>
+							<a href="<{$base_url}>goods/category">商品类目</a>
+							</li>
+							<{/if}>
+						</ul>
 					</li>
 					<{/if}>
 
@@ -58,7 +70,13 @@
 					</li>
 					<{/if}>
 
-					<{if isset($data['permission_tree']['bulletin'])}>					
+					<{if isset($data['permission_tree']['promote'])}>
+					<li<{if $data.base.class_name eq 'promote'}> class="active"<{/if}>>
+					<a href="<{$base_url}>promote"><i class="icon-clipboard5"></i> <span>活动管理</span></a>
+					</li>
+					<{/if}>
+
+					<{if isset($data['permission_tree']['bulletin'])}>
 					<li<{if $data.base.class_name eq 'bulletin'}> class="active"<{/if}>>
 						<a href="<{$base_url}>bulletin"><i class="icon-clipboard5"></i> <span>公告管理</span></a>
 					</li>

@@ -1,7 +1,7 @@
 
 /* ------------------------------------------------------------------------------
  *
- * money 财务买家JS
+ * money 财务买家提现JS
  *
  * ---------------------------------------------------------------------------- */
 var Satus = {1: "待审核",3: "审核未通过",12: "待打款",13: "提现完成"};
@@ -272,7 +272,7 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
                                 data:['提现金额']
                             },
                             toolbox: {
-                                show : true,
+                                show : false,
                                 feature : {
                                     mark : {show: true},
                                     dataView : {show: true, readOnly: false},
@@ -335,7 +335,7 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
                                 data:['提现金额']
                             },
                             toolbox: {
-                                show : true,
+                                show : false,
                                 feature : {
                                     mark : {show: true},
                                     dataView : {show: true, readOnly: false},

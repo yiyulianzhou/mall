@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-02-08 15:02:59
+/* Smarty version 3.1.30, created on 2018-03-06 16:57:11
   from "D:\wamp64\www\mall_manage\application\views\money\detail.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a7bf623e725e8_33022561',
+  'unifunc' => 'content_5a9e57e7d12e05_88544284',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '313d0be5c6b0a079ce3354f31206c993619f8ebf' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\money\\detail.html',
-      1 => 1517981988,
+      1 => 1520326629,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5a7bf623e725e8_33022561 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a9e57e7d12e05_88544284 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -58,12 +58,9 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
                 <div class="panel-body">
                   <input name="id" value="<?php echo $_smarty_tpl->tpl_vars['detail']->value['id'];?>
 "  style="display:none" >
-                  <input name="type" value="<?php echo $_smarty_tpl->tpl_vars['type']->value;?>
+                  <input name="type" value="<?php echo $_smarty_tpl->tpl_vars['detail']->value['user_type'];?>
 "  style="display:none" >
-                  <input name="state" value="<?php echo $_smarty_tpl->tpl_vars['state']->value;?>
-"  style="display:none" >
-                  <input name="username" value="<?php echo $_smarty_tpl->tpl_vars['username']->value;?>
-"  style="display:none" >
+
                   <div class=" form-group">
                     <label class="col-sm-2 control-label">用户姓名:</label>
                     <div class="col-sm-10">
@@ -108,14 +105,14 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
                   </div>
                   <?php if ($_smarty_tpl->tpl_vars['detail']->value['status'] == 3 || $_smarty_tpl->tpl_vars['detail']->value['status'] == 13) {?>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label">操作人:</label>
+                    <label class="col-sm-2 control-label">审核人:</label>
                     <div class="col-sm-10">
                     <input type="text" class="form-control" readonly="readonly" placeholder="" value="<?php echo $_smarty_tpl->tpl_vars['detail']->value['realname'];?>
 ">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label">操作时间:</label>
+                    <label class="col-sm-2 control-label">审核时间:</label>
                     <div class="col-sm-10">
                     <input type="text" class="form-control" readonly="readonly" placeholder="" value="<?php echo date('Y-m-d H:i:s',$_smarty_tpl->tpl_vars['detail']->value['verify_time']);?>
 ">
@@ -139,14 +136,14 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
                   <?php }?>
                   <?php } elseif ($_smarty_tpl->tpl_vars['detail']->value['status'] == 12) {?>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label">操作人:</label>
+                    <label class="col-sm-2 control-label">审核人:</label>
                     <div class="col-sm-10">
                     <input type="text" class="form-control" readonly="readonly" placeholder="" value="<?php echo $_smarty_tpl->tpl_vars['detail']->value['realname'];?>
 ">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label">操作时间:</label>
+                    <label class="col-sm-2 control-label">审核时间:</label>
                     <div class="col-sm-10">
                     <input type="text" class="form-control" readonly="readonly" placeholder="" value="<?php echo date('Y-m-d H:i:s',$_smarty_tpl->tpl_vars['detail']->value['verify_time']);?>
 ">
@@ -158,11 +155,9 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
                     <div class=" col-sm-4 ">
                       <select name="status" class="form-control" <?php if (($_smarty_tpl->tpl_vars['detail']->value['status'] == '3') || ($_smarty_tpl->tpl_vars['detail']->value['status'] == '13')) {?>  disabled="disabled" <?php }?>>
                         <?php if ($_smarty_tpl->tpl_vars['detail']->value['status'] == 1) {?>
-                        <option value="1">待审核</option>
                         <option value="3">不通过</option>
                         <option value="12">通过</option>
                         <?php } elseif ($_smarty_tpl->tpl_vars['detail']->value['status'] == 12) {?>
-                        <option value="12">待打款</option>
                         <option value="13">确认打款</option>
                         <?php } elseif ($_smarty_tpl->tpl_vars['detail']->value['status'] == 13) {?>
                         <option value="13">提现完成</option>

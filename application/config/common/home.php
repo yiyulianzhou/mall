@@ -7,6 +7,9 @@ $config['base']['module_url']  = "home/";
 // 模块名
 $config['base']['module_name'] = '权限';
 
+//顶部统计信息
+$config['url']['top_count'] = $config['base']['module_url'] . 'topCount/';
+
 //用户反馈待处理信息
 $config['url']['show_tips'] = $config['base']['module_url'] . 'showTips/';
 
@@ -23,6 +26,6 @@ $config['url']['show_buyer'] = $config['base']['module_url'] . 'showBuyer/';
 //商品top5报表数据连接
 $config['url']['show_goods'] = $config['base']['module_url'] . 'showGoods/';
 
-//活跃小区top5报表数据连接
-$config['url']['show_district'] = $config['base']['module_url'] . 'showDistrict/';
+//商品类目top5报表数据连接
+$config['url']['show_items'] = $config['base']['module_url'] . 'showItems/';
 

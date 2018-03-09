@@ -4,91 +4,116 @@
 <div class="page-container"> 
   
   <!-- Page content -->
-  <div class="page-content"> 
+  <div class="page-content">
       <{include file="../public/left.html" }>
     <div class="content-wrapper">
+
+      <{include file="../public/breadcrumb.html" }>
       <!-- Content area -->
-      <div class="content">
-        <div class="panel panel-flat">
-          <div class="panel-heading">
-            <h5 class="panel-title">订单管理<span class="ml10">
-              <input name="" type="button"  value="<{$searchbtn}>"  class="btn btn-xs bg-grey-100 text-xg flitbtn" id="searchbtn" onclick="btn()" >
-              </span></h5>
-            <!--<div class="heading-elements"><a href="#adduser" class="btn btn-primary" data-toggle="modal" data-target="#adduser"><i class="icon-plus-circle2"></i> 新增用户</a></div>-->
-            <div class="heading-elements"></div>
-          </div>
-          <form action="" method="GET" class="form-container">
-            <div class="panel-body br-t pt20" id="searchbox" style="<{$searchbox}>">
-              <div class="row">
-                <div class="col-md-2 col-sm-6 m-ss">
-                  <select name="status" class="form-control">
-                    <option value="-1"<{if $status eq -1}> selected="selected"<{/if}>>订单状态</option>
-                    <{foreach from=$orderStatus item=statusList key=key}>
-                      <option value="<{$key}>"<{if $status eq $key}> selected="selected"<{/if}>><{$statusList}></option>
-                    <{/foreach}>
-                  </select>
+      <div class="content" ng-controller="appCtrl">
+        <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-info col-md-12">
+
+                <div class="panel-heading" >
+                  <div class="panel-title row">
+                    <div class="col-md-1 col-sm-4 m-ss">订单统计</div>
+                    <div class="col-md-2 pt10">
+                      <button  ng-click="getSalesList('day')" ng-class="day ? 'btn btn-success' : 'btn'">今日</button>
+                      <button  ng-click="getSalesList('week')" ng-class="week ? 'btn btn-success' : 'btn'">本周</button>
+                      <button  ng-click="getSalesList('month')" ng-class="month ? 'btn btn-success' : 'btn'">本月</button>
+                    </div>
+                    <div class="col-md-1 col-sm-4 m-ss">指定日期</div>
+                    <div class="col-md-2 col-sm-4 m-ss" >
+                      <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                        <input type="text" name="s_start_time" ng-model="s_start_time" class="form-control pickadate"  placeholder="请选择开始时间">
+                      </div>
+                    </div>
+                    <div class="col-sm-2 m-ss">
+                      <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                        <input type="text" name="s_end_time" ng-model="s_end_time" class="form-control pickadate"  placeholder="请选择结束时间">
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <select name="s_order_cate" ng-model="s_order_cate" class="form-control">
+                        <option value="">请选择分类...</option>
+                        <{foreach from=$data.common.category key=key item=item}>
+                        <option value="<{$key}>" ><{$item}></option>
+                        <{/foreach}>
+                      </select>
+                    </div>
+                    <div class="col-md-2">
+                      <button class="btn btn-success" ng-click="searchAction()">筛选</button>
+                    </div>
+                  </div>
+
                 </div>
-                <div class="col-md-1 m-ss">
-                  <input type="submit" class=" btn btn-block bg-grey-300" value="筛选">
+                <div class="panel-body br-t" >
+                  <div class="chart-container">
+                    <div class="chart has-fixed-height" id="stacked_lines"></div>
+                  </div>
                 </div>
               </div>
             </div>
-          </form>
-          <table class="table datatable-basic table-hover">
-            <thead class="bg-grey-100">
-              <tr>
-                <th>订单编号</th>
-                <th>买家姓名</th>
-                <th>商品名称</th>
-                <th>商品规格</th>
-                <th>购买数量</th>
-                <th>订单总价</th>
-                <th>下单时间</th>
-                <th>发货时间</th>
-                <th>订单状态</th>
-                <{if isset($permission_tree.detail) || isset($permission_tree.delete)}>
-                <th class="text-center">操作</th>
-                <{/if}>
-              </tr>
-            </thead>
-            <tbody><!-- danger -->
-              <{foreach from=$orderList item=v}>
-              <tr>
-                <td><{$v.order_id}></td>
-                <td><{$v.username}></td>
-                <td><{$v.goodsName}></td>
-                <td><{$v.name}></td>
-                <td><{$v.amount}></td>
-                <td><{$v.money}></td>
-                <td><{date('Y-m-d H:i:s',$v.create_time)}></td>
-                <td><{(empty($v.send_time)) ? '' : date('Y-m-d H:i:s',$v.send_time)}></td>
-                <td><{$orderStatus[$v.status]}></td>
-                <{if isset($permission_tree.detail) || isset($permission_tree.delete)}>
-                <td class="text-center">
-                  <ul class="icons-list">
-                    <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-menu9"></i> </a>
-                      <ul class="dropdown-menu dropdown-menu-right mnw100">
-                        <{if isset($permission_tree.detail)}>
-                        <li><a href='<{site_url("order/detail?id=<{$v.id}>")}>&per_page=<{$page}>&status=<{$status}>' ><i class="icon-compose"></i> 订单详情</a> 
-                        </li>
-                        <{/if}>
-                        <{if isset($permission_tree.delete)}>
-                        <li>
-                          <a href='<{site_url("order/delete?id=<{$v.id}>")}>&per_page=<{$page}>'><i class="icon-inbox"></i> 订单删除</a>
-                        </li>
-                        <{/if}>
-                      </ul>
-                    </li>
-                  </ul>
-                </td>
-                <{/if}>
-              </tr>
-              <{/foreach}>
-            </tbody>
-          </table>
-          <{include file="../public/pager.html"}>
         </div>
-        
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-flat">
+              <div class="panel-heading">
+                <div class="row">
+                  <button  class='col-md-2 ml10' ng-click="filterList('all')" ng-class="all ? 'btn btn-success' : 'btn'">全部</button>
+                  <button  class='col-md-2 ml20' ng-click="filterList('toSend')" ng-class="toSend ? 'btn btn-success' : 'btn'">待发货</button>
+                  <button  class='col-md-2 ml20' ng-click="filterList('toReceive')" ng-class="toReceive ? 'btn btn-success' : 'btn'">待收货</button>
+                  <button  class='col-md-2 ml20' ng-click="filterList('done')" ng-class="done ? 'btn btn-success' : 'btn'">已完成</button>
+                </div>
+              </div>
+              <div class="panel-body">
+                <table class="table datatable datatable-basic table-hover">
+                  <thead class="bg-grey-100">
+                  <tr>
+                    <th>订单号</th>
+                    <th>商品名</th>
+                    <th>规格</th>
+                    <th>订单总价</th>
+                    <th>所属商铺</th>
+                    <th>买家</th>
+                    <th>下单时间</th>
+                    <th>发货时间</th>
+                    <th>配送</th>
+                    <th>状态</th>
+                    <{if isset($data['permission_tree']['order']['getOrderInfo']) || isset($data['permission_tree']['order']['delete'])}>
+                    <th class="text-center">操作</th>
+                    <{/if}>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng-repeat="item in alllist track by $index" id="tr_{{item.id}}">
+                    <td>{{item.order_id}}</td>
+                    <td>{{item.goods_name}}</td>
+                    <td>{{item.gname}}</td>
+                    <td>{{item.money}}</td>
+                    <td>{{item.shop}}</td>
+                    <td>{{item.username}}</td>
+                    <td>{{item.create_time*1000|date:'yyyy-MM-dd HH:mm'}}</td>
+                    <td ng-show="item.send_time ==null"></td>
+                    <td ng-show="item.send_time !=null">{{item.send_time*1000|date:'yyyy-MM-dd HH:mm'}}</td>
+                    <td>{{item.logi | logisticsDesc}}</td>
+                    <td>{{item.status | StateDesc}}</td>
+                    <{if isset($data['permission_tree']['order']['getOrderInfo']) || isset($data['permission_tree']['order']['delete'])}>
+                    <td class="text-center">
+                      <a  href="#info_modal" data-toggle="modal" data-target="#info_modal" ng-click="getData(item.id)"><i class="icon-list2"></i> 详情</a><br>
+                    <{/if}>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="panel-footer">
+                <{include file="../public/page.html"}>
+              </div>
+            </div>
+          </div>
+          <{include file="order/info.html" }>
+        </div>
         <{include file="../public/footer_page.html" }>
         
       </div>
@@ -101,24 +126,14 @@
   <!-- /page content --> 
   
 </div>
-</div>
 <!-- /page container --> 
 <!-- /page JS files -->
 <script type="text/javascript" src="<{$base_url}>assets/js/pages/modals_option.js"></script>
 <script type="text/javascript" src="<{$base_url}>assets/js/plugins/forms/styling/uniform.min.js"></script>
 <script type="text/javascript" src="<{$base_url}>assets/js/plugins/forms/styling/switch.min.js"></script>
 
-<script type="text/javascript">
-  var btn1=document.getElementById('searchbtn');
-  var box1=document.getElementById('searchbox');
-  function btn(){ 
-    if(btn1.value=="筛选 －"){
-      box1.style.display='none';
-      btn1.value="筛选 ＋";
-    }else{
-      box1.style.display='';
-      btn1.value="筛选 －";
-    }
-  }
-</script>
+<{*这里只加载echats库文件，图表配置项在assets/dev/pages/report/index.js中*}>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/visualization/echarts/echarts.js"></script>
+<!-- 日期范围选择配置 -->
+<script type="text/javascript" src="<{$base_url}>assets/js/pages/picker_date.js"></script>
 <{include file="../public/footer.html" }>

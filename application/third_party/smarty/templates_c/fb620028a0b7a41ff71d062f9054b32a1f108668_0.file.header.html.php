@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-02-07 15:45:30
+/* Smarty version 3.1.30, created on 2018-03-05 11:22:05
   from "D:\wamp64\www\mall_manage\application\views\public\header.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a7aae9a89ddf6_62220621',
+  'unifunc' => 'content_5a9cb7dded2647_00787432',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fb620028a0b7a41ff71d062f9054b32a1f108668' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\public\\header.html',
-      1 => 1517989527,
+      1 => 1520220123,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a7aae9a89ddf6_62220621 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a9cb7dded2647_00787432 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +44,10 @@ assets/css/minified/components.min.css" rel="stylesheet" type="text/css">
 assets/css/minified/colors.min.css" rel="stylesheet" type="text/css">
 <link href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
 assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+<link href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
+assets/css/bootstrap-switch.css" rel="stylesheet" type="text/css">
+<link href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
+assets/css/button/main.css" rel="stylesheet" type="text/css">
 <!-- Core JS files -->
 <?php echo '<script'; ?>
  type="text/javascript" src="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
@@ -82,7 +86,7 @@ assets/js/pages/laydate.js"><?php echo '</script'; ?>
 >
 <?php echo '<script'; ?>
  type="text/javascript" src="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-assets/js/plugins/ui/moment/moment.min.js"><?php echo '</script'; ?>
+assets/js/plugins/ui/moment/moment.js"><?php echo '</script'; ?>
 >
 <?php echo '<script'; ?>
  type="text/javascript" src="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>

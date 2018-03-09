@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-02-08 07:29:31
+/* Smarty version 3.1.30, created on 2018-03-07 13:48:29
   from "D:\wamp64\www\mall_manage\application\views\goods\index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a7bfc5b1d0087_92808635',
+  'unifunc' => 'content_5a9f7d2dae9eb7_68395761',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3928ed6816fca92361319947834567a009abb1a8' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\goods\\index.html',
-      1 => 1517981988,
+      1 => 1520401707,
       2 => 'file',
     ),
   ),
@@ -20,12 +20,16 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
     'file:../public/header.html' => 1,
     'file:../public/left.html' => 1,
-    'file:../public/pager.html' => 1,
+    'file:../public/breadcrumb.html' => 1,
+    'file:../public/page.html' => 1,
+    'file:goods/verify.html' => 1,
+    'file:goods/info.html' => 1,
+    'file:goods/up.html' => 1,
     'file:../public/footer_page.html' => 1,
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5a7bfc5b1d0087_92808635 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a9f7d2dae9eb7_68395761 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -34,171 +38,254 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
 <div class="page-container"> 
   
   <!-- Page content -->
-  <div class="page-content"> 
+  <div class="page-content">
       <?php $_smarty_tpl->_subTemplateRender("file:../public/left.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
     <div class="content-wrapper">
-      <!-- Content area -->
-      <div class="content">
-        <div class="panel panel-flat">
-          <div class="panel-heading">
-            <h5 class="panel-title">商品管理<span class="ml10">
-              <input name="" type="button"  value="<?php echo $_smarty_tpl->tpl_vars['searchbtn']->value;?>
-"  class="btn btn-xs bg-grey-100 text-xg flitbtn" id="searchbtn" onclick="btn()" >
-              </span></h5>
-            <!--<div class="heading-elements"><a href="#adduser" class="btn btn-primary" data-toggle="modal" data-target="#adduser"><i class="icon-plus-circle2"></i> 新增用户</a></div>-->
-            <div class="heading-elements"></div>
-          </div>
-          <form action="" method="GET" class="form-container">
-            <div class="panel-body br-t pt20" id="searchbox" style="<?php echo $_smarty_tpl->tpl_vars['searchbox']->value;?>
-">
-              <div class="row">
-                <div class="col-md-2 col-sm-4 m-ss">
-                  <input type="text" class="form-control" placeholder="商品名称" name="name" value="<?php echo $_smarty_tpl->tpl_vars['name']->value;?>
-">
-                </div>
-                <div class="col-md-2 col-sm-6 m-ss">
-                  <select name="categoryId" class="form-control">
-                    <option value="-1"<?php if ($_smarty_tpl->tpl_vars['categoryId']->value == -1) {?> selected="selected"<?php }?>>商品分类</option>
-                    <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['categoryList']->value, 'category', false, 'key');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['category']->value) {
-?>
-                      <option value="<?php echo $_smarty_tpl->tpl_vars['key']->value;?>
-"<?php if ($_smarty_tpl->tpl_vars['categoryId']->value == $_smarty_tpl->tpl_vars['key']->value) {?> selected="selected"<?php }?>><?php echo $_smarty_tpl->tpl_vars['category']->value;?>
-</option>
-                    <?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+
+      <?php $_smarty_tpl->_subTemplateRender("file:../public/breadcrumb.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
-                  </select>
+      <!-- Content area -->
+      <div class="content" ng-controller="appCtrl">
+        <div class="row">
+            <div class=" col-md-12">
+              <div class="panel panel-flat">
+                <div class="panel-heading">
+                  <h6 class="panel-title">今日数据<span class="pull-right"><?php echo date('Y-m-d');?>
+</span></h6>
                 </div>
-                <div class="col-md-2 col-sm-6 m-ss">
-                  <select name="sales_type" class="form-control">
-                    <option value="-1"<?php if ($_smarty_tpl->tpl_vars['sales_type']->value == -1) {?> selected="selected"<?php }?>>销售方式</option>
-                    <option value="1"<?php if ($_smarty_tpl->tpl_vars['sales_type']->value == 1) {?> selected="selected"<?php }?>>普通</option>
-                    <option value="2"<?php if ($_smarty_tpl->tpl_vars['sales_type']->value == 2) {?> selected="selected"<?php }?>>团购</option>
-                  </select>
+                <div class="container-fluid">
+                  <div class="row col-md-offset-1">
+                    <div class="col-md-3">
+                      <div class="panel bg-teal-400">
+                        <div class="panel-body pb20 homgicon-01">
+                          <h4 class="no-margin">新增商品</h4>
+                          <h2 class="mv10">{{lists.new_goods}}个</h2>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-md-offset-1">
+                      <div class="panel bg-pink-400 ">
+                        <div class="panel-body pb20 homgicon-02">
+                          <h4 class="no-margin">商品总数</h4>
+                          <h2 class="mv10">{{lists.goods_total}}个</h2>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-md-offset-1">
+                      <div class="panel bg-blue-400">
+                        <div class="panel-body pb20 homgicon-03">
+                          <h4 class="no-margin">商品类目</h4>
+                          <h2 class=" mv10">{{lists.goods_item}}条</h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-2 col-sm-6 m-ss">
-                  <select name="orderBy" class="form-control">
-                    <option value="-1"<?php if ($_smarty_tpl->tpl_vars['orderBy']->value == -1) {?> selected="selected"<?php }?>>排序</option>
-                    <option value="1"<?php if ($_smarty_tpl->tpl_vars['orderBy']->value == 1) {?> selected="selected"<?php }?>>销量从高到低</option>
-                    <option value="2"<?php if ($_smarty_tpl->tpl_vars['orderBy']->value == 2) {?> selected="selected"<?php }?>>销量从低到高</option>
-                    <option value="3"<?php if ($_smarty_tpl->tpl_vars['orderBy']->value == 3) {?> selected="selected"<?php }?>>活跃从高到低</option>
-                    <option value="4"<?php if ($_smarty_tpl->tpl_vars['orderBy']->value == 4) {?> selected="selected"<?php }?>>活跃从低到高</option>
-                  </select>
+
+              </div>
+            </div>
+          </div>
+        <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-info col-md-6">
+
+                <div class="panel-heading" >
+                  <div class="panel-title row">
+                    <div class="col-md-6 pt10">单品销售统计
+                      <button  ng-click="getSalesList('day')" ng-class="day ? 'btn btn-success' : 'btn'">今日</button>
+                      <button  ng-click="getSalesList('week')" ng-class="week ? 'btn btn-success' : 'btn'">本周</button>
+                      <button  ng-click="getSalesList('month')" ng-class="month ? 'btn btn-success' : 'btn'">本月</button>
+                    </div>
+                    <div class="col-md-4 col-sm-4 m-ss" >
+                      指定日期
+                      <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                        <input type="text" name="s_start_time" ng-model="s_start_time" class="form-control pickadate"  placeholder="请选择开始时间">
+                      </div>
+                      <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                        <input type="text" name="s_end_time" ng-model="s_end_time" class="form-control pickadate"  placeholder="请选择结束时间">
+                      </div>
+                    </div>
+                    <div class="col-md-2 pt20">
+                      <button class="btn btn-success" ng-click="searchAction()">筛选</button>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-1 m-ss">
-                  <input type="submit" class=" btn btn-block bg-grey-300" value="筛选">
+                <div class="panel-body br-t" >
+                  <div class="chart-container">
+                    <div class="chart has-fixed-height" id="stacked_lines"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-info col-md-6">
+                <div class="panel-heading">
+                  <div class="panel-title row">
+                    <div class="col-md-6 pt10">
+                      类目销售统计
+                      <button  ng-click="getCatesList('day2')" ng-class="day2 ? 'btn btn-success' : 'btn'">今日</button>
+                      <button  ng-click="getCatesList('week2')" ng-class="week2 ? 'btn btn-success' : 'btn'">本周</button>
+                      <button  ng-click="getCatesList('month2')" ng-class="month2 ? 'btn btn-success' : 'btn'">本月</button>
+                    </div>
+                    <div class="col-md-4 col-sm-4 m-ss" >
+                      指定日期
+                      <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                        <input type="text" name="s_start_time2" ng-model="s_start_time2" class="form-control pickadate"  placeholder="请选择开始时间">
+                      </div>
+                      <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                        <input type="text" name="s_end_time2" ng-model="s_end_time2" class="form-control pickadate"  placeholder="请选择结束时间">
+                      </div>
+
+                    </div>
+                    <div class="col-md-2 pt20">
+                      <button class="btn btn-success" ng-click="searchAction2()">筛选</button>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="panel-body br-t" >
+                  <div class="chart-container">
+                    <div class="chart has-fixed-height" id="stacked2_lines"></div>
+                  </div>
                 </div>
               </div>
             </div>
-          </form>
-          <table class="table datatable-basic table-hover">
-            <thead class="bg-grey-100">
-              <tr>
-                <th>商品名称</th>
-                <th>商品图片</th>
-                <th>商品分类</th>
-                <th>销售方式</th>
-                <th>产地直销</th>
-                <th>物流方式</th>
-                <th>运费/配送范围</th>
-                <th>状态</th>
-                <?php if (isset($_smarty_tpl->tpl_vars['permission_tree']->value['detail']) || isset($_smarty_tpl->tpl_vars['permission_tree']->value['verify']) || isset($_smarty_tpl->tpl_vars['permission_tree']->value['nosales'])) {?>
-                <th class="text-center">操作</th>
-                <?php }?>
-              </tr>
-            </thead>
-            <tbody><!-- danger -->
-              <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['goodsList']->value, 'v');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['v']->value) {
-?>
-              <tr>
-                <td><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
-</td>
-                <td> <img src="<?php echo $_smarty_tpl->tpl_vars['data']->value['common']['upload_images'];
-echo $_smarty_tpl->tpl_vars['v']->value['img'];?>
-" style="width:60px;height:60px;"></td>
-                <td><?php echo $_smarty_tpl->tpl_vars['categoryList']->value[$_smarty_tpl->tpl_vars['v']->value['category']];?>
-</td>
-                <td><?php echo $_smarty_tpl->tpl_vars['v']->value['sales_type'] == '1' ? '普通' : '团购';?>
-</td>
-                <td><?php echo $_smarty_tpl->tpl_vars['v']->value['direct_sales'] == '1' ? '是' : '否';?>
-</td>
-                <td><?php echo $_smarty_tpl->tpl_vars['v']->value['logistics'] == '1' ? '第三方快递' : '卖家送货上门';?>
-</td>
-                <?php if ($_smarty_tpl->tpl_vars['v']->value['logistics'] == '2') {?>
-                <td><?php echo $_smarty_tpl->tpl_vars['v']->value['ship_cost'] == '0' ? '1公里内' : ($_smarty_tpl->tpl_vars['v']->value['ship_cost'] == '1' ? '2公里内' : ($_smarty_tpl->tpl_vars['v']->value['ship_cost'] == '2' ? '3公里内' : '距离不限'));?>
-</td>
-                <?php } else { ?>
-                <td><?php echo $_smarty_tpl->tpl_vars['v']->value['ship_cost'];?>
-</td>
-                <?php }?>
-                <td><?php echo $_smarty_tpl->tpl_vars['goodsState']->value[$_smarty_tpl->tpl_vars['v']->value['state']];?>
-</td>
-                <?php if (isset($_smarty_tpl->tpl_vars['permission_tree']->value['detail']) || isset($_smarty_tpl->tpl_vars['permission_tree']->value['verify']) || isset($_smarty_tpl->tpl_vars['permission_tree']->value['nosales'])) {?>
-                <td class="text-center">
-                  <ul class="icons-list">
-                    <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-menu9"></i> </a>
-                      <ul class="dropdown-menu dropdown-menu-right mnw100">
-                        <?php if (isset($_smarty_tpl->tpl_vars['permission_tree']->value['verify']) && $_smarty_tpl->tpl_vars['v']->value['state'] == '1') {?>
-                        <li><a href='<?php echo site_url("goods/detail?id=".((string)$_smarty_tpl->tpl_vars['v']->value['id']));?>
-&per_page=<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
-&categoryId=<?php echo $_smarty_tpl->tpl_vars['categoryId']->value;?>
-&sales_type=<?php echo $_smarty_tpl->tpl_vars['sales_type']->value;?>
-&orderBy=<?php echo $_smarty_tpl->tpl_vars['orderBy']->value;?>
-&name=<?php echo $_smarty_tpl->tpl_vars['name']->value;?>
-&type=1' ><i class="icon-compose"></i> 商品审核</a> 
-                        </li>
-                        <?php }?>
-                        <?php if (isset($_smarty_tpl->tpl_vars['permission_tree']->value['detail'])) {?>
-                        <li>
-                          <a href='<?php echo site_url("goods/detail?id=".((string)$_smarty_tpl->tpl_vars['v']->value['id'])."&per_page=".((string)$_smarty_tpl->tpl_vars['page']->value));?>
-&categoryId=<?php echo $_smarty_tpl->tpl_vars['categoryId']->value;?>
-&sales_type=<?php echo $_smarty_tpl->tpl_vars['sales_type']->value;?>
-&orderBy=<?php echo $_smarty_tpl->tpl_vars['orderBy']->value;?>
-&name=<?php echo $_smarty_tpl->tpl_vars['name']->value;?>
-&type=2'><i class="icon-inbox"></i> 商品详情</a>
-                        </li>
-                        <?php }?>
-                        <?php if (isset($_smarty_tpl->tpl_vars['permission_tree']->value['nosales']) && $_smarty_tpl->tpl_vars['v']->value['state'] == '5') {?>
-                        <li>
-                          <a href='<?php echo site_url("goods/nosales?id=".((string)$_smarty_tpl->tpl_vars['v']->value['id'])."&state=".((string)$_smarty_tpl->tpl_vars['v']->value['state']));?>
-&categoryId=<?php echo $_smarty_tpl->tpl_vars['categoryId']->value;?>
-&sales_type=<?php echo $_smarty_tpl->tpl_vars['sales_type']->value;?>
-&per_page=<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
-&orderBy=<?php echo $_smarty_tpl->tpl_vars['orderBy']->value;?>
-&name=<?php echo $_smarty_tpl->tpl_vars['name']->value;?>
-'><i class="icon-inbox"></i> 商品下架</a>
-                        </li>
-                        <?php }?>
-                      </ul>
-                    </li>
-                  </ul>
-                </td>
-                <?php }?>
-              </tr>
-              <?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+          <div class="col-md-12">
+            <div class="panel panel-info col-md-6">
+
+              <div class="panel-heading" >
+                <div class="panel-title row">
+                  <div class="col-md-6 pt10">单品访问统计
+                    <button  ng-click="getVisitList('day3')" ng-class="day3 ? 'btn btn-success' : 'btn'">今日</button>
+                    <button  ng-click="getVisitList('week3')" ng-class="week3 ? 'btn btn-success' : 'btn'">本周</button>
+                    <button  ng-click="getVisitList('month3')" ng-class="month3 ? 'btn btn-success' : 'btn'">本月</button>
+                  </div>
+                  <div class="col-md-4 col-sm-4 m-ss" >
+                    指定日期
+                    <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                      <input type="text" name="s_start_time3" ng-model="s_start_time3" class="form-control pickadate"  placeholder="请选择开始时间">
+                    </div>
+                    <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                      <input type="text" name="s_end_time3" ng-model="s_end_time3" class="form-control pickadate"  placeholder="请选择结束时间">
+                    </div>
+
+                  </div>
+                  <div class="col-md-2 pt20">
+                    <button class="btn btn-success" ng-click="searchAction3()">筛选</button>
+                  </div>
+                </div>
+
+              </div>
+              <div class="panel-body br-t" >
+                <div class="chart-container">
+                  <div class="chart has-fixed-height" id="stacked3_lines"></div>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-info col-md-6">
+              <div class="panel-heading">
+                <div class="panel-title row">
+                  <div class="col-md-6 pt10">
+                    单品分享统计
+                    <button  ng-click="getShareList('day4')" ng-class="day4 ? 'btn btn-success' : 'btn'">今日</button>
+                    <button  ng-click="getShareList('week4')" ng-class="week4 ? 'btn btn-success' : 'btn'">本周</button>
+                    <button  ng-click="getShareList('month4')" ng-class="month4 ? 'btn btn-success' : 'btn'">本月</button>
+                  </div>
+                  <div class="col-md-4 col-sm-4 m-ss" >
+                    指定日期
+                    <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                      <input type="text" name="s_start_time4" ng-model="s_start_time4" class="form-control pickadate"  placeholder="请选择开始时间">
+                    </div>
+                    <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                      <input type="text" name="s_end_time4" ng-model="s_end_time4" class="form-control pickadate"  placeholder="请选择结束时间">
+                    </div>
+
+                  </div>
+                  <div class="col-md-2 pt20">
+                    <button class="btn btn-success" ng-click="searchAction4()">筛选</button>
+                  </div>
+                </div>
+
+              </div>
+              <div class="panel-body br-t" >
+                <div class="chart-container">
+                  <div class="chart has-fixed-height" id="stacked4_lines"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-flat">
+              <div class="panel-heading">
+                <div class="row">
+                  <button  class='col-md-2 ml10' ng-click="filterList('all')" ng-class="all ? 'btn btn-success' : 'btn'">全部</button>
+                  <button  class='col-md-2 ml20' ng-click="filterList('verify')" ng-class="verify ? 'btn btn-success' : 'btn'">待审批</button>
+                  <button  class='col-md-2 ml20' ng-click="filterList('sale')" ng-class="sale ? 'btn btn-success' : 'btn'">在售</button>
+                  <button  class='col-md-2 ml20' ng-click="filterList('down')" ng-class="down ? 'btn btn-success' : 'btn'">已下架</button>
+                </div>
+              </div>
+              <div class="panel-body">
+                <table class="table datatable datatable-basic table-hover">
+                  <thead class="bg-grey-100">
+                  <tr>
+                    <th>商品名</th>
+                    <th>图像</th>
+                    <th>规格</th>
+                    <th>售价</th>
+                    <th>所属商铺</th>
+                    <th>发布时间</th>
+                    <th>分类</th>
+                    <th>销售方式</th>
+                    <th>配送</th>
+                    <th>状态</th>
+                    <?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['verify']) || isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['verifys'])) {?>
+                    <th>操作</th>
+                    <?php }?>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng-repeat="item in alllist track by $index" id="tr_{{item.id}}">
+                    <td>{{item.name}}</td>
+                    <td><img ng-src="<?php echo $_smarty_tpl->tpl_vars['data']->value['common']['upload_images'];?>
+{{item.img}}" width=60px,height=60px /></td>
+                    <td>{{item.cname}}</td>
+                    <td>{{item.sales_price}}</td>
+                    <td>{{item.shop}}</td>
+                    <td>{{item.add_time*1000|date:'yyyy-MM-dd HH:mm'}}</td>
+                    <td>{{item.category | CateDesc}}</td>
+                    <td>{{item.sales_type | salesTypeDesc}}</td>
+                    <td>{{item.logistics | logisticsDesc}}</td>
+                    <td>{{item.state | StateDesc}}</td>
+                    <?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['verify']) || isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['verifys'])) {?>
+                    <td>
+                      <a ng-if="item.state == 1" href="#verify_modal" data-toggle="modal" data-target="#verify_modal" ng-click="getData(item.id)"><i class="icon-task"></i> 审核</a>
+                      <a ng-if="item.state != 1" href="#info_modal" data-toggle="modal" data-target="#info_modal" ng-click="getData(item.id)"><i class="icon-task"></i> 详情</a>
+                    </td>
+                    <?php }?>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="panel-footer">
+                <?php $_smarty_tpl->_subTemplateRender("file:../public/page.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
-            </tbody>
-          </table>
-          <?php $_smarty_tpl->_subTemplateRender("file:../public/pager.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+              </div>
+            </div>
+          </div>
+          <?php $_smarty_tpl->_subTemplateRender("file:goods/verify.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
+
+          <?php $_smarty_tpl->_subTemplateRender("file:goods/info.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
+
+          <?php $_smarty_tpl->_subTemplateRender("file:goods/up.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
         </div>
-        
         <?php $_smarty_tpl->_subTemplateRender("file:../public/footer_page.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -212,7 +299,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
   </div>
   <!-- /page content --> 
   
-</div>
 </div>
 <!-- /page container --> 
 <!-- /page JS files -->
@@ -229,20 +315,15 @@ assets/js/plugins/forms/styling/uniform.min.js"><?php echo '</script'; ?>
 assets/js/plugins/forms/styling/switch.min.js"><?php echo '</script'; ?>
 >
 
+
 <?php echo '<script'; ?>
- type="text/javascript">
-  var btn1=document.getElementById('searchbtn');
-  var box1=document.getElementById('searchbox');
-  function btn(){ 
-    if(btn1.value=="筛选 －"){
-      box1.style.display='none';
-      btn1.value="筛选 ＋";
-    }else{
-      box1.style.display='';
-      btn1.value="筛选 －";
-    }
-  }
-<?php echo '</script'; ?>
+ type="text/javascript" src="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
+assets/js/plugins/visualization/echarts/echarts.js"><?php echo '</script'; ?>
+>
+<!-- 日期范围选择配置 -->
+<?php echo '<script'; ?>
+ type="text/javascript" src="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
+assets/js/pages/picker_date.js"><?php echo '</script'; ?>
 >
 <?php $_smarty_tpl->_subTemplateRender("file:../public/footer.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>

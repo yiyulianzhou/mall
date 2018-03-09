@@ -25,9 +25,8 @@
                   </div>
                 <div class="panel-body">
                   <input name="id" value="<{$detail.id}>"  style="display:none" >
-                  <input name="type" value="<{$type}>"  style="display:none" >
-                  <input name="state" value="<{$state}>"  style="display:none" >
-                  <input name="username" value="<{$username}>"  style="display:none" >
+                  <input name="type" value="<{$detail.user_type}>"  style="display:none" >
+
                   <div class=" form-group">
                     <label class="col-sm-2 control-label">用户姓名:</label>
                     <div class="col-sm-10">
@@ -66,13 +65,13 @@
                   </div>
                   <{if $detail.status == 3 || $detail.status == 13}>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label">操作人:</label>
+                    <label class="col-sm-2 control-label">审核人:</label>
                     <div class="col-sm-10">
                     <input type="text" class="form-control" readonly="readonly" placeholder="" value="<{$detail.realname}>">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label">操作时间:</label>
+                    <label class="col-sm-2 control-label">审核时间:</label>
                     <div class="col-sm-10">
                     <input type="text" class="form-control" readonly="readonly" placeholder="" value="<{date('Y-m-d H:i:s',$detail.verify_time)}>">
                     </div>
@@ -93,13 +92,13 @@
                   <{/if}>
                   <{elseif $detail.status == 12}>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label">操作人:</label>
+                    <label class="col-sm-2 control-label">审核人:</label>
                     <div class="col-sm-10">
                     <input type="text" class="form-control" readonly="readonly" placeholder="" value="<{$detail.realname}>">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label">操作时间:</label>
+                    <label class="col-sm-2 control-label">审核时间:</label>
                     <div class="col-sm-10">
                     <input type="text" class="form-control" readonly="readonly" placeholder="" value="<{date('Y-m-d H:i:s',$detail.verify_time)}>">
                     </div>
@@ -110,11 +109,9 @@
                     <div class=" col-sm-4 ">
                       <select name="status" class="form-control" <{if ($detail.status == '3') || ($detail.status == '13')}>  disabled="disabled" <{/if}>>
                         <{if $detail.status == 1}>
-                        <option value="1">待审核</option>
                         <option value="3">不通过</option>
                         <option value="12">通过</option>
                         <{elseif $detail.status == 12}>
-                        <option value="12">待打款</option>
                         <option value="13">确认打款</option>
                         <{elseif $detail.status == 13}>
                         <option value="13">提现完成</option>

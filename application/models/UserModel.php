@@ -47,6 +47,7 @@ class UserModel extends MY_Model
             $this->db->join('shop_permission b', 'b.id = a.permission_id', 'left');
             $this->db->where('a.admin_id', $id);
             $permission_temp = $this->db->get()->result_array();
+            $permission_tree = array();
             foreach($permission_temp as $value)
             {
                 $permission_tree[$value['parent_id']][$value['id']] = $value['id'];
@@ -71,7 +72,7 @@ class UserModel extends MY_Model
 
     /**
      * 用户列表
-     * @param    int 推广员ID
+     * @param    int 管理员ID
      * @return   array
      */
     public function userList($name, $state, $page, $uid, $is_admin)
@@ -83,7 +84,7 @@ class UserModel extends MY_Model
 
         if(!empty($name)) $this->db->like('realname', $name);
 
-        if($state > 0) $this->db->where('status', $state);
+        if($state >= 0) $this->db->where('status', $state);
 
         $this->db->where('id != ', $uid);
 
@@ -91,7 +92,7 @@ class UserModel extends MY_Model
 
         $pager = $this->setPager($total_rows, $page);
         $this->db->limit($pager['per_page'], $pager['start_page']);
-        $this->db->order_by('id', 'DESC');
+        $this->db->order_by('create_time', 'DESC');
 
         // 获取结果集
         $data['list'] = $this->db->get()->result_array();

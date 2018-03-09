@@ -119,7 +119,7 @@ class user extends MY_Controller
 	            			$this->model->insert('admin_permission', $data);
 	            		}
             			$this->response['msg_type'] = 'success';
-            			$this->response['message'] = '';
+            			$this->response['message'] = '添加成功';
 	                	$this->returnResponse();
 	            	}
 	            }
@@ -130,6 +130,7 @@ class user extends MY_Controller
 		}
 		$this->display($this->data['file_path']);
 	}
+
 
 	/**
      * @function recursion 遍历传入权限参数
@@ -163,13 +164,17 @@ class user extends MY_Controller
 	 */
 	public function index()
 	{
-		//print_r($this->input->get());
-		//exit;
 		$searchbtn = "筛选 ＋";
 		$searchbox = "display:none";
 		$page  = $this->input->get('page') > 1 ? $this->input->get('page') : 1;
-		$state = !empty($this->input->get('status')) && $this->input->get('status') != -1 ? $this->input->get('status') : -1;
-		$name  = !empty($this->input->get('name')) ? $this->input->get('name') : '';
+
+		$state = $this->input->get('status');
+
+		$name = $this->input->get('name');
+
+		$state =  isset($state) ? $this->input->get('status') : -1;
+
+		$name  = isset($name) ? $this->input->get('name') : '';
 
 		if($state != -1 || !empty($name))
 		{

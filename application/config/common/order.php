@@ -20,3 +20,15 @@ $config['order']['status']  = array(
 								"11"=>"已删除",
 								"14"=>"已取消"
 							);
+
+// 订单列表数据访问链接
+$config['url']['get_order']               = $config['base']['module_url'].'getOrder/';
+//订单报表
+$config['url']['get_order_data']               = $config['base']['module_url'].'getOrderData/';
+
+//订单报表
+$config['url']['orderInfo_url']               = $config['base']['module_url'].'getOrderInfo/';
+
+// 操作链接
+$config['url']['action_url'] = $config['base']['module_url'] . 'delete/';
+

@@ -17,44 +17,58 @@ class HomeModel extends MY_Model
      */
     public function getData()
     {
-    	$data = ['buyer'=>0, 'seller'=>0, 'order'=>0, 'goods'=>0];
-
-    	// 新增买家
-    	$this->db->select('count(*) as buyer');
+        $count = array('new_seller'=>0,'new_buyer'=>0,'new_order'=>0,'new_goods'=>0);
+    	// 新增卖家
+    	$this->db->select('count(id) as sellers');
         $this->db->from('user');
+        //用户类型为卖家
+        $this->db->where('is_sellers = ',1);
         $today = strtotime(date('Y-m-d'));
         $this->db->where('create_time >= ', $today);
         $tmp = $this->db->get()->row_array();
-
-        $data['buyer'] = $tmp['buyer'];
+        $count['new_seller'] = $tmp['sellers'];
+        $tmp = [];
         $this->db->reset_query();
 
-        // 新增卖家
-    	$this->db->select('count(*) as seller');
-        $this->db->from('user_shop');
+        // 新增买家
+        $this->db->select('count(id) as buyers');
+        $this->db->from('user');
+        //用户类型为卖家
+        $this->db->where('is_sellers = ',0);
+        $today = strtotime(date('Y-m-d'));
         $this->db->where('create_time >= ', $today);
         $tmp = $this->db->get()->row_array();
-        $data['seller'] = $tmp['seller'];
+        $count['new_seller'] = $tmp['buyers'];
+        $tmp = [];
         $this->db->reset_query();
 
-        // 新增订单
-    	$this->db->select('count(*) as orders');
+        //新增订单
+        $this->db->select('count(id) as orders');
         $this->db->from('order');
+
+        $today = strtotime(date('Y-m-d'));
         $this->db->where('create_time >= ', $today);
         $tmp = $this->db->get()->row_array();
-        $data['order'] = $tmp['orders'];
+        $count['new_order'] = $tmp['orders'];
+        $tmp = [];
         $this->db->reset_query();
 
-        // 新增商品
-        $this->db->select('count(*) as goods');
+        //新增商品
+        $this->db->select('count(id) as goods');
         $this->db->from('goods');
+        $this->db->where('state !=',3);
+
+        $today = strtotime(date('Y-m-d'));
         $this->db->where('add_time >= ', $today);
 
         $tmp = $this->db->get()->row_array();
-        $data['goods'] = $tmp['goods'];
+        $count['new_goods'] = $tmp['goods'];
+        $tmp = [];
+
+        $res['list'] = $count;
         $this->db->reset_query();
 
-        return $data;
+        return $res;
     }
 
     //获取商铺销售金额排行
@@ -64,7 +78,7 @@ class HomeModel extends MY_Model
         $this->db->select('sum(shop_order.money) as mon,user_shop.shop,user_shop.address_id',FALSE);
         $this->db->from('order');
         $today = strtotime(date('Y-m-d'));
-        $this->db->where('order.create_time <= ',$today);
+        //$this->db->where('order.create_time >= ',$today);
 
         //查出卖家店铺的相关信息
         $this->db->join('user_shop','user_shop.uid = order.sellers_id','left');
@@ -85,7 +99,7 @@ class HomeModel extends MY_Model
         $this->db->select('sum(shop_order.money) as mon,user.username,user.districtId',FALSE);
         $this->db->from('order');
         $today = strtotime(date('Y-m-d'));
-        $this->db->where('order.create_time <= ',$today);
+        //$this->db->where('order.create_time >= ',$today);
 
         //查出买家的相关信息
         $this->db->join('user','user.id = order.buyer_id','left');
@@ -100,32 +114,48 @@ class HomeModel extends MY_Model
         return $res;
     }
 
-    //获取商品销量排行
+    //获取商品类目销量排行
+    public function getItems ()
+    {
+        //商品类目top5数据
+        $this->db->select('sum(shop_goods_data.total_money) as mon,category.name',FALSE);
+        $this->db->from('goods_data');
+        $today = strtotime(date('Y-m-d'));
+        //今日数据
+        //$this->db->where('logdate >= ',$today);
+
+        //查出商品的相关信息
+        $this->db->join('category','goods_data.category = category.id','left');
+        $this->db->group_by('goods_data.category');
+        //计算销售总金额前5的商品类目
+        $this->db->order_by('mon','desc')->limit(5);
+        $res = $this->db->get()->result_array();
+        $res['mons'] = array_column($res,'mon');
+        $res['names'] = array_column($res,'name');
+        return $res;
+    }
+
+    //获取商品销售金额排行信息
     public function getGoods ()
     {
         $res = [];
         //商品销量top5数据
-        $this->db->select('sum(shop_goods.amount) as total,sum(shop_order_goods.money) as mon, goods.name',FALSE);
-        $this->db->from('goods');
-
+        $this->db->select('sum(a.amount) as total,sum(a.total_money) as mon,b.name',FALSE);
+        $this->db->from('goods_data a');
+        $this->db->join('goods b','b.id = a.gid','left');
         //查出有该商品订单的相关信息
-        $this->db->join('order_goods','order_goods.gid = goods.id','left');
+        $today = strtotime(date('Y-m-d'));
+        //今日数据
+        //$this->db->where('a.logdate >= ',$today);
 
-        $this->db->group_by('order_goods.gid');
+        $this->db->group_by('a.gid');
 
         //计算商品销量前5的商品，按销量
         $this->db->order_by('total','desc')->limit(5);
         $res = $this->db->get()->result_array();
 
-        $res['total'] = array_column($res,'total');
-        $res['name'] = array_column($res,'name');
-        return $res;
-    }
-
-    //获取活跃小区排行信息
-    public function showDistrict ()
-    {
-        $res = 'ceshi';
+        $res['mons'] = array_column($res,'mon');
+        $res['names'] = array_column($res,'name');
         return $res;
     }
 
@@ -140,13 +170,13 @@ class HomeModel extends MY_Model
 
         $today = strtotime(date('Y-m-d'));
         //$this->db->where('order.time >= ',$today);
-        $this->db->order_by('time','desc');
+        $this->db->order_by('time','DESC');
 
         $total_rows = $this->db->count_all_results('', false);
 
 
         // 翻页设置
-        $per_page   = isset($this->data['base']['per_page']) ? $this->data['base']['per_page'] : $this->data['common']['per_page'];
+        $per_page   = isset($this->data['base']['per_page1']) ? $this->data['base']['per_page1'] : $this->data['common']['per_page1'];
         $uri_segment = isset($this->data['base']['uri_segment']) ? $this->data['base']['uri_segment'] : $this->data['common']['uri_segment'];
         $curpage     = $this->uri->segment($uri_segment) ? $this->uri->segment($uri_segment) : 1;
         $start_page  = ($curpage && is_numeric($curpage) && $curpage > 1) ? ($curpage - 1) * $per_page : 0;
@@ -170,10 +200,6 @@ class HomeModel extends MY_Model
         // 总页数页码集合json数据
         $data['pageNumbers'] = $data['pages'] > 1 ? json_encode(range(1, $data['pages'])) : 1;
 
-        foreach ($data['list'] as $key=>$val)
-        {
-            $data['list'][$key]['time'] = date('Y年m月d日 H:i:s',$val['time']);
-        }
         return $data;
     }
 
@@ -188,14 +214,14 @@ class HomeModel extends MY_Model
         $today = strtotime(date('Y-m-d'));
 
         //$this->db->where('user_money.create_time >=',$today);
-        $this->db->order_by('create_time','desc');
+        $this->db->order_by('create_time','DESC');
 
         //审核状态为1,待处理
         $this->db->where('user_money.status = ',1);
         //计算总记录条数
         $total_rows = $this->db->count_all_results('',false);
         // 翻页设置
-        $per_page   = isset($this->data['base']['per_page']) ? $this->data['base']['per_page'] : $this->data['common']['per_page'];
+        $per_page   = isset($this->data['base']['per_page1']) ? $this->data['base']['per_page1'] : $this->data['common']['per_page1'];
         $uri_segment = isset($this->data['base']['uri_segment']) ? $this->data['base']['uri_segment'] : $this->data['common']['uri_segment'];
         $curpage     = $this->uri->segment($uri_segment) ? $this->uri->segment($uri_segment) : 1;
         $start_page  = ($curpage && is_numeric($curpage) && $curpage > 1) ? ($curpage - 1) * $per_page : 0;
@@ -218,11 +244,6 @@ class HomeModel extends MY_Model
         $data['pages'] = ceil($total_rows / $per_page);
         // 总页数页码集合json数据
         $data['pageNumbers'] = $data['pages'] > 1 ? json_encode(range(1, $data['pages'])) : 1;
-
-        foreach ($data['list'] as $key=>$val)
-        {
-            $data['list'][$key]['create_time'] = date('Y年m月d日 H:i:s',$val['create_time']);
-        }
 
         return $data;
     }

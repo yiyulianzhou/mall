@@ -10,25 +10,6 @@ class buyer extends MY_Controller
     }
     public function index()
     {
-    	$status = ($this->input->get('status')== '0' || ($this->input->get('status') == '2' )? $this->input->get('status') : -1);
-    	$username = empty($this->input->get('username')) ? '' : $this->input->get('username');
-    	$page = $this->input->get('per_page') > 1 ? $this->input->get('per_page') : 1;
-    	$searchbtn = "筛选 －";
-		$searchbox = "display:''";
-    	if($status == -1 && empty($username))
-		{
-			$searchbtn = "筛选 ＋";
-			$searchbox = "display:none";
-		}
-    	$res = $this->model->buyerList( $status,$username,$page );
-        $this->assign('username', $username);
-        $this->assign('status', $status);
-        $this->assign('page', $page);
-        $this->assign('searchbtn', $searchbtn);
-        $this->assign('searchbox', $searchbox);
-        $this->assign('buyerList', $res['list']);
-		$this->assign('permission_tree', $this->data['permission_tree'][$this->router->class]);
-        $this->assign('pager_links', $res['pager_links']);
 		$this->display($this->data['file_path']);
     }
     /**
@@ -61,5 +42,107 @@ class buyer extends MY_Controller
         $this->assign('username',$username);
         $this->assign('status',$status);
         $this->display($this->data['file_path']);
+    }
+
+    /**
+     * @copyright 卖家顶部统计数据
+     * @return    [type]      [description]
+     */
+
+    public function countBuyer()
+    {
+        $this->response['count'] = $this->model->countBuyer();
+
+        if ($this->response){
+            $this->response['msg_type'] = 'success';
+            $this->response['message'] = '获取买家顶部统计成功';
+        }
+        $this->returnResponse();
+    }
+
+
+
+    /**
+     * @copyright 买家列表数据
+     * @return    [type]    [description]
+     */
+
+    public function getBuyerList()
+    {
+        $this->response = $this->model->getBuyerList();
+
+        if ($this->response){
+            $this->response['msg_type'] = 'success';
+            $this->response['message'] = '获取买家列表成功';
+        }
+        $this->returnResponse();
+    }
+
+    /**
+     * @copyright 买家消费统计数据
+     * @return    [type]      [description]
+     */
+
+    public function getBuyerCost()
+    {
+        $search = $this->input->post();
+
+        $this->response['echarts_data'] = $this->model->getBuyerCost($search);
+
+        if ($this->response){
+            $this->response['msg_type'] = 'success';
+            $this->response['message'] = '获取买家消费统计成功';
+        }
+        $this->returnResponse();
+    }
+
+    /**
+     * @copyright 买家分布统计数据
+     * @return    [type]      [description]
+     */
+
+    public function getBuyerUsers()
+    {
+        $this->response['echarts_data'] = $this->model->getBuyerUsers();
+
+        if ($this->response){
+            $this->response['msg_type'] = 'success';
+            $this->response['message'] = '获取买家分布统计成功';
+        }
+        $this->returnResponse();
+    }
+    /**
+     * @copyright 买家详情
+     * @return    [type]      [description]
+     */
+    public function getBuyerInfo($id='')
+    {
+        $this->validationId($id);
+        $this->response['item'] = $this->model->buyerDetail($id);
+
+        if ($this->response){
+            $this->response['msg_type'] = 'success';
+            $this->response['message'] = '获取买家详情成功';
+        }
+
+        $this->returnResponse();
+    }
+
+    /**
+     * @copyright 封禁和解封买状态
+     * @return    [type]      [description]
+     */
+
+    public function changeLock($id = '')
+    {
+        $this->validationId($id);
+        $con = $this->input->post();
+        $this->response = $this->model->lockBuyer($con);
+
+        if ($this->response){
+            $this->response['msg_type'] = 'success';
+            $this->response['message'] = '修改卖家封禁状态成功';
+        }
+        $this->returnResponse();
     }
 }

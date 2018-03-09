@@ -1,7 +1,7 @@
 
 /* ------------------------------------------------------------------------------
  *
- * money 财务JS
+ * money 财务卖家提现JS
  *
  * ---------------------------------------------------------------------------- */
 var Satus = {1: "待审核",3: "审核未通过",12: "待打款",13: "提现完成"};
@@ -272,7 +272,7 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
                                 data:['提现金额']
                             },
                             toolbox: {
-                                show : true,
+                                show : false,
                                 feature : {
                                     mark : {show: true},
                                     dataView : {show: true, readOnly: false},
@@ -328,6 +328,7 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
                         var aa =angular.fromJson(response.echarts_data.username);
                         var bb =angular.fromJson(response.echarts_data.mon);
                         stacked_lines_options = {
+                            color: ['#6398DB'],
                             tooltip : {
                                 trigger: 'axis'
                             },
@@ -335,7 +336,7 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
                                 data:['提现金额']
                             },
                             toolbox: {
-                                show : true,
+                                show : false,
                                 feature : {
                                     mark : {show: true},
                                     dataView : {show: true, readOnly: false},

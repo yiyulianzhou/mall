@@ -4,117 +4,240 @@
 <div class="page-container"> 
   
   <!-- Page content -->
-  <div class="page-content"> 
+  <div class="page-content">
       <{include file="../public/left.html" }>
     <div class="content-wrapper">
+
+      <{include file="../public/breadcrumb.html" }>
       <!-- Content area -->
-      <div class="content">
-        <div class="panel panel-flat">
-          <div class="panel-heading">
-            <h5 class="panel-title">商品管理<span class="ml10">
-              <input name="" type="button"  value="<{$searchbtn}>"  class="btn btn-xs bg-grey-100 text-xg flitbtn" id="searchbtn" onclick="btn()" >
-              </span></h5>
-            <!--<div class="heading-elements"><a href="#adduser" class="btn btn-primary" data-toggle="modal" data-target="#adduser"><i class="icon-plus-circle2"></i> 新增用户</a></div>-->
-            <div class="heading-elements"></div>
+      <div class="content" ng-controller="appCtrl">
+        <div class="row">
+            <div class=" col-md-12">
+              <div class="panel panel-flat">
+                <div class="panel-heading">
+                  <h6 class="panel-title">今日数据<span class="pull-right"><{date('Y-m-d')}></span></h6>
+                </div>
+                <div class="container-fluid">
+                  <div class="row col-md-offset-1">
+                    <div class="col-md-3">
+                      <div class="panel bg-teal-400">
+                        <div class="panel-body pb20 homgicon-01">
+                          <h4 class="no-margin">新增商品</h4>
+                          <h2 class="mv10">{{lists.new_goods}}个</h2>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-md-offset-1">
+                      <div class="panel bg-pink-400 ">
+                        <div class="panel-body pb20 homgicon-02">
+                          <h4 class="no-margin">商品总数</h4>
+                          <h2 class="mv10">{{lists.goods_total}}个</h2>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-md-offset-1">
+                      <div class="panel bg-blue-400">
+                        <div class="panel-body pb20 homgicon-03">
+                          <h4 class="no-margin">商品类目</h4>
+                          <h2 class=" mv10">{{lists.goods_item}}条</h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
           </div>
-          <form action="" method="GET" class="form-container">
-            <div class="panel-body br-t pt20" id="searchbox" style="<{$searchbox}>">
-              <div class="row">
-                <div class="col-md-2 col-sm-4 m-ss">
-                  <input type="text" class="form-control" placeholder="商品名称" name="name" value="<{$name}>">
+        <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-info col-md-6">
+
+                <div class="panel-heading" >
+                  <div class="panel-title row">
+                    <div class="col-md-6 pt10">单品销售统计
+                      <button  ng-click="getSalesList('day')" ng-class="day ? 'btn btn-success' : 'btn'">今日</button>
+                      <button  ng-click="getSalesList('week')" ng-class="week ? 'btn btn-success' : 'btn'">本周</button>
+                      <button  ng-click="getSalesList('month')" ng-class="month ? 'btn btn-success' : 'btn'">本月</button>
+                    </div>
+                    <div class="col-md-4 col-sm-4 m-ss" >
+                      指定日期
+                      <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                        <input type="text" name="s_start_time" ng-model="s_start_time" class="form-control pickadate"  placeholder="请选择开始时间">
+                      </div>
+                      <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                        <input type="text" name="s_end_time" ng-model="s_end_time" class="form-control pickadate"  placeholder="请选择结束时间">
+                      </div>
+                    </div>
+                    <div class="col-md-2 pt20">
+                      <button class="btn btn-success" ng-click="searchAction()">筛选</button>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-2 col-sm-6 m-ss">
-                  <select name="categoryId" class="form-control">
-                    <option value="-1"<{if $categoryId eq -1}> selected="selected"<{/if}>>商品分类</option>
-                    <{foreach from=$categoryList item=category key=key}>
-                      <option value="<{$key}>"<{if $categoryId eq $key}> selected="selected"<{/if}>><{$category}></option>
-                    <{/foreach}>
-                  </select>
+                <div class="panel-body br-t" >
+                  <div class="chart-container">
+                    <div class="chart has-fixed-height" id="stacked_lines"></div>
+                  </div>
                 </div>
-                <div class="col-md-2 col-sm-6 m-ss">
-                  <select name="sales_type" class="form-control">
-                    <option value="-1"<{if $sales_type eq -1}> selected="selected"<{/if}>>销售方式</option>
-                    <option value="1"<{if $sales_type eq 1}> selected="selected"<{/if}>>普通</option>
-                    <option value="2"<{if $sales_type eq 2}> selected="selected"<{/if}>>团购</option>
-                  </select>
+              </div>
+              <div class="panel panel-info col-md-6">
+                <div class="panel-heading">
+                  <div class="panel-title row">
+                    <div class="col-md-6 pt10">
+                      类目销售统计
+                      <button  ng-click="getCatesList('day2')" ng-class="day2 ? 'btn btn-success' : 'btn'">今日</button>
+                      <button  ng-click="getCatesList('week2')" ng-class="week2 ? 'btn btn-success' : 'btn'">本周</button>
+                      <button  ng-click="getCatesList('month2')" ng-class="month2 ? 'btn btn-success' : 'btn'">本月</button>
+                    </div>
+                    <div class="col-md-4 col-sm-4 m-ss" >
+                      指定日期
+                      <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                        <input type="text" name="s_start_time2" ng-model="s_start_time2" class="form-control pickadate"  placeholder="请选择开始时间">
+                      </div>
+                      <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                        <input type="text" name="s_end_time2" ng-model="s_end_time2" class="form-control pickadate"  placeholder="请选择结束时间">
+                      </div>
+
+                    </div>
+                    <div class="col-md-2 pt20">
+                      <button class="btn btn-success" ng-click="searchAction2()">筛选</button>
+                    </div>
+                  </div>
+
                 </div>
-                <div class="col-md-2 col-sm-6 m-ss">
-                  <select name="orderBy" class="form-control">
-                    <option value="-1"<{if $orderBy eq -1}> selected="selected"<{/if}>>排序</option>
-                    <option value="1"<{if $orderBy eq 1}> selected="selected"<{/if}>>销量从高到低</option>
-                    <option value="2"<{if $orderBy eq 2}> selected="selected"<{/if}>>销量从低到高</option>
-                    <option value="3"<{if $orderBy eq 3}> selected="selected"<{/if}>>活跃从高到低</option>
-                    <option value="4"<{if $orderBy eq 4}> selected="selected"<{/if}>>活跃从低到高</option>
-                  </select>
-                </div>
-                <div class="col-md-1 m-ss">
-                  <input type="submit" class=" btn btn-block bg-grey-300" value="筛选">
+                <div class="panel-body br-t" >
+                  <div class="chart-container">
+                    <div class="chart has-fixed-height" id="stacked2_lines"></div>
+                  </div>
                 </div>
               </div>
             </div>
-          </form>
-          <table class="table datatable-basic table-hover">
-            <thead class="bg-grey-100">
-              <tr>
-                <th>商品名称</th>
-                <th>商品图片</th>
-                <th>商品分类</th>
-                <th>销售方式</th>
-                <th>产地直销</th>
-                <th>物流方式</th>
-                <th>运费/配送范围</th>
-                <th>状态</th>
-                <{if isset($permission_tree.detail) || isset($permission_tree.verify) || isset($permission_tree.nosales)}>
-                <th class="text-center">操作</th>
-                <{/if}>
-              </tr>
-            </thead>
-            <tbody><!-- danger -->
-              <{foreach from=$goodsList item=v}>
-              <tr>
-                <td><{$v.name}></td>
-                <td> <img src="<{$data.common.upload_images}><{$v.img}>" style="width:60px;height:60px;"></td>
-                <td><{$categoryList[$v.category]}></td>
-                <td><{($v.sales_type == '1') ? '普通' : '团购'}></td>
-                <td><{($v.direct_sales == '1') ? '是' : '否'}></td>
-                <td><{($v.logistics == '1')?'第三方快递':'卖家送货上门'}></td>
-                <{if $v.logistics == '2'}>
-                <td><{($v.ship_cost=='0')?'1公里内':(($v.ship_cost=='1')?'2公里内':(($v.ship_cost=='2')?'3公里内':'距离不限'))}></td>
-                <{else}>
-                <td><{$v.ship_cost}></td>
-                <{/if}>
-                <td><{$goodsState[$v.state]}></td>
-                <{if isset($permission_tree.detail) || isset($permission_tree.verify) || isset($permission_tree.nosales)}>
-                <td class="text-center">
-                  <ul class="icons-list">
-                    <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-menu9"></i> </a>
-                      <ul class="dropdown-menu dropdown-menu-right mnw100">
-                        <{if isset($permission_tree.verify) && $v.state == '1'}>
-                        <li><a href='<{site_url("goods/detail?id=<{$v.id}>")}>&per_page=<{$page}>&categoryId=<{$categoryId}>&sales_type=<{$sales_type}>&orderBy=<{$orderBy}>&name=<{$name}>&type=1' ><i class="icon-compose"></i> 商品审核</a> 
-                        </li>
-                        <{/if}>
-                        <{if isset($permission_tree.detail)}>
-                        <li>
-                          <a href='<{site_url("goods/detail?id=<{$v.id}>&per_page=<{$page}>")}>&categoryId=<{$categoryId}>&sales_type=<{$sales_type}>&orderBy=<{$orderBy}>&name=<{$name}>&type=2'><i class="icon-inbox"></i> 商品详情</a>
-                        </li>
-                        <{/if}>
-                        <{if isset($permission_tree.nosales) && $v.state == '5'}>
-                        <li>
-                          <a href='<{site_url("goods/nosales?id=<{$v.id}>&state=<{$v.state}>")}>&categoryId=<{$categoryId}>&sales_type=<{$sales_type}>&per_page=<{$page}>&orderBy=<{$orderBy}>&name=<{$name}>'><i class="icon-inbox"></i> 商品下架</a>
-                        </li>
-                        <{/if}>
-                      </ul>
-                    </li>
-                  </ul>
-                </td>
-                <{/if}>
-              </tr>
-              <{/foreach}>
-            </tbody>
-          </table>
-          <{include file="../public/pager.html"}>
+          <div class="col-md-12">
+            <div class="panel panel-info col-md-6">
+
+              <div class="panel-heading" >
+                <div class="panel-title row">
+                  <div class="col-md-6 pt10">单品访问统计
+                    <button  ng-click="getVisitList('day3')" ng-class="day3 ? 'btn btn-success' : 'btn'">今日</button>
+                    <button  ng-click="getVisitList('week3')" ng-class="week3 ? 'btn btn-success' : 'btn'">本周</button>
+                    <button  ng-click="getVisitList('month3')" ng-class="month3 ? 'btn btn-success' : 'btn'">本月</button>
+                  </div>
+                  <div class="col-md-4 col-sm-4 m-ss" >
+                    指定日期
+                    <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                      <input type="text" name="s_start_time3" ng-model="s_start_time3" class="form-control pickadate"  placeholder="请选择开始时间">
+                    </div>
+                    <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                      <input type="text" name="s_end_time3" ng-model="s_end_time3" class="form-control pickadate"  placeholder="请选择结束时间">
+                    </div>
+
+                  </div>
+                  <div class="col-md-2 pt20">
+                    <button class="btn btn-success" ng-click="searchAction3()">筛选</button>
+                  </div>
+                </div>
+
+              </div>
+              <div class="panel-body br-t" >
+                <div class="chart-container">
+                  <div class="chart has-fixed-height" id="stacked3_lines"></div>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-info col-md-6">
+              <div class="panel-heading">
+                <div class="panel-title row">
+                  <div class="col-md-6 pt10">
+                    单品分享统计
+                    <button  ng-click="getShareList('day4')" ng-class="day4 ? 'btn btn-success' : 'btn'">今日</button>
+                    <button  ng-click="getShareList('week4')" ng-class="week4 ? 'btn btn-success' : 'btn'">本周</button>
+                    <button  ng-click="getShareList('month4')" ng-class="month4 ? 'btn btn-success' : 'btn'">本月</button>
+                  </div>
+                  <div class="col-md-4 col-sm-4 m-ss" >
+                    指定日期
+                    <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                      <input type="text" name="s_start_time4" ng-model="s_start_time4" class="form-control pickadate"  placeholder="请选择开始时间">
+                    </div>
+                    <div class="input-group" style="color:#666"> <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                      <input type="text" name="s_end_time4" ng-model="s_end_time4" class="form-control pickadate"  placeholder="请选择结束时间">
+                    </div>
+
+                  </div>
+                  <div class="col-md-2 pt20">
+                    <button class="btn btn-success" ng-click="searchAction4()">筛选</button>
+                  </div>
+                </div>
+
+              </div>
+              <div class="panel-body br-t" >
+                <div class="chart-container">
+                  <div class="chart has-fixed-height" id="stacked4_lines"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-flat">
+              <div class="panel-heading">
+                <div class="row">
+                  <button  class='col-md-2 ml10' ng-click="filterList('all')" ng-class="all ? 'btn btn-success' : 'btn'">全部</button>
+                  <button  class='col-md-2 ml20' ng-click="filterList('verify')" ng-class="verify ? 'btn btn-success' : 'btn'">待审批</button>
+                  <button  class='col-md-2 ml20' ng-click="filterList('sale')" ng-class="sale ? 'btn btn-success' : 'btn'">在售</button>
+                  <button  class='col-md-2 ml20' ng-click="filterList('down')" ng-class="down ? 'btn btn-success' : 'btn'">已下架</button>
+                </div>
+              </div>
+              <div class="panel-body">
+                <table class="table datatable datatable-basic table-hover">
+                  <thead class="bg-grey-100">
+                  <tr>
+                    <th>商品名</th>
+                    <th>图像</th>
+                    <th>规格</th>
+                    <th>售价</th>
+                    <th>所属商铺</th>
+                    <th>发布时间</th>
+                    <th>分类</th>
+                    <th>销售方式</th>
+                    <th>配送</th>
+                    <th>状态</th>
+                    <{if isset($data['permission_tree']['goods']['verify']) || isset($data['permission_tree']['goods']['verifys'])}>
+                    <th>操作</th>
+                    <{/if}>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng-repeat="item in alllist track by $index" id="tr_{{item.id}}">
+                    <td>{{item.name}}</td>
+                    <td><img ng-src="<{$data.common.upload_images}>{{item.img}}" width=60px,height=60px /></td>
+                    <td>{{item.cname}}</td>
+                    <td>{{item.sales_price}}</td>
+                    <td>{{item.shop}}</td>
+                    <td>{{item.add_time*1000|date:'yyyy-MM-dd HH:mm'}}</td>
+                    <td>{{item.category | CateDesc}}</td>
+                    <td>{{item.sales_type | salesTypeDesc}}</td>
+                    <td>{{item.logistics | logisticsDesc}}</td>
+                    <td>{{item.state | StateDesc}}</td>
+                    <{if isset($data['permission_tree']['goods']['verify']) || isset($data['permission_tree']['goods']['verifys'])}>
+                    <td>
+                      <a ng-if="item.state == 1" href="#verify_modal" data-toggle="modal" data-target="#verify_modal" ng-click="getData(item.id)"><i class="icon-task"></i> 审核</a>
+                      <a ng-if="item.state != 1" href="#info_modal" data-toggle="modal" data-target="#info_modal" ng-click="getData(item.id)"><i class="icon-task"></i> 详情</a>
+                    </td>
+                    <{/if}>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="panel-footer">
+                <{include file="../public/page.html"}>
+              </div>
+            </div>
+          </div>
+          <{include file="goods/verify.html" }>
+          <{include file="goods/info.html" }>
+          <{include file="goods/up.html" }>
+        </div>
         <{include file="../public/footer_page.html" }>
         
       </div>
@@ -127,24 +250,14 @@
   <!-- /page content --> 
   
 </div>
-</div>
 <!-- /page container --> 
 <!-- /page JS files -->
 <script type="text/javascript" src="<{$base_url}>assets/js/pages/modals_option.js"></script>
 <script type="text/javascript" src="<{$base_url}>assets/js/plugins/forms/styling/uniform.min.js"></script>
 <script type="text/javascript" src="<{$base_url}>assets/js/plugins/forms/styling/switch.min.js"></script>
 
-<script type="text/javascript">
-  var btn1=document.getElementById('searchbtn');
-  var box1=document.getElementById('searchbox');
-  function btn(){ 
-    if(btn1.value=="筛选 －"){
-      box1.style.display='none';
-      btn1.value="筛选 ＋";
-    }else{
-      box1.style.display='';
-      btn1.value="筛选 －";
-    }
-  }
-</script>
+<{*这里只加载echats库文件，图表配置项在assets/dev/pages/report/index.js中*}>
+<script type="text/javascript" src="<{$base_url}>assets/js/plugins/visualization/echarts/echarts.js"></script>
+<!-- 日期范围选择配置 -->
+<script type="text/javascript" src="<{$base_url}>assets/js/pages/picker_date.js"></script>
 <{include file="../public/footer.html" }>

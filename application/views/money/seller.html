@@ -131,8 +131,7 @@
                 <table class="table datatable datatable-basic table-hover">
                   <thead class="bg-grey-100">
                   <tr>
-                    <th>编号</th>
-                    <th>卖家姓名</th>
+                    <th>真实姓名</th>
                     <th>头像</th>
                     <th>提现金额</th>
                     <th>申请时间</th>
@@ -141,22 +140,39 @@
                     <th>付款人</th>
                     <th>付款时间</th>
                     <th>状态</th>
-                    <th>操作</th>
+                    <{if isset($data['permission_tree']['money']['detail'])}>
+                    <th class="text-center">操作</th>
+                    <{/if}>
                   </tr>
                   </thead>
                   <tbody>
                   <tr ng-repeat="item in alllist track by $index" id="tr_{{item.id}}">
-                    <td>{{item.id}}</td>
-                    <td>{{item.username}}</td>
-                    <td><img ng-src="{{item.avatarUrl}}" width=60px,height=60px /></td>
+                    <td>{{item.name}}</td>
+                    <td><img ng-src="{{item.pic}}" width=60px,height=60px /></td>
                     <td>{{item.money}}</td>
-                    <td>{{item.create_time}}</td>
-                    <td>{{item.realname}}</td>
-                    <td>{{item.verify_time}}</td>
-                    <td>{{item.payName}}</td>
-                    <td>{{item.pay_time}}</td>
+                    <td ng-show="item.create_time==null"></td>
+                    <td ng-show="item.create_time!=null">{{item.create_time*1000|date:'yyyy-MM-dd HH:mm'}}</td>
+                    <td>{{item.verify_name}}</td>
+                    <td ng-show="item.verify_time==null"></td>
+                    <td ng-show="item.verify_time!=null">{{item.verify_time*1000|date:'yyyy-MM-dd HH:mm'}}</td>
+                    <td>{{item.pay_name}}</td>
+                    <td ng-show="item.pay_time==null"></td>
+                    <td ng-show="item.pay_time!=null">{{item.pay_time*1000|date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{item.status | StatusDesc}}</td>
-                    <td><a href="<{site_url($data.page_url.action_url)}>{{item.id}}"><i class="icon-list3"></i> 审核</a></td>
+
+                    <{if isset($data['permission_tree']['money']['verify']) || isset($data['permission_tree']['money']['detail']) || isset($data['permission_tree']['money']['pay'])}>
+
+                    <td>
+                      <{if isset($data['permission_tree']['money']['verify'])}>
+                      <a ng-if="item.status == 1" href="<{site_url($data.page_url.action_url)}>{{item.id}}"><i class="icon-list3"></i> 审核</a>             <{/if}>
+                      <{if isset($data['permission_tree']['money']['detail'])}>
+                      <a ng-if="item.status == 13 || item.status == 3" href="<{site_url($data.page_url.action_url)}>{{item.id}}"><i class="icon-list3"></i> 详情</a>
+                      <{/if}>
+                      <{if isset($data['permission_tree']['money']['pay'])}>
+                      <a ng-if="item.status == 12" href="<{site_url($data.page_url.action_url)}>{{item.id}}"><i class="icon-list3"></i> 打款</a>
+                      <{/if}>
+                    </td>
+                    <{/if}>
                   </tr>
                   </tbody>
                 </table>
@@ -167,10 +183,6 @@
             </div>
           </div>
         </div>
-
-
-
-
         <{include file="../public/footer_page.html" }>
         
       </div>

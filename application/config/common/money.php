@@ -5,7 +5,7 @@ if(!defined('BASEPATH')) exit();
 $config['base']['module_url']  = "money/";
 
 // 模块名
-$config['base']['module_name'] = '订单';
+$config['base']['module_name'] = '财务管理';
 
 // 列表数据访问链接
 $config['url']['money_url']               = $config['base']['module_url'].'money/';
@@ -27,7 +27,8 @@ $config['common']['Status'] = array(
 
 // 操作链接
 $config['url']['action_url'] = $config['base']['module_url'] . 'detail/';
-
+//买家充值详情
+$config['url']['info_url'] = $config['base']['module_url'] . 'info/';
 //卖家提现列表数据
 $config['url']['get_seller'] = $config['base']['module_url'] . 'getSeller/';
 

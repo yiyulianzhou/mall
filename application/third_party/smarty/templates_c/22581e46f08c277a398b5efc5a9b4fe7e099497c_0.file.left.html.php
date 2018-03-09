@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-02-07 13:48:08
+/* Smarty version 3.1.30, created on 2018-03-06 11:01:41
   from "D:\wamp64\www\mall_manage\application\views\public\left.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a7a93180f1c72_50832770',
+  'unifunc' => 'content_5a9e0495840585_89287607',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '22581e46f08c277a398b5efc5a9b4fe7e099497c' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\public\\left.html',
-      1 => 1517981988,
+      1 => 1520305298,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a7a93180f1c72_50832770 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a9e0495840585_89287607 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!-- lef sidebar -->
 <div class="sidebar sidebar-main">
@@ -28,7 +28,7 @@ function content_5a7a93180f1c72_50832770 (Smarty_Internal_Template $_smarty_tpl)
 		<div class="sidebar-category sidebar-category-visible">
 			<div class="category-content no-padding">
 				<ul class="navigation navigation-main navigation-accordion ptn">
-					<li class="active"><a href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
+					<li><a href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
 home"><i class="icon-home4"></i> <span>首页</span></a></li>
 					<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money'])) {?>
 					<li> <a href="javascript:void(0);"><i class="icon-price-tags"></i> <span>财务管理</span></a>
@@ -57,8 +57,21 @@ money/recharge">充值列表</a>
 
 					<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods'])) {?>					
 					<li<?php if ($_smarty_tpl->tpl_vars['data']->value['base']['class_name'] == 'goods') {?> class="active"<?php }?>> 
-						<a href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-goods"><i class="icon-pie-chart3"></i> <span>商品管理</span></a>
+						<a href="javascript:void(0);"><i class="icon-pie-chart3"></i> <span>商品管理</span></a>
+						<ul>
+							<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['index'])) {?>
+							<li<?php if ($_smarty_tpl->tpl_vars['data']->value['base']['class_name'] == 'goods' && $_smarty_tpl->tpl_vars['data']->value['base']['method_name'] == 'index') {?> class="active"<?php }?>>
+							<a href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
+goods/index">商品列表</a>
+							</li>
+							<?php }?>
+							<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['category'])) {?>
+							<li<?php if ($_smarty_tpl->tpl_vars['data']->value['base']['class_name'] == 'goods' && $_smarty_tpl->tpl_vars['data']->value['base']['method_name'] == 'category') {?> class="active"<?php }?>>
+							<a href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
+goods/category">商品类目</a>
+							</li>
+							<?php }?>
+						</ul>
 					</li>
 					<?php }?>
 
@@ -91,7 +104,14 @@ user"><i class="icon-users2"></i> <span>用户管理</span></a>
 					</li>
 					<?php }?>
 
-					<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['bulletin'])) {?>					
+					<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['promote'])) {?>
+					<li<?php if ($_smarty_tpl->tpl_vars['data']->value['base']['class_name'] == 'promote') {?> class="active"<?php }?>>
+					<a href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
+promote"><i class="icon-clipboard5"></i> <span>活动管理</span></a>
+					</li>
+					<?php }?>
+
+					<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['bulletin'])) {?>
 					<li<?php if ($_smarty_tpl->tpl_vars['data']->value['base']['class_name'] == 'bulletin') {?> class="active"<?php }?>>
 						<a href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
 bulletin"><i class="icon-clipboard5"></i> <span>公告管理</span></a>

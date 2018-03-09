@@ -15,14 +15,21 @@ class Home extends MY_Controller
 
     public function index ()
     {
-        $list= $this->model->getData();
-
-        $this->assign('list',$list);
 
         $this->assign('data', $this->data);
 
 		$this->display($this->data['file_path']);
 
+    }
+
+    public function topCount()
+    {
+        $this->response = $this->model->getData();
+        if($this->response){
+            $this->response['msg_type'] = 'success';
+            $this->response['message'] = '获取头部统计数据成功';
+        }
+        $this->returnResponse();
     }
     //获取卖家统计数据
     public function showLine ()
@@ -56,20 +63,20 @@ class Home extends MY_Controller
 
         if($this->response['echarts_data']){
             $this->response['msg_type'] = 'success';
-            $this->response['message'] = '获取商品统计数据成功';
+            $this->response['message'] = '获取商品销售top5数据成功';
         }
 
         $this->returnResponse ();
     }
 
     //获取活跃小区排名
-    public function showDistrict ()
+    public function showItems ()
     {
-        $this->response['echarts_data'] = $this->model->showDistrict();
+        $this->response['echarts_data'] = $this->model->getItems();
 
         if($this->response['echarts_data']){
             $this->response['msg_type'] = 'success';
-            $this->response['message'] = '获取活跃小区数据成功';
+            $this->response['message'] = '获取商品类目top5数据成功';
         }
 
         $this->returnResponse();
@@ -86,7 +93,7 @@ class Home extends MY_Controller
             $this->response['message'] = '获取用户反馈数据成功';
         }
 
-        $this->returnResponse ();
+        $this->returnResponse();
     }
 
     //用户提现申请
@@ -99,7 +106,7 @@ class Home extends MY_Controller
             $this->response['message'] = '获取用户提现数据成功';
         }
 
-        $this->returnResponse ();
+        $this->returnResponse();
     }
 
 }
