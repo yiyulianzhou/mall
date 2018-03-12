@@ -1,10 +1,10 @@
 /* ------------------------------------------------------------------------------
  *
- * seller 卖家管理JS
+ * promote 活动管理JS
  *
  * ---------------------------------------------------------------------------- */
 //实名认证
-var Status = {0: "过期",1: "正常"};
+var Status = {0: "过期",1: "正常",3:"满金额",4:"手工关闭"};
 
 app.filter("StatusDesc", function () {
     return function (e) {
@@ -116,9 +116,6 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
             //红包规则描述
             $scope.fullData.desc = response.item.desc;
 
-            //个人红包金额上限
-            $scope.fullData.max_money = response.item.max_money;
-
             //红包使用范围
             $scope.fullData.con_money = response.item.con_money;
 
@@ -133,7 +130,7 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
             $scope.fullData.create_time= response.item.create_time;
 
             //活动结束时间
-            $scope.fullData.end_time = response.item.end_time;
+            $scope.fullData.close_time= response.item.close_time;
 
             //活动封面图片
             $scope.fullData.money1 = response.item.money1;

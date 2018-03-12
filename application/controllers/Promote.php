@@ -93,7 +93,7 @@ class Promote extends MY_Controller
     {
         $this->validationId($id);
 
-        $this->response['item'] = $this->model->PormoteDetail($id);
+        $this->response['item'] = $this->model->promoteDetail($id);
 
         if ($this->response){
            $this->response['msg_type'] = 'success';

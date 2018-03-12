@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-08 17:27:03
+/* Smarty version 3.1.30, created on 2018-03-12 10:29:47
   from "D:\wamp64\www\mall_manage\application\views\promote\index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa101e71d2162_28089423',
+  'unifunc' => 'content_5aa5e61b4df9c8_82254487',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6a89a7461ab052ac502e6bf227c3756319d047e0' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\promote\\index.html',
-      1 => 1520501220,
+      1 => 1520821703,
       2 => 'file',
     ),
   ),
@@ -28,7 +28,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5aa101e71d2162_28089423 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa5e61b4df9c8_82254487 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -162,26 +162,27 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
                   <thead class="bg-grey-100">
                   <tr>
                     <th>互动标题</th>
-                    <th>开放时间</th>
-                    <th>结束时间</th>
                     <th>参与人数</th>
                     <th>成功拆包</th>
                     <th>累计金额</th>
                     <th>获益用户</th>
                     <th>状态</th>
+                    <th>创建时间</th>
+                    <th>结束时间</th>
                     <th>操作</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr ng-repeat="item in alllist track by $index" id="tr_{{item.id}}">
                     <td>{{item.name}}</td>
-                    <td>{{item.create_time*1000|date:'yyyy-MM-dd HH:mm'}}</td>
-                    <td>{{item.end_time*1000|date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{item.use_user}}</td>
                     <td>{{item.pd_user}}</td>
                     <td>{{item.use_money}}</td>
                     <td>{{item.use_user}}</td>
                     <td>{{item.status | StatusDesc}}</td>
+                    <td>{{item.create_time*1000|date:'yyyy-MM-dd HH:mm'}}</td>
+                    <td ng-if="item.close_time == null"></td>
+                    <td ng-if="item.close_time != null">{{item.close_time*1000|date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>
                       <a  href="#info_modal" data-toggle="modal" data-target="#info_modal" ng-click="getData(item.id)"><i class="icon-task"></i> 详情</a>
                     </td>

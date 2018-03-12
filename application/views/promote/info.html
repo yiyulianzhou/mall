@@ -22,12 +22,6 @@
                         <div class="col-sm-9 form-control-static">{{fullData.use_user}}</div>
                     </div>
                     <div class="form-group mn br-b">
-                        <label class="control-label col-sm-3">个人红包金额上限:</label>
-                        <div class="col-sm-9 form-control-static">
-                            {{fullData.max_money}}
-                        </div>
-                    </div>
-                    <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">红包使用范围:</label>
                         <div class="col-sm-9 form-control-static">{{fullData.con_money}}</div>
                     </div>
@@ -49,10 +43,13 @@
                             {{fullData.create_time*1000|date:'yyyy-MM-dd HH:mm'}}
                         </div>
                     </div>
+
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">活动结束时间:</label>
-                        <div class="col-sm-9 form-control-static">
-                            {{fullData.end_time*1000|date:'yyyy-MM-dd HH:mm'}}
+                        <div class="col-sm-9 form-control-static" ng-if="fullData.close_time == null">
+                        </div>
+                        <div class="col-sm-9 form-control-static" ng-if="fullData.close_time != null">
+                            {{fullData.close_time*1000|date:'yyyy-MM-dd HH:mm'}}
                         </div>
                     </div>
 

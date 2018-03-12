@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-09 09:14:33
+/* Smarty version 3.1.30, created on 2018-03-12 10:30:59
   from "D:\wamp64\www\mall_manage\application\views\promote\info.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa1dff92b5191_92335151',
+  'unifunc' => 'content_5aa5e6635786c6_06054886',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd8c1c7af0df1cd885d2fa0a1fc6c9909141659f9' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\promote\\info.html',
-      1 => 1520558055,
+      1 => 1520821856,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aa1dff92b5191_92335151 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa5e6635786c6_06054886 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div id="info_modal" class="modal fade">
     <div class="modal-dialog  modal-lg">
@@ -46,12 +46,6 @@ function content_5aa1dff92b5191_92335151 (Smarty_Internal_Template $_smarty_tpl)
                         <div class="col-sm-9 form-control-static">{{fullData.use_user}}</div>
                     </div>
                     <div class="form-group mn br-b">
-                        <label class="control-label col-sm-3">个人红包金额上限:</label>
-                        <div class="col-sm-9 form-control-static">
-                            {{fullData.max_money}}
-                        </div>
-                    </div>
-                    <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">红包使用范围:</label>
                         <div class="col-sm-9 form-control-static">{{fullData.con_money}}</div>
                     </div>
@@ -73,10 +67,13 @@ function content_5aa1dff92b5191_92335151 (Smarty_Internal_Template $_smarty_tpl)
                             {{fullData.create_time*1000|date:'yyyy-MM-dd HH:mm'}}
                         </div>
                     </div>
+
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">活动结束时间:</label>
-                        <div class="col-sm-9 form-control-static">
-                            {{fullData.end_time*1000|date:'yyyy-MM-dd HH:mm'}}
+                        <div class="col-sm-9 form-control-static" ng-if="fullData.close_time == null">
+                        </div>
+                        <div class="col-sm-9 form-control-static" ng-if="fullData.close_time != null">
+                            {{fullData.close_time*1000|date:'yyyy-MM-dd HH:mm'}}
                         </div>
                     </div>
 

@@ -22,7 +22,7 @@ class PromoteModel extends MY_Model
      */
     public function getPromoteList()
     {
-        $this->db->select('a.id,a.uid,a.name,a.money,a.desc,a.use_user,a.use_money,a.pd_user,a.pd_money,a.create_time,a.end_time,a.status');
+        $this->db->select('a.id,a.uid,a.name,a.money,a.desc,a.use_user,a.use_money,a.pd_user,a.pd_money,a.create_time,a.status,a.close_time');
 
         $this->db->from('red_bag a');
 
@@ -32,7 +32,6 @@ class PromoteModel extends MY_Model
         $this->db->join('user b','b.id = a.uid','left');
 
         $this->db->join('goods c','c.uid = a.uid','left');
-
 
         // 翻页设置
         $per_page   = isset($this->data['base']['per_page']) ? $this->data['base']['per_page'] : $this->data['common']['per_page'];
@@ -72,9 +71,10 @@ class PromoteModel extends MY_Model
      * @param     [type]      $id [description]
      * @return    [type]          [description]
      */
-    public function PormoteDetail( $id )
+
+    public function promoteDetail( $id )
     {
-        $this->db->select('a.id,a.uid,a.name,a.money,a.desc,a.use_user,a.use_money,a.pd_user,a.pd_money,a.create_time,a.end_time,a.status,a.con_money');
+        $this->db->select('a.id,a.uid,a.name,a.money,a.desc,a.use_user,a.use_money,a.pd_user,a.pd_money,a.create_time,a.status,a.con_money,a.close_time');
 
         $this->db->from('red_bag a');
 

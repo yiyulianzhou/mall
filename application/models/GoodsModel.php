@@ -3,6 +3,7 @@
 /**
  * 商品管理
  */
+
 class GoodsModel extends MY_Model
 {
 
@@ -23,6 +24,7 @@ class GoodsModel extends MY_Model
      * @param     [type]      $state [description]
      * @return    [type]              [description]
      */
+
     public function goodsVarify( $id, $state, $verify_remark )
     {
         $verify_user = $this->user_session['uid'];
@@ -467,6 +469,7 @@ class GoodsModel extends MY_Model
         $data = $this->db->get()->row_array();
         return $data;
     }
+
     //执行添加操作
     public function addCatedata($data)
     {
