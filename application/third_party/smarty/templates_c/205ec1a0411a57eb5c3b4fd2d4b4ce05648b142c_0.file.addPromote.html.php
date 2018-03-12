@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-08 17:38:44
+/* Smarty version 3.1.30, created on 2018-03-12 16:01:21
   from "D:\wamp64\www\mall_manage\application\views\promote\addPromote.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa104a4c792d2_96760362',
+  'unifunc' => 'content_5aa633d113e022_66311483',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '205ec1a0411a57eb5c3b4fd2d4b4ce05648b142c' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\promote\\addPromote.html',
-      1 => 1520501922,
+      1 => 1520841674,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aa104a4c792d2_96760362 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa633d113e022_66311483 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div id="add_modal" class="modal fade">
     <div class="modal-dialog  modal-lg">
@@ -52,31 +52,11 @@ function content_5aa104a4c792d2_96760362 (Smarty_Internal_Template $_smarty_tpl)
                         </div>
                     </div>
                     <div class="form-group mn br-b">
-                        <label class="control-label col-sm-3">个人红包金额上限:</label>
-                        <div class="col-sm-9 form-control-static">
-                            <input class="form-control" type="text" name="max_money" ng-model="max_money">
-                        </div>
-                    </div>
-                    <div class="form-group mn br-b">
-                        <label class="control-label col-sm-3">红包使用范围:</label>
-                        <div class="col-sm-9 form-control-static">
-                            <input class="form-control" type="text" name="con_money" ng-model="con_money">
-                        </div>
-                    </div>
-                    <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">红包使用条件:</label>
                         <div class="col-sm-9 form-control-static">
                             <input class="form-control" type="text" name="con_money" ng-model="con_money">
                         </div>
                     </div>
-                    <div class="form-group mn br-b">
-                        <label class="control-label col-sm-3">红包使用有效期:</label>
-                        <div class="col-sm-9 form-control-static">
-                            <input class="form-control" type="text" name="life_time" ng-model="life_time">
-                        </div>
-                    </div>
-
-
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">活动开始时间:</label>
                         <div class="col-sm-9 form-control-static">
@@ -86,7 +66,7 @@ function content_5aa104a4c792d2_96760362 (Smarty_Internal_Template $_smarty_tpl)
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">活动结束时间:</label>
                         <div class="col-sm-9 form-control-static">
-                            <input class="form-control" type="text" name="end_time" ng-model="end_time">
+                            <input class="form-control" type="text" name="close_time" ng-model="close_time">
                         </div>
                     </div>
 

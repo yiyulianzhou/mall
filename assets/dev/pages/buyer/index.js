@@ -13,6 +13,9 @@ var Sex = {0: "未知",1: "男",2: "女"};
 //小区
 var District = {0: "未认证",1: "已认证",2: "资料待审核"};
 
+//状态
+var Status = {0: "可用",1: "禁用",2: "禁止发言"};
+
 app.filter("SexDesc", function () {
     return function (e) {
         return Sex[e];
@@ -22,6 +25,12 @@ app.filter("SexDesc", function () {
 app.filter("DistrictDesc", function () {
     return function (e) {
         return District[e];
+    }
+});
+
+app.filter("StatusDesc", function () {
+    return function (e) {
+        return Status[e];
     }
 });
 

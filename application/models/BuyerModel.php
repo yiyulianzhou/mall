@@ -25,16 +25,25 @@ class BuyerModel extends MY_Model
         $today = strtotime(date('Y-m-d'));
 
         $this->db->where('create_time >=',$today);
+        //10以内为系统用户
+        $this->db->where('id >',10);
+
         $tmp = $this->db->get()->row_array();
         $data['new_buyers'] = $tmp['num'];
-
+        $tmp =[];
+        $this->db->reset_query();
         //买家总数
         $this->db->select('count(id) as total');
         $this->db->from('user');
 
+        //10以内为系统用户
+        $this->db->where('id >',10);
 
         $tmp = $this->db->get()->row_array();
         $data['total_buyers'] = $tmp['total'];
+        $tmp =[];
+        $this->db->reset_query();
+
         return $data;
     }
 

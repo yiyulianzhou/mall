@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-08 18:21:42
+/* Smarty version 3.1.30, created on 2018-03-12 15:55:07
   from "D:\wamp64\www\mall_manage\application\views\buyer\info.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa10eb6124709_97067493',
+  'unifunc' => 'content_5aa6325b9e75b4_61248485',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0e34549ce0d0811de739016fe7f6a3993dfa0144' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\buyer\\info.html',
-      1 => 1520504497,
+      1 => 1520841303,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aa10eb6124709_97067493 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa6325b9e75b4_61248485 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div id="info_modal" class="modal fade">
     <div class="modal-dialog  modal-lg">
@@ -69,7 +69,7 @@ function content_5aa10eb6124709_97067493 (Smarty_Internal_Template $_smarty_tpl)
 
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">状态:</label>
-                        <div class="col-sm-9 form-control-static">{{fullData.status}}</div>
+                        <div class="col-sm-9 form-control-static">{{fullData.status|StatusDesc}}</div>
                     </div>
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">注册时间:</label>

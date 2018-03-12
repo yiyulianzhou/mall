@@ -100,16 +100,23 @@ class SellerModel extends MY_Model
         $today = strtotime(date('Y-m-d'));
 
         $this->db->where('create_time >=',$today);
+        //10以内是系统用户
+        $this->db->where('uid >',10);
         $tmp = $this->db->get()->row_array();
         $data['new_sellers'] = $tmp['num'];
+        $tmp =[];
+        $this->db->reset_query();
 
         //卖家总数
         $this->db->select('count(id) as total');
         $this->db->from('user_shop');
 
-
+        //10以内是系统用户
+        $this->db->where('uid >',10);
         $tmp = $this->db->get()->row_array();
         $data['total_sellers'] = $tmp['total'];
+        $tmp =[];
+        $this->db->reset_query();
         return $data;
     }
 

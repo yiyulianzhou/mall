@@ -83,24 +83,7 @@ app.controller('appCtrl', ['$scope', '$interval','$http', 'appService', 'appFact
     }
     cashapply(1);
 
-    //定时任务轮播提示信息
-    //var n =1;
 
-    // var settime = function(){
-    //     //feedback(n);
-    //     //cashapply(n);
-    //     n++;
-    //     if(n>=$scope.pages){
-    //         n = 1;
-    //     }
-    // }
-    //设置定时
-    //var timer = $interval(settime,3000);
-
-    //清除定时
-    // $scope.$on('$destroy',function(){
-    //     $interval.cancel(timer);
-    // });
     // 翻页
     $scope.changePager = function(page, $event) {
         if($event =='tips') feedback(page);
