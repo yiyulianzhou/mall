@@ -20,38 +20,6 @@ class goods extends MY_Controller
      * @copyright 商品详情
      * @return    [state]      [description]
      */
-    public function detail($id='')
-    {
-
-        $categoryList = $this->config->item('goods')['category'];//商品分类列表
-        $goodsStatus = $this->config->item('goods')['state'];//商品状态
-    	$type = $this->input->get('type');
-		$this->validationId($id);
-		$this->data['id'] = $id;
-    	$categoryId = $this->input->get( 'categoryId' );
-    	$sales_type = $this->input->get( 'sales_type' );
-    	$orderBy = $this->input->get( 'orderBy' );
-    	$name = $this->input->get( 'name' );
-    	$res = $this->model->goodsDetail( $id );
-    	if($type == 1){
-    		$title = "商品审核";
-    	}else{
-    		$title = "商品详情";
-    	}
-    	$this->assign('detail', $res);
-        $this->assign('title', $title);
-    	$this->assign('goodsStatus', $goodsStatus);
-        $this->assign('categoryList', $categoryList);
-    	$this->assign('categoryId', $categoryId);
-    	$this->assign('sales_type', $sales_type);
-    	$this->assign('orderBy', $orderBy);
-    	$this->assign('name', $name);
-    	$this->assign('type', $type);
-        $this->assign('data', $this->data);
-		$this->display($this->data['file_path']);
-    }
-	//查看商品详情
-
 	public function verify($id = '')
 	{
 		$this->validationId($id);
