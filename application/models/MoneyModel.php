@@ -971,6 +971,8 @@ class MoneyModel extends MY_Model
 		$today = strtotime(date('Y-m-d'));
 
 		$this->db->where('create_time >= ',$today);
+		//提现完成
+		$this->db->where('status = ',13);
 
 		$tmp = $this->db->get()->row_array();
 
@@ -981,6 +983,7 @@ class MoneyModel extends MY_Model
 		}
 
 		$tmp = [];
+		$this->db->reset_query();
 
 		//2.统计卖家提现的总次数
 		$this->db->select('count(*) as times',FALSE);
@@ -994,14 +997,17 @@ class MoneyModel extends MY_Model
 
 		//今日数据
 		$this->db->where('create_time >= ',$today);
+		//提现完成
+		$this->db->where('status = ',13);
 
 		$tmp = $this->db->get()->row_array();
 
 		$data['totalTimes'] = $tmp['times'];
 		$tmp = [];
+		$this->db->reset_query();
 
 		//3.统计卖家提现的总人数
-		$this->db->select('id',FALSE);
+		$this->db->select('count(id) num',FALSE);
 		$this->db->from('user_money');
 
 		//操作类型为提现
@@ -1012,12 +1018,16 @@ class MoneyModel extends MY_Model
 		//今日数据
 		$this->db->where('create_time >= ',$today);
 
+		//提现完成
+		$this->db->where('status = ',13);
+
 		$this->db->group_by('uid');
 
 		$tmp = $this->db->get()->result_array();
 		//买家提现人数
 		$data['totalPeople'] = count($tmp);
-
+		$tmp = [];
+		$this->db->reset_query();
 		return $data;
 
 	}
