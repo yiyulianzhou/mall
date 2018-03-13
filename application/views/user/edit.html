@@ -257,6 +257,9 @@
 													<{if isset($data['permission_tree']['goods'])}>
 													<li class="folder" id="20000">商品管理
 														<ul>
+															<{if isset($data['permission_tree']['goods']['index'])}>
+															<li id="6">商品列表</li>
+															<{/if}>
 															<{if isset($data['permission_tree']['goods']['verify'])}>
 															<li id="8">商品详情</li>
 															<{/if}>

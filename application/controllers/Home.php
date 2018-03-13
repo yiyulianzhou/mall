@@ -15,7 +15,6 @@ class Home extends MY_Controller
 
     public function index ()
     {
-
         $this->assign('data', $this->data);
 
 		$this->display($this->data['file_path']);

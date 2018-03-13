@@ -7,29 +7,8 @@
 					<li<{if $data.base.class_name eq 'home'}> class="active"<{/if}>>
 					<a href="<{$base_url}>home"><i class="icon-home4"></i> <span>首页</span></a>
 					</li>
-					<{if isset($data['permission_tree']['money'])}>
-					<li> <a href="javascript:void(0);"><i class="icon-price-tags"></i> <span>财务管理</span></a>
-						<ul>
-							<{if isset($data['permission_tree']['money']['seller'])}>
-							<li<{if $data.base.class_name eq 'money' && $data.base.method_name eq 'seller' || $data.base.method_name eq 'detail' }> class="active"<{/if}>>
-								<a href="<{$base_url}>money/seller">卖家提现</a>
-							</li>
-							<{/if}>
-							<{if isset($data['permission_tree']['money']['buyer'])}>
-							<li<{if $data.base.class_name eq 'money' && $data.base.method_name eq 'buyer' || $data.base.method_name eq 'detail'}> class="active"<{/if}>>
-								<a href="<{$base_url}>money/buyer">买家提现</a>
-							</li>
-							<{/if}>
-							<{if isset($data['permission_tree']['money']['recharge'])}>
-							<li<{if $data.base.class_name eq 'money' && $data.base.method_name eq 'recharge'}> class="active"<{/if}>>
-								<a href="<{$base_url}>money/recharge">充值列表</a>
-							</li>
-							<{/if}>
-						</ul>
-					</li>
-					<{/if}>
 
-					<{if isset($data['permission_tree']['goods'])}>					
+					<{if isset($data['permission_tree']['goods'])}>
 					<li<{if $data.base.class_name eq 'goods'}> class="active"<{/if}>> 
 						<a href="javascript:void(0);"><i class="icon-pie-chart3"></i> <span>商品管理</span></a>
 						<ul>
@@ -84,6 +63,27 @@
 					</li>
 					<{/if}>
 
+					<{if isset($data['permission_tree']['money'])}>
+					<li> <a href="javascript:void(0);"><i class="icon-price-tags"></i> <span>财务管理</span></a>
+						<ul>
+							<{if isset($data['permission_tree']['money']['seller'])}>
+							<li<{if $data.base.class_name eq 'money' && $data.base.method_name eq 'seller' || $data.base.method_name eq 'detail' }> class="active"<{/if}>>
+							<a href="<{$base_url}>money/seller">卖家提现</a>
+							</li>
+							<{/if}>
+							<{if isset($data['permission_tree']['money']['buyer'])}>
+							<li<{if $data.base.class_name eq 'money' && $data.base.method_name eq 'buyer' || $data.base.method_name eq 'detail'}> class="active"<{/if}>>
+							<a href="<{$base_url}>money/buyer">买家提现</a>
+							</li>
+							<{/if}>
+							<{if isset($data['permission_tree']['money']['recharge'])}>
+							<li<{if $data.base.class_name eq 'money' && $data.base.method_name eq 'recharge'}> class="active"<{/if}>>
+							<a href="<{$base_url}>money/recharge">充值列表</a>
+							</li>
+							<{/if}>
+						</ul>
+					</li>
+					<{/if}>
 				</ul>
 			</div>
 		</div>

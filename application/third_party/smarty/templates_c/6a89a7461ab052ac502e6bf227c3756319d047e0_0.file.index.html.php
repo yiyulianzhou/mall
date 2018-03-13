@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-12 10:29:47
+/* Smarty version 3.1.30, created on 2018-03-13 18:10:26
   from "D:\wamp64\www\mall_manage\application\views\promote\index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa5e61b4df9c8_82254487',
+  'unifunc' => 'content_5aa7a3927675f7_99200696',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6a89a7461ab052ac502e6bf227c3756319d047e0' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\promote\\index.html',
-      1 => 1520821703,
+      1 => 1520935823,
       2 => 'file',
     ),
   ),
@@ -28,7 +28,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5aa5e61b4df9c8_82254487 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa7a3927675f7_99200696 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -55,7 +55,7 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
                 <div class="panel-heading">
                   <h6 class="panel-title">今日数据<span class="pull-right"><?php echo date('Y-m-d');?>
 </span></h6>
-                  <button  class='col-md-offset-10 col-md-2 btn btn-warning' href="#add_modal" data-toggle="modal" data-target="#add_modal" ng-click="addCate()">发布新活动</button>
+
                   <div class="container-fluid">
                     <div class="row col-md-offset-2">
                       <div class="col-md-3">
@@ -155,6 +155,7 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
               <div class="panel-heading">
                 <div class="row">
                   <button  class='col-md-2 ml10' ng-click="filterList('all')" ng-class="all ? 'btn btn-success' : 'btn'">活动列表</button>
+                  <button  class='col-md-offset-7 col-md-2 btn btn-warning' href="#add_modal" data-toggle="modal" data-target="#add_modal" ng-click="addCate()">发布新活动</button>
                 </div>
               </div>
               <div class="panel-body">
