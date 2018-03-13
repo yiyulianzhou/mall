@@ -56,6 +56,7 @@ class OrderModel extends MY_Model
     public function getOrderList($search)
     {
         $this->db->select( 'a.*,b.username,d.name gname,e.name goods_name,f.shop' );
+
         $this->db->from( 'order a' );
 
         $this->db->join('user b','b.id = a.buyer_id','left');
@@ -201,93 +202,7 @@ class OrderModel extends MY_Model
         return $res;
 
     }
-    public function getRedBags($search)
-    {
-        $this->db->select('a.money,a.create_time');
-        $this->db->from('order a');
 
-        //订单状态为已完成或待发货
-        $where ='a.status =7 or a.status=9';
-        $this->db->where($where);
-        $this->db->join('goods b','b.id = a.gid','left');
-        //自选时间
-        if (isset($search['s_start_time']) && isset($search['s_end_time']) && !empty($search['s_start_time']) && !empty($search['s_end_time']) ){
-            $search['s_day'] = '';
-            $start_time = $search['s_start_time'];
-            $end_time = $search['s_end_time'];
-            $today = !empty($end_time) ? strtotime(str_replace('／', '-', $end_time)) : strtotime(date("Y-m-d"));
-            $start = !empty($start_time) ? strtotime(str_replace('／', '-', $start_time)) : ($today - 86400);
-        }
-
-        //按固定时间搜索
-        if (isset($search['s_day']) && !empty($search['s_day'])) {
-            $day = $search['s_day'];
-            switch ($day) {
-                //今日
-                case 'day':
-                    $today = strtotime(date('Y-m-d'),time());
-                    $start = $today - 86400;
-                    break;
-                //本周
-                case 'week':
-                    $today = strtotime(date('Y-m-d'),time());
-                    $start = $today - (6*86400);
-                    break;
-                //本月
-                case 'month':
-                    $today = strtotime(date('Y-m-d'),time());
-                    //本月第一天
-                    $start = strtotime(date('Y-m-01'));
-                    break;
-            }
-        }
-
-        //按商品分类条件搜索
-        if (isset($search['s_order_cate']) && !empty($search['s_order_cate'])){
-            $cate = $search['s_order_cate'];
-            $this->db->where('b.category =',$cate);
-        }
-
-        $this->db->where('a.create_time >=',$start);
-        $this->db->where('a.create_time <=',$today);
-
-        $this->db->order_by('a.money','DESC');
-
-
-        $result = $this->db->get()->result_array();
-
-        foreach($result as $key=>$val) {
-            $result[$key]['create_time'] = strtotime(date('Y-m-d',$val['create_time']));
-        }
-
-
-        $keyvalue = [];
-
-        array_filter(
-            $result,
-            function ($item) use (&$keyvalue) {
-                if (array_key_exists($item['create_time'], $keyvalue)) {
-                    $keyvalue[$item['create_time']] = [
-                        'create_time' => $item['create_time'],
-                        'money' => $item['money'] + $keyvalue[$item['create_time']]['money']
-                    ];
-                    return false;
-                } else {
-                    $keyvalue[$item['create_time']] = [
-                        'create_time' => $item['create_time'],
-                        'money' => $item['money']
-                    ];
-                    return true;
-                }
-            });
-
-        $money = array_column($keyvalue,'money','create_time');
-
-        $res = $this->getDaysData($start,$today,$money);
-
-
-        return $res;
-    }
     //按选择天获取图表数据的方法
 
     public function getDaysData($start,$today,$money){
@@ -329,8 +244,8 @@ class OrderModel extends MY_Model
         $this->db->join('goods_model d','d.id = og.geid','left');
         $this->db->join('goods e','e.id = og.gid','left');
         $this->db->join('user_shop f','f.uid = a.sellers_id','left');
-        $this->db->join('user_address g','g.uid = a.buyer_id','left');
-        $this->db->join('building h','h.id = a.address_id','left');
+        $this->db->join('user_address g','g.id = a.address_id','left');
+        $this->db->join('building h','h.id = g.address_id','left');
 
         $this->db->where('a.id = ',$id);
         $data = $this->db->get()->result_array();

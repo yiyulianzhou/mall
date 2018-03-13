@@ -238,22 +238,19 @@
 													<li class="folder" id="20000">商品管理
 														<ul>
 															<{if isset($data['permission_tree']['goods']['index'])}>
-															<li id="6">商品列表</li>
+															<li id="6">数据概览</li>
 															<{/if}>
-
-															<{if isset($data['permission_tree']['goods']['detail'])}>
-															<li id="7">商品详情</li>
-															<{/if}>
-
 															<{if isset($data['permission_tree']['goods']['verify'])}>
-															<li id="8">审核商品</li>
+															<li id="8">商品详情</li>
 															<{/if}>
-
+															<{if isset($data['permission_tree']['goods']['verifys'])}>
+															<li id="55">商品审核</li>
+															<{/if}>
 															<{if isset($data['permission_tree']['goods']['nosales'])}>
 															<li id="9">商品下架</li>
 															<{/if}>
 															<{if isset($data['permission_tree']['goods']['getGoods'])}>
-															<li id="49">获取商品列表</li>
+															<li id="49">商品列表</li>
 															<{/if}>
 															<{if isset($data['permission_tree']['goods']['countGoods'])}>
 															<li id="50">商品顶部统计</li>
@@ -264,15 +261,11 @@
 															<{if isset($data['permission_tree']['goods']['getCates'])}>
 															<li id="52">类目销售统计</li>
 															<{/if}>
-
 															<{if isset($data['permission_tree']['goods']['getVisit'])}>
 															<li id="53">单品放完统计</li>
 															<{/if}>
 															<{if isset($data['permission_tree']['goods']['getVisit'])}>
 															<li id="54">单品分享统计</li>
-															<{/if}>
-															<{if isset($data['permission_tree']['goods']['verifys'])}>
-															<li id="55">商品审核</li>
 															<{/if}>
 															<{if isset($data['permission_tree']['goods']['category'])}>
 															<li id="56">商品分类</li>
@@ -294,24 +287,18 @@
 													<li class="folder" id="30000">订单管理
 														<ul>
 															<{if isset($data['permission_tree']['order']['index'])}>
-															<li id="11">订单列表</li>
+															<li id="11">数据概览</li>
 															<{/if}>
-
-															<{if isset($data['permission_tree']['order']['detail'])}>
-															<li id="12">订单详情</li>
-															<{/if}>
-
 															<{if isset($data['permission_tree']['order']['delete'])}>
 															<li id="13">删除订单</li>
 															<{/if}>
-
 															<{if isset($data['permission_tree']['order']['getOrder'])}>
-															<li id="59">订单列表</li>
+															<li id="59">获取订单列表</li>
 															<{/if}>
 															<{if isset($data['permission_tree']['order']['getOrder'])}>
 															<li id="60">订单排行统计</li>
 															<{/if}>
-															<{if isset($data['permission_tree']['order']['getOrder'])}>
+															<{if isset($data['permission_tree']['order']['getOrderInfo'])}>
 															<li id="61">订单详情</li>
 															<{/if}>
 														</ul>

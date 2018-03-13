@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-12 16:13:48
+/* Smarty version 3.1.30, created on 2018-03-13 11:18:37
   from "D:\wamp64\www\mall_manage\application\views\user\edit.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa636bc89fac7_08696009',
+  'unifunc' => 'content_5aa7430d463672_68921427',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7af74429adff6dd38f9b1a97e591cb92a710bf72' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\user\\edit.html',
-      1 => 1520842424,
+      1 => 1520911111,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5aa636bc89fac7_08696009 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa7430d463672_68921427 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -364,22 +364,19 @@ user" class="btn btn-primary">返回用户列表</a></div>
 													<li class="folder" id="20000">商品管理
 														<ul>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['index'])) {?>
-															<li id="6">商品列表</li>
+															<li id="6">数据概览</li>
 															<?php }?>
-
-															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['detail'])) {?>
-															<li id="7">商品详情</li>
-															<?php }?>
-
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['verify'])) {?>
-															<li id="8">审核商品</li>
+															<li id="8">商品详情</li>
 															<?php }?>
-
+															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['verifys'])) {?>
+															<li id="55">商品审核</li>
+															<?php }?>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['nosales'])) {?>
 															<li id="9">商品下架</li>
 															<?php }?>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['getGoods'])) {?>
-															<li id="49">获取商品列表</li>
+															<li id="49">商品列表</li>
 															<?php }?>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['countGoods'])) {?>
 															<li id="50">商品顶部统计</li>
@@ -390,15 +387,11 @@ user" class="btn btn-primary">返回用户列表</a></div>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['getCates'])) {?>
 															<li id="52">类目销售统计</li>
 															<?php }?>
-
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['getVisit'])) {?>
 															<li id="53">单品放完统计</li>
 															<?php }?>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['getVisit'])) {?>
 															<li id="54">单品分享统计</li>
-															<?php }?>
-															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['verifys'])) {?>
-															<li id="55">商品审核</li>
 															<?php }?>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['category'])) {?>
 															<li id="56">商品分类</li>
@@ -420,24 +413,18 @@ user" class="btn btn-primary">返回用户列表</a></div>
 													<li class="folder" id="30000">订单管理
 														<ul>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['order']['index'])) {?>
-															<li id="11">订单列表</li>
+															<li id="11">数据概览</li>
 															<?php }?>
-
-															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['order']['detail'])) {?>
-															<li id="12">订单详情</li>
-															<?php }?>
-
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['order']['delete'])) {?>
 															<li id="13">删除订单</li>
 															<?php }?>
-
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['order']['getOrder'])) {?>
-															<li id="59">订单列表</li>
+															<li id="59">获取订单列表</li>
 															<?php }?>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['order']['getOrder'])) {?>
 															<li id="60">订单排行统计</li>
 															<?php }?>
-															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['order']['getOrder'])) {?>
+															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['order']['getOrderInfo'])) {?>
 															<li id="61">订单详情</li>
 															<?php }?>
 														</ul>
