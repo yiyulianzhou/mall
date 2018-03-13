@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-13 13:45:30
+/* Smarty version 3.1.30, created on 2018-03-13 17:53:07
   from "D:\wamp64\www\mall_manage\application\views\user\edit.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa7657ac1dcc5_04596445',
+  'unifunc' => 'content_5aa79f83087ca1_48619920',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7af74429adff6dd38f9b1a97e591cb92a710bf72' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\user\\edit.html',
-      1 => 1520914597,
+      1 => 1520934760,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5aa7657ac1dcc5_04596445 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa79f83087ca1_48619920 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -444,9 +444,6 @@ user" class="btn btn-primary">返回用户列表</a></div>
 														<ul>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['order']['index'])) {?>
 															<li id="11">数据概览</li>
-															<?php }?>
-															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['order']['delete'])) {?>
-															<li id="13">删除订单</li>
 															<?php }?>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['order']['getOrder'])) {?>
 															<li id="59">获取订单列表</li>

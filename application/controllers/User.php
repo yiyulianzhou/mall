@@ -55,6 +55,7 @@ class user extends MY_Controller
 		}
 
 		$info = $this->model->userInfo($get['id'], $this->user_session['uid'], $this->user_session['is_admin']);
+		
 		if(empty($info))
 		{
 			redirect(site_url('home'));
