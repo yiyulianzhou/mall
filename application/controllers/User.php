@@ -168,7 +168,7 @@ class user extends MY_Controller
 	{
 		$searchbtn = "筛选 ＋";
 		$searchbox = "display:none";
-		$page  = $this->input->get('page') > 1 ? $this->input->get('page') : 1;
+		$page  = $this->input->get('per_page') > 1 ? $this->input->get('per_page') : 1;
 
 		$state = $this->input->get('status');
 

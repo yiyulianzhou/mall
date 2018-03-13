@@ -41,7 +41,7 @@ class bulletin extends MY_Controller
 	{
 		$searchbtn = "筛选 ＋";
 		$searchbox = "display:none";
-		$page  = $this->input->get('page') > 1 ? $this->input->get('page') : 1;
+		$page  = $this->input->get('per_page') > 1 ? $this->input->get('per_page') : 1;
 		$title = !empty($this->input->get('name')) ? $this->input->get('name') : '';
 
 		if(!empty($title))

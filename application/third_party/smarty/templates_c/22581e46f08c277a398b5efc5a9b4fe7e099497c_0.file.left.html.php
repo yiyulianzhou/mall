@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-12 17:24:03
+/* Smarty version 3.1.30, created on 2018-03-13 15:23:31
   from "D:\wamp64\www\mall_manage\application\views\public\left.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa647330a1027_27997152',
+  'unifunc' => 'content_5aa77c73bd1066_53988694',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '22581e46f08c277a398b5efc5a9b4fe7e099497c' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\public\\left.html',
-      1 => 1520846621,
+      1 => 1520925808,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aa647330a1027_27997152 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa77c73bd1066_53988694 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!-- lef sidebar -->
 <div class="sidebar sidebar-main">
@@ -80,14 +80,14 @@ goods/category">商品类目</a>
 					<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['order'])) {?>					
 					<li<?php if ($_smarty_tpl->tpl_vars['data']->value['base']['class_name'] == 'order') {?> class="active"<?php }?>> 
 						<a href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-order"><i class="icon-pie-chart3"></i> <span>订单管理</span></a>
+order"><i class="icon-clipboard5"></i> <span>订单管理</span></a>
 					</li>
 					<?php }?>
 
 					<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['seller'])) {?>
 					<li<?php if ($_smarty_tpl->tpl_vars['data']->value['base']['class_name'] == 'seller') {?> class="active"<?php }?>>
 						<a href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-seller"><i class="icon-clipboard5"></i> <span>卖家管理</span></a>
+seller"><i class="icon-user-block"></i> <span>卖家管理</span></a>
 					</li>
 					<?php }?>
 

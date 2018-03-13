@@ -49,13 +49,13 @@
 
 					<{if isset($data['permission_tree']['order'])}>					
 					<li<{if $data.base.class_name eq 'order'}> class="active"<{/if}>> 
-						<a href="<{$base_url}>order"><i class="icon-pie-chart3"></i> <span>订单管理</span></a>
+						<a href="<{$base_url}>order"><i class="icon-clipboard5"></i> <span>订单管理</span></a>
 					</li>
 					<{/if}>
 
 					<{if isset($data['permission_tree']['seller'])}>
 					<li<{if $data.base.class_name eq 'seller'}> class="active"<{/if}>>
-						<a href="<{$base_url}>seller"><i class="icon-clipboard5"></i> <span>卖家管理</span></a>
+						<a href="<{$base_url}>seller"><i class="icon-user-block"></i> <span>卖家管理</span></a>
 					</li>
 					<{/if}>
 

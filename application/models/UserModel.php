@@ -101,7 +101,6 @@ class UserModel extends MY_Model
 
         // 创建翻页html代码
         $data['pager_links'] = $this->pagination->create_links();
-
         return $data;
     }
 }
