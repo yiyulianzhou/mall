@@ -5,10 +5,17 @@
  * ---------------------------------------------------------------------------- */
 //实名认证
 var Status = {0: "过期",1: "正常",3:"满金额",4:"手工关闭"};
-
+//是否在首页显示
+var Display = {0: "否",1: "是"};
 app.filter("StatusDesc", function () {
     return function (e) {
         return Status[e];
+    }
+});
+
+app.filter("DisplayDesc", function () {
+    return function (e) {
+        return Display[e];
     }
 });
 
@@ -107,36 +114,71 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
             //活动名称
             $scope.fullData.name = response.item.name;
 
-            //单个红包金额
+            //需要人数
+            $scope.fullData.user = response.item.user;
+
+            //红包总额
             $scope.fullData.money = response.item.money;
 
-            //拆分人数
-            $scope.fullData.use_user = response.item.use_user;
+            //红包总个数
+            $scope.fullData.number = response.item.number;
 
-            //红包规则描述
-            $scope.fullData.desc = response.item.desc;
+            //可使用红包数
+            $scope.fullData.use_number = response.item.use_number;
 
-            //红包使用范围
+            //需要人数
+            $scope.fullData.user = response.item.user;
+
+            //单个红包金额
+            $scope.fullData.bag_money = response.item.bag_money;
+
+            //拆分方式
+            $scope.fullData.split_type = response.item.split_type;
+
+            //使用限制
             $scope.fullData.con_money = response.item.con_money;
 
-            //红包使用条件
-            $scope.fullData.con_money = response.item.con_money;
-
-            //红包使用有效期
-            $scope.fullData.del_time = response.item.del_time;
-
-
-            //活动开始时间
-            $scope.fullData.create_time= response.item.create_time;
+            //红包有效期截止时间
+            $scope.fullData.bet = response.item.bet;
 
             //活动结束时间
+            $scope.fullData.aet = response.item.aet;
+
+            //是否在首页显示
+            $scope.fullData.is_display = response.item.is_display;
+
+            //已领取人数
+            $scope.fullData.pd_user = response.item.pd_user;
+
+            //已领取金额
+            $scope.fullData.pd_money = response.item.pd_money;
+
+            //已使用人数
+            $scope.fullData.use_user = response.item.use_user;
+
+            //已使用金额
+            $scope.fullData.use_money = response.item.use_money;
+
+            //创建时间
+            $scope.fullData.create_time= response.item.create_time;
+
+            //结束时间
             $scope.fullData.close_time= response.item.close_time;
+
+            //删除时间
+            $scope.fullData.del_time = response.item.del_time;
 
             //活动封面图片
             $scope.fullData.money1 = response.item.money1;
 
+            //红包规则描述
+            $scope.fullData.desc = response.item.desc;
+
             //规则描述
             $scope.fullData.money2 = response.item.money2;
+
+            //状态
+            $scope.fullData.status = response.item.status;
 
         });
     };

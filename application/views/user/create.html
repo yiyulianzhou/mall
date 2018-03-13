@@ -188,18 +188,32 @@
 															<{if isset($data['permission_tree']['money']['pay'])}>
 															<li id="35">提现打款</li>
 															<{/if}>
-															<{if isset($data['permission_tree']['money']['getSellerCash'])}>
-															<li id="36">卖家提现统计</li>
-															<{/if}>
-															<{if isset($data['permission_tree']['money']['getCashSeller'])}>
-															<li id="37">提现卖家统计</li>
-															<{/if}>
-															<{if isset($data['permission_tree']['money']['countSellerCash'])}>
-															<li id="38">财务卖家顶部</li>
-															<{/if}>
-															<{if isset($data['permission_tree']['money']['getSeller'])}>
-															<li id="39">财务卖家列表</li>
-															<{/if}>
+														</ul>
+													</li>
+													<{/if}>
+													<{if isset($data['permission_tree']['money'])}>
+													 <li class="folder" id="10000">
+														 卖家提现概览
+														 <ul>
+															 <{if isset($data['permission_tree']['money']['getSellerCash'])}>
+															 <li id="36">卖家提现统计</li>
+															 <{/if}>
+															 <{if isset($data['permission_tree']['money']['getCashSeller'])}>
+															 <li id="37">提现卖家统计</li>
+															 <{/if}>
+															 <{if isset($data['permission_tree']['money']['countSellerCash'])}>
+															 <li id="38">财务卖家顶部</li>
+															 <{/if}>
+															 <{if isset($data['permission_tree']['money']['getSeller'])}>
+															 <li id="39">财务卖家列表</li>
+															 <{/if}>
+														 </ul>
+													 </li>
+													<{/if}>
+													<{if isset($data['permission_tree']['money'])}>
+													<li class="folder" id="10000">
+														买家提现概览
+														<ul>
 															<{if isset($data['permission_tree']['money']['countBuyerCash'])}>
 															<li id="40">财务买家顶部</li>
 															<{/if}>
@@ -212,6 +226,13 @@
 															<{if isset($data['permission_tree']['money']['getBuyer'])}>
 															<li id="43">财务买家列表</li>
 															<{/if}>
+														</ul>
+													</li>
+													<{/if}>
+													<{if isset($data['permission_tree']['money'])}>
+													<li class="folder" id="10000">
+														买家充值概览
+														<ul>
 															<{if isset($data['permission_tree']['money']['countBuyerRecharge'])}>
 															<li id="44">买家充值顶部</li>
 															<{/if}>
@@ -230,13 +251,9 @@
 														</ul>
 													</li>
 													<{/if}>
-
 													<{if isset($data['permission_tree']['goods'])}>
 													<li class="folder" id="20000">商品管理
 														<ul>
-															<{if isset($data['permission_tree']['goods']['index'])}>
-															<li id="6">数据概览</li>
-															<{/if}>
 															<{if isset($data['permission_tree']['goods']['verify'])}>
 															<li id="8">商品详情</li>
 															<{/if}>
@@ -246,6 +263,14 @@
 															<{if isset($data['permission_tree']['goods']['nosales'])}>
 															<li id="9">商品下架</li>
 															<{/if}>
+
+														</ul>
+													</li>
+													<{/if}>
+
+													<{if isset($data['permission_tree']['goods'])}>
+													<li class="folder" id="20000">商品数据概览
+														<ul>
 															<{if isset($data['permission_tree']['goods']['getGoods'])}>
 															<li id="49">商品列表</li>
 															<{/if}>
@@ -255,14 +280,20 @@
 															<{if isset($data['permission_tree']['goods']['getSales'])}>
 															<li id="51">单品销售统计</li>
 															<{/if}>
-															<{if isset($data['permission_tree']['goods']['getCates'])}>
-															<li id="52">类目销售统计</li>
-															<{/if}>
 															<{if isset($data['permission_tree']['goods']['getVisit'])}>
-															<li id="53">单品放完统计</li>
+															<li id="53">单品访问统计</li>
 															<{/if}>
 															<{if isset($data['permission_tree']['goods']['getVisit'])}>
 															<li id="54">单品分享统计</li>
+															<{/if}>
+														</ul>
+													</li>
+													<{/if}>
+													<{if isset($data['permission_tree']['goods'])}>
+													<li class="folder" id="20000">商品分类
+														<ul>
+															<{if isset($data['permission_tree']['goods']['getCates'])}>
+															<li id="52">类目销售统计</li>
 															<{/if}>
 															<{if isset($data['permission_tree']['goods']['category'])}>
 															<li id="56">商品分类</li>
@@ -279,7 +310,6 @@
 														</ul>
 													</li>
 													<{/if}>
-
 													<{if isset($data['permission_tree']['order'])}>
 													<li class="folder" id="30000">订单管理
 														<ul>
@@ -301,22 +331,18 @@
 														</ul>
 													</li>
 													<{/if}>
-
 													<{if isset($data['permission_tree']['seller'])}>
 													<li class="folder" id="40000">卖家管理
 														<ul>
 															<{if isset($data['permission_tree']['seller']['index'])}>
 															<li id="15">卖家列表</li>
 															<{/if}>
-
 															<{if isset($data['permission_tree']['seller']['verify'])}>
 															<li id="16">卖家审核</li>
 															<{/if}>
-
 															<{if isset($data['permission_tree']['seller']['changeLock'])}>
 															<li id="73">卖家封禁</li>
 															<{/if}>
-
 															<{if isset($data['permission_tree']['seller']['countSeller'])}>
 															<li id="63">卖家顶部统计</li>
 															<{/if}>
@@ -342,14 +368,12 @@
 															<{if isset($data['permission_tree']['buyer']['index'])}>
 															<li id="18">买家列表</li>
 															<{/if}>
-
 															<{if isset($data['permission_tree']['buyer']['changeLock'])}>
 															<li id="75">买家禁言</li>
 															<{/if}>
 															<{if isset($data['permission_tree']['buyer']['countBuyer'])}>
 															<li id="64">买家顶部统计</li>
 															<{/if}>
-
 															<{if isset($data['permission_tree']['buyer']['getBuyerCost'])}>
 															<li id="67">买家消费统计</li>
 															<{/if}>
@@ -365,36 +389,30 @@
 														</ul>
 													</li>
 													<{/if}>
-
 													<{if isset($data['permission_tree']['user'])}>
 													<li class="folder" id="60000">用户管理
 														<ul>
 															<{if isset($data['permission_tree']['user']['index'])}>
 															<li id="2">用户列表</li>
 															<{/if}>
-
 															<{if isset($data['permission_tree']['user']['create'])}>
 															<li id="3">新增用户</li>
 															<{/if}>
-
 															<{if isset($data['permission_tree']['user']['lock'])}>
 															<li id="4">封禁用户</li>
 															<{/if}>
-
 															<{if isset($data['permission_tree']['user']['detail'])}>
 															<li id="29">编辑用户</li>
 															<{/if}>
 														</ul>
 													</li>
 													<{/if}>
-
 													<{if isset($data['permission_tree']['bulletin'])}>
 													<li class="folder" id="70000">公告管理
 														<ul>
 															<{if isset($data['permission_tree']['bulletin']['create'])}>
 															<li id="27">新增公告</li>
 															<{/if}>
-
 															<{if isset($data['permission_tree']['bulletin']['detail'])}>
 															<li id="28">公告详情</li>
 															<{/if}>

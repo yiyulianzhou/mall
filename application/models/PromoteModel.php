@@ -74,7 +74,7 @@ class PromoteModel extends MY_Model
 
     public function promoteDetail( $id )
     {
-        $this->db->select('a.id,a.uid,a.name,a.money,a.desc,a.use_user,a.use_money,a.pd_user,a.pd_money,a.create_time,a.status,a.con_money,a.close_time');
+        $this->db->select('a.id,a.user,a.uid,a.name,a.money,a.number,a.use_number,a.desc,a.use_user,a.use_money,a.bet,a.aet,a.is_display,a.split_type,a.bag_money,a.pd_user,a.pd_money,a.create_time,a.status,a.con_money,a.close_time');
 
         $this->db->from('red_bag a');
 

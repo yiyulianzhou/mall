@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-13 11:18:37
+/* Smarty version 3.1.30, created on 2018-03-13 13:45:30
   from "D:\wamp64\www\mall_manage\application\views\user\edit.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa7430d463672_68921427',
+  'unifunc' => 'content_5aa7657ac1dcc5_04596445',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7af74429adff6dd38f9b1a97e591cb92a710bf72' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\user\\edit.html',
-      1 => 1520911111,
+      1 => 1520914597,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5aa7430d463672_68921427 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa7657ac1dcc5_04596445 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -317,6 +317,13 @@ user" class="btn btn-primary">返回用户列表</a></div>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money']['pay'])) {?>
 															<li id="35">提现打款</li>
 															<?php }?>
+														</ul>
+													</li>
+													<?php }?>
+													<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money'])) {?>
+													<li class="folder" id="10000">
+														卖家提现概览
+														<ul>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money']['getSellerCash'])) {?>
 															<li id="36">卖家提现统计</li>
 															<?php }?>
@@ -329,6 +336,13 @@ user" class="btn btn-primary">返回用户列表</a></div>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money']['getSeller'])) {?>
 															<li id="39">财务卖家列表</li>
 															<?php }?>
+														</ul>
+													</li>
+													<?php }?>
+													<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money'])) {?>
+													<li class="folder" id="10000">
+														买家提现概览
+														<ul>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money']['countBuyerCash'])) {?>
 															<li id="40">财务买家顶部</li>
 															<?php }?>
@@ -341,6 +355,13 @@ user" class="btn btn-primary">返回用户列表</a></div>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money']['getBuyer'])) {?>
 															<li id="43">财务买家列表</li>
 															<?php }?>
+														</ul>
+													</li>
+													<?php }?>
+													<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money'])) {?>
+													<li class="folder" id="10000">
+														买家充值概览
+														<ul>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money']['countBuyerRecharge'])) {?>
 															<li id="44">买家充值顶部</li>
 															<?php }?>
@@ -359,13 +380,9 @@ user" class="btn btn-primary">返回用户列表</a></div>
 														</ul>
 													</li>
 													<?php }?>
-
 													<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods'])) {?>
 													<li class="folder" id="20000">商品管理
 														<ul>
-															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['index'])) {?>
-															<li id="6">数据概览</li>
-															<?php }?>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['verify'])) {?>
 															<li id="8">商品详情</li>
 															<?php }?>
@@ -375,6 +392,14 @@ user" class="btn btn-primary">返回用户列表</a></div>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['nosales'])) {?>
 															<li id="9">商品下架</li>
 															<?php }?>
+
+														</ul>
+													</li>
+													<?php }?>
+
+													<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods'])) {?>
+													<li class="folder" id="20000">商品数据概览
+														<ul>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['getGoods'])) {?>
 															<li id="49">商品列表</li>
 															<?php }?>
@@ -384,14 +409,20 @@ user" class="btn btn-primary">返回用户列表</a></div>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['getSales'])) {?>
 															<li id="51">单品销售统计</li>
 															<?php }?>
-															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['getCates'])) {?>
-															<li id="52">类目销售统计</li>
-															<?php }?>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['getVisit'])) {?>
-															<li id="53">单品放完统计</li>
+															<li id="53">单品访问统计</li>
 															<?php }?>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['getVisit'])) {?>
 															<li id="54">单品分享统计</li>
+															<?php }?>
+														</ul>
+													</li>
+													<?php }?>
+													<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods'])) {?>
+													<li class="folder" id="20000">商品分类
+														<ul>
+															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['getCates'])) {?>
+															<li id="52">类目销售统计</li>
 															<?php }?>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['category'])) {?>
 															<li id="56">商品分类</li>
@@ -408,7 +439,6 @@ user" class="btn btn-primary">返回用户列表</a></div>
 														</ul>
 													</li>
 													<?php }?>
-
 													<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['order'])) {?>
 													<li class="folder" id="30000">订单管理
 														<ul>

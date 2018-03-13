@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-12 10:30:59
+/* Smarty version 3.1.30, created on 2018-03-13 14:38:10
   from "D:\wamp64\www\mall_manage\application\views\promote\info.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa5e6635786c6_06054886',
+  'unifunc' => 'content_5aa771d29887e1_81693569',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd8c1c7af0df1cd885d2fa0a1fc6c9909141659f9' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\promote\\info.html',
-      1 => 1520821856,
+      1 => 1520923088,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aa5e6635786c6_06054886 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa771d29887e1_81693569 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div id="info_modal" class="modal fade">
     <div class="modal-dialog  modal-lg">
@@ -38,45 +38,88 @@ function content_5aa5e6635786c6_06054886 (Smarty_Internal_Template $_smarty_tpl)
                         <div class="col-sm-9 form-control-static">{{fullData.name}}</div>
                     </div>
                     <div class="form-group mn br-b">
-                        <label class="control-label col-sm-3">单个红包金额：</label>
+                        <label class="control-label col-sm-3">红包总额：</label>
                         <div class="col-sm-9 form-control-static">{{fullData.money}}</div>
                     </div>
                     <div class="form-group mn br-b">
-                        <label class="control-label col-sm-3">拆分人数:</label>
+                        <label class="control-label col-sm-3">红包总个数：</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.number}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">可使用红包数：</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.use_number}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">需要人数：</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.user}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">单个红包金额：</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.bag_money}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">拆分方式：</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.split_type}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">使用限制：</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.con_money}}</div>
+                    </div>
+
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">红包有效截止时间:</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.bet*1000|date:'yyyy-MM-dd HH:mm'}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">活动结束时间:</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.aet*1000|date:'yyyy-MM-dd HH:mm'}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">是否在首页显示:</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.is_display | DisplayDesc}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">已领取人数:</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.pd_user}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">已领取金额:</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.pd_money}}</div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">已使用人数:</label>
                         <div class="col-sm-9 form-control-static">{{fullData.use_user}}</div>
                     </div>
                     <div class="form-group mn br-b">
-                        <label class="control-label col-sm-3">红包使用范围:</label>
-                        <div class="col-sm-9 form-control-static">{{fullData.con_money}}</div>
+                        <label class="control-label col-sm-3">已使用金额:</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.use_money}}</div>
                     </div>
                     <div class="form-group mn br-b">
-                        <label class="control-label col-sm-3">红包使用条件:</label>
-                        <div class="col-sm-9 form-control-static">{{fullData.con_money}}</div>
-                    </div>
-                    <div class="form-group mn br-b">
-                        <label class="control-label col-sm-3">红包使用有效期:</label>
-                        <div class="col-sm-9 form-control-static">
-                            {{fullData.del_time}}
-                        </div>
-                    </div>
-
-
-                    <div class="form-group mn br-b">
-                        <label class="control-label col-sm-3">活动开始时间:</label>
+                        <label class="control-label col-sm-3">创建时间:</label>
                         <div class="col-sm-9 form-control-static">
                             {{fullData.create_time*1000|date:'yyyy-MM-dd HH:mm'}}
                         </div>
                     </div>
-
                     <div class="form-group mn br-b">
-                        <label class="control-label col-sm-3">活动结束时间:</label>
+                        <label class="control-label col-sm-3">结束时间:</label>
                         <div class="col-sm-9 form-control-static" ng-if="fullData.close_time == null">
                         </div>
                         <div class="col-sm-9 form-control-static" ng-if="fullData.close_time != null">
                             {{fullData.close_time*1000|date:'yyyy-MM-dd HH:mm'}}
                         </div>
                     </div>
-
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">删除时间:</label>
+                        <div class="col-sm-9 form-control-static" ng-if="fullData.del_time == null">
+                        </div>
+                        <div class="col-sm-9 form-control-static" ng-if="fullData.del_time != null">
+                            {{fullData.del_time*1000|date:'yyyy-MM-dd HH:mm'}}
+                        </div>
+                    </div>
+                    <div class="form-group mn br-b">
+                        <label class="control-label col-sm-3">状态:</label>
+                        <div class="col-sm-9 form-control-static">{{fullData.status | StatusDesc}}</div>
+                    </div>
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">规则描述:</label>
                         <div class="col-sm-9 form-control-static">
