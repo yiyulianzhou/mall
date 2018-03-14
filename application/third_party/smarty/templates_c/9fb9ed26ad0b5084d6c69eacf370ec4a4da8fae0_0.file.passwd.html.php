@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-13 09:54:23
+/* Smarty version 3.1.30, created on 2018-03-14 14:52:03
   from "D:\wamp64\www\mall_manage\application\views\my\passwd.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa72f4fafab81_77909862',
+  'unifunc' => 'content_5aa8c693707e32_34290293',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9fb9ed26ad0b5084d6c69eacf370ec4a4da8fae0' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\my\\passwd.html',
-      1 => 1517981988,
+      1 => 1521010320,
       2 => 'file',
     ),
   ),
@@ -23,7 +23,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5aa72f4fafab81_77909862 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa8c693707e32_34290293 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -165,7 +165,8 @@ assets/images/logo_light.png" alt=""></a>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown dropdown-user">
                     <a class="dropdown-toggle" data-toggle="dropdown"> <img src="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-assets/images/placeholder_user.jpg" alt=""> <span> yangxun</span> <i class="caret"></i> </a>
+assets/images/placeholder_user.jpg" alt=""> <span> <?php echo $_smarty_tpl->tpl_vars['data']->value['base']['username'];?>
+</span> <i class="caret"></i> </a>
 					<ul class="dropdown-menu dropdown-menu-right">
 						<li><a href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
 my/info"><i class="icon-cog5"></i> 帐号信息</a></li>

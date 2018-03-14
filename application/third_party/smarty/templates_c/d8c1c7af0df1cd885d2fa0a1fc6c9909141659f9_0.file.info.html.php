@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-13 14:38:10
+/* Smarty version 3.1.30, created on 2018-03-14 10:06:22
   from "D:\wamp64\www\mall_manage\application\views\promote\info.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa771d29887e1_81693569',
+  'unifunc' => 'content_5aa8839ea6d6f5_58168617',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd8c1c7af0df1cd885d2fa0a1fc6c9909141659f9' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\promote\\info.html',
-      1 => 1520923088,
+      1 => 1520993179,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aa771d29887e1_81693569 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa8839ea6d6f5_58168617 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div id="info_modal" class="modal fade">
     <div class="modal-dialog  modal-lg">
@@ -59,7 +59,7 @@ function content_5aa771d29887e1_81693569 (Smarty_Internal_Template $_smarty_tpl)
                     </div>
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">拆分方式：</label>
-                        <div class="col-sm-9 form-control-static">{{fullData.split_type}}</div>
+                        <div class="col-sm-9 form-control-static">{{fullData.split_type | SplitDesc}}</div>
                     </div>
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">使用限制：</label>
@@ -101,7 +101,7 @@ function content_5aa771d29887e1_81693569 (Smarty_Internal_Template $_smarty_tpl)
                         </div>
                     </div>
                     <div class="form-group mn br-b">
-                        <label class="control-label col-sm-3">结束时间:</label>
+                        <label class="control-label col-sm-3">手工关闭时间:</label>
                         <div class="col-sm-9 form-control-static" ng-if="fullData.close_time == null">
                         </div>
                         <div class="col-sm-9 form-control-static" ng-if="fullData.close_time != null">

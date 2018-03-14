@@ -7,6 +7,8 @@
 var Status = {0: "过期",1: "正常",3:"满金额",4:"手工关闭"};
 //是否在首页显示
 var Display = {0: "否",1: "是"};
+//拆分方式
+var Split = {1:"等分",2:"随机"};
 app.filter("StatusDesc", function () {
     return function (e) {
         return Status[e];
@@ -16,6 +18,12 @@ app.filter("StatusDesc", function () {
 app.filter("DisplayDesc", function () {
     return function (e) {
         return Display[e];
+    }
+});
+
+app.filter("SplitDesc", function () {
+    return function (e) {
+        return Split[e];
     }
 });
 
@@ -126,9 +134,6 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
             //可使用红包数
             $scope.fullData.use_number = response.item.use_number;
 
-            //需要人数
-            $scope.fullData.user = response.item.user;
-
             //单个红包金额
             $scope.fullData.bag_money = response.item.bag_money;
 
@@ -168,53 +173,158 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
             //删除时间
             $scope.fullData.del_time = response.item.del_time;
 
-            //活动封面图片
-            $scope.fullData.money1 = response.item.money1;
-
             //红包规则描述
             $scope.fullData.desc = response.item.desc;
 
-            //规则描述
-            $scope.fullData.money2 = response.item.money2;
 
             //状态
             $scope.fullData.status = response.item.status;
 
         });
     };
+    var formInit = function() {
+        //活动名称
+        $scope.name='';
 
+        //需要人数
+        $scope.user='';
+
+        //红包总额
+        $scope.money='';
+
+        //红包总个数
+        $scope.number='';
+
+        //可使用红包数
+        $scope.use_number='';
+
+        //单个红包金额
+        $scope.bag_money='';
+
+        //拆分方式
+        $scope.split_type='';
+
+        //使用限制
+        $scope.con_money='';
+
+        //红包有效期截止时间
+        $scope.bet='';
+
+        //活动结束时间
+        $scope.aet='';
+
+        //是否在首页显示
+        $scope.is_display='';
+
+        //创建时间
+        $scope.create_time='';
+
+        //红包规则描述
+        $scope.desc='';
+
+    }
+
+    formInit();
     /*
-     * 更新数据
+     * 创建数据
      * id: ID
      */
     $scope.save = function() {
         var formData = {};
-        // 更新的数据
-        formData.state = $scope.state;
 
-        // 请求更新数据开始
-        appFactory.loadingToggle(1);
-        $http({
-            url: common.promote_info + $scope.id,
-            method: 'POST',
-            data: $.param(formData),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        }).success(function(response) {
-            // 信息弹出框
-            appFactory.simpleAlert(response);
+        //活动名称
+        formData.name = $scope.name;
 
-            // 更新成功需更新list中的数据
-            if (response.msg_type == 'success') {
-                // 隐藏模态框
-                $('#info_modal').modal('hide');
-                $('#add_modal').modal('hide');
-                $scope.changePager($scope.curpage, '');
-            }
-            appFactory.loadingToggle(0);
+        //需要人数
+        formData.user = $scope.user;
+
+        //红包总额
+        formData.money = $scope.money;
+
+        //红包总个数
+        formData.number = $scope.number;
+
+        //可使用红包数
+        formData.use_number = $scope.use_number;
+
+        //单个红包金额
+        formData.bag_money = $scope.bag_money;
+
+        //拆分方式
+        formData.split_type = $scope.split_type;
+
+        //使用限制
+        formData.con_money = $scope.con_money;
+
+        //红包有效期截止时间
+        formData.bet = $scope.bet;
+
+        //活动结束时间
+        formData.aet = $scope.aet;
+
+        //是否在首页显示
+        formData.is_display = $scope.is_display;
+
+        //创建时间
+        formData.create_time= $scope.create_time;
+
+        //结束时间
+        formData.close_time= $scope.close_time;
+
+        //删除时间
+        formData.del_time = $scope.del_time;
+
+        //红包规则描述
+        formData.desc = $scope.desc;
+
+
+        // 请求数据开始
+        sweetAlert({
+            title: "新增活动",
+            text: "确定要新增活动吗",
+            type: "info",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        }, function() {
+            $http({
+                url: common.create,
+                method: 'POST',
+                data: $.param(formData),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).success(function(response) {
+                // 新增成功
+                if (response.msg_type == 'success') {
+                    // 初始化不要放到sweetAlert中执行
+                    formInit();
+                    sweetAlert({
+                        title: "新增成功",
+                        text: "继续新增活动还是返回列表",
+                        type: "success",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "继续新增",
+                        cancelButtonText: "返回列表",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    }, function(isConfirm) {
+                        // 是否新增用户
+                        if (isConfirm) {
+                            // 跳转到编辑用户
+                            window.location.href = common.index;
+                        }else{
+                            // 跳转到列表
+                            window.location.href = common.index;
+                        }
+                    });
+                } else {
+                    // 信息弹出框
+                    appFactory.simpleAlert(response);
+                }
+            });
         });
-        // 请求结束
-
     };
+
 
 
     // Echat 设置，配置Echats相关文件路径

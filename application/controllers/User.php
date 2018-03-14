@@ -122,8 +122,8 @@ class user extends MY_Controller
 	            			$this->model->insert('admin_permission', $data);
 	            		}
             			$this->response['msg_type'] = 'success';
-            			$this->response['message'] = '添加成功';
-	                	$this->returnResponse();
+						$this->response['message'] = '添加成功';
+						$this->returnResponse();
 	            	}
 	            }
         	}

@@ -21,6 +21,7 @@ $config['url']['edit']         = $config['base']['module_url'].'edit';
 
 // 提示词
 $config['base']['create'] = '新增用户';
+
 $config['base']['edit']   = '编辑用户';
 
 // 操作成功

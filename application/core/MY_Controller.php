@@ -65,10 +65,10 @@ class MY_Controller extends CI_Controller
 		if(empty($this->user_session))
 		{
 			//开发测试阶段，输出文字
-			echo "请登录";
-			exit;
-			//$this->session->sess_destroy();
-			//redirect(site_url());
+			//echo "请登录";
+			//exit;
+			$this->session->sess_destroy();
+			redirect(site_url());
 		}
 
         $this->data['base']['username'] = $this->user_session['username'];

@@ -29,12 +29,9 @@ class PromoteModel extends MY_Model
         //计算总记录条数
         $total_rows = $this->db->count_all_results('',false);
 
-        $this->db->join('user b','b.id = a.uid','left');
-
-        $this->db->join('goods c','c.uid = a.uid','left');
-
         // 翻页设置
         $per_page   = isset($this->data['base']['per_page']) ? $this->data['base']['per_page'] : $this->data['common']['per_page'];
+
         $uri_segment = isset($this->data['base']['uri_segment']) ? $this->data['base']['uri_segment'] : $this->data['common']['uri_segment'];
 
         $curpage     = $this->uri->segment($uri_segment) ? $this->uri->segment($uri_segment) : 1;
@@ -88,7 +85,6 @@ class PromoteModel extends MY_Model
     /**
      * @DateTime  2017-3-8
      * @copyright 活动顶部统计
-     * @param     [type]      $id [description]
      * @return    [type]          [description]
      */
 
@@ -125,8 +121,8 @@ class PromoteModel extends MY_Model
     /**
      * @DateTime  2017-3-8
      * @copyright 红包发放金额统计
-     * @param     [type]      $id [description]
-     * @return    [type]          [description]
+     * @param     [type]      $search   [description]
+     * @return    [type]                [description]
      */
     public function getPromoteMoney($search)
     {
@@ -291,6 +287,38 @@ class PromoteModel extends MY_Model
 
         $res = $this->getDaysData($start,$today,$money);
 
+
+        return $res;
+    }
+
+    /**
+     * @DateTime  2017-3-14
+     * @copyright 创建活动
+     * @return    [type]         [description]
+     */
+
+    public function createPromote($data)
+    {
+        if (!empty($data)){
+            $input['name'] = $data['name'];
+            $input['uid'] = $this->user_session['uid'];
+            $input['money'] = $data['money'];
+            $input['number'] = $data['number'];
+            $input['use_number'] = $data['use_number'];
+            $input['user'] = $data['user'];
+            $input['bag_money'] = $data['bag_money'];
+            $input['split_type'] = $data['split_type'];
+            $input['desc'] = $data['desc'];
+            $input['con_money'] = $data['con_money'];
+            $input['bet'] = !empty($data['bet']) ? strtotime(str_replace('／', '-', $data['bet'])) :'';
+            $input['aet'] = !empty($data['aet']) ? strtotime(str_replace('／', '-', $data['bet'])) :'';
+            $input['is_display'] = $data['is_display'];
+            $input['create_time'] = time();
+            $input['status'] = 1;
+            $res = $this->db->insert('red_bag',$input);
+        } else{
+            $res = false;
+        }
 
         return $res;
     }

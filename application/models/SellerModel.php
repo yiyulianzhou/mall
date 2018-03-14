@@ -70,8 +70,9 @@ class SellerModel extends MY_Model
      * @DateTime  2017-12-20
      * @copyright 卖家详情
      * @param     [type]      $id [description]
-     * @return    [type]          [description]
+     * @return    [type]      array  $data   结果集
      */
+
     public function sellerDetail( $id )
     {
         $this->db->select('a.id,a.uid,a.shop,a.com_id,a.address_id,a.pic,a.bg_img,a.name,a.phone,a.is_real,a.is_health,a.lock,a.money,a.money1,a.money2,a.img1,a.img2,a.img3,a.lock,a.create_time,b.address,c.title com_address');
@@ -89,8 +90,9 @@ class SellerModel extends MY_Model
     /**
      * @copyright 卖家顶部统计数据
      * @param     [type]      $id        [description]
-     * @return    [type]                 [description]
+     * @return    array       $data      结果集
      */
+
     public function countSeller()
     {
         //新增卖家
@@ -184,8 +186,8 @@ class SellerModel extends MY_Model
 
     /**
      * @copyright 卖家订单数统计
-     * @param     [type]      $id        [description]
-     * @return    [type]                 [description]
+     * @param     [type]    $id        [description]
+     * @return    array     $data      结果集
      */
 
     public function getSellerUsers($search)
@@ -243,8 +245,8 @@ class SellerModel extends MY_Model
 
     /**
      * @copyright 封禁或解封卖家
-     * @param     [type]      $id        [description]
-     * @return    [type]                 [description]
+     * @param     [type]        $id         [description]
+     * @return    array         $res        结果集
      */
 
     public function lockSeller($con)
@@ -255,8 +257,9 @@ class SellerModel extends MY_Model
 
         return $res;
     }
+
     /**
-     * @copyright 封禁或解封卖家
+     * @copyright 卖家实名和健康认证
      * @param     [type]      $id        [description]
      * @return    [type]                 [description]
      */

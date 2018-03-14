@@ -12,8 +12,8 @@ class HomeModel extends MY_Model
     }
 
     /**
-     * @function getData 各表新增数据汇总
-     * @return   array $data   结果集
+     * @function getData        各表新增数据汇总
+     * @return   array $data    结果集
      */
     public function getData()
     {
@@ -71,7 +71,10 @@ class HomeModel extends MY_Model
         return $res;
     }
 
-    //获取商铺销售金额排行
+    /**
+     * @function getSeller      获取商铺销售金额排行
+     * @return   array $data    结果集
+     */
     public function getSeller()
     {
         //卖家top5数据
@@ -92,7 +95,11 @@ class HomeModel extends MY_Model
         return $res;
     }
 
-    //获取买家消费金额排行
+    /**
+     * @function getBuyer       获取买家消费金额排行
+     * @return   array $data    结果集
+     */
+
     public function getBuyer()
     {
         //买家top5数据
@@ -114,7 +121,11 @@ class HomeModel extends MY_Model
         return $res;
     }
 
-    //获取商品类目销量排行
+
+    /**
+     * @function getItems       获取商品类目销量排行
+     * @return   array $data    结果集
+     */
     public function getItems ()
     {
         //商品类目top5数据
@@ -135,7 +146,10 @@ class HomeModel extends MY_Model
         return $res;
     }
 
-    //获取商品销售金额排行信息
+    /**
+     * @function getGoods       获取商品销售金额排行信息
+     * @return   array $data    结果集
+     */
     public function getGoods ()
     {
         $res = [];
@@ -159,7 +173,11 @@ class HomeModel extends MY_Model
         return $res;
     }
 
-    //用户反馈记录
+    /**
+     * @function showTips       获取用户反馈记录
+     * @return   array $data    结果集
+     */
+
     public function showTips ()
     {
         $data = [];
@@ -203,7 +221,11 @@ class HomeModel extends MY_Model
         return $data;
     }
 
-    //用户提现申请
+    /**
+     * @function cashApply          获取用户提现申请
+     * @return   array $data        结果集
+     */
+
     public function cashApply ()
     {
        //查询用户余额表

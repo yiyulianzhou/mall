@@ -101,4 +101,25 @@ class Promote extends MY_Controller
         }
         $this->returnResponse();
     }
+
+    /**
+     * @copyright 创建新活动
+     * @param     [type]      $id [description]
+     * @return    [type]          [description]
+     */
+    public function create()
+    {
+        $data = $this->input->post();
+        $id = $this->model->createPromote($data);
+
+        if ($id){
+            $this->response['msg_type'] = 'success';
+            $this->response['message'] = '创建活动成功';
+        } else {
+            $this->response['msg_type'] = 'failure';
+            $this->response['message'] = $this->data['base']['failure'];
+        }
+
+        $this->returnResponse();
+    }
 }

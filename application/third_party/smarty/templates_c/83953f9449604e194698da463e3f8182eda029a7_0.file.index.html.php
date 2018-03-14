@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-13 16:30:03
+/* Smarty version 3.1.30, created on 2018-03-14 14:29:41
   from "D:\wamp64\www\mall_manage\application\views\home\index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa78c0b1e3321_60127153',
+  'unifunc' => 'content_5aa8c1553d4792_57768063',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '83953f9449604e194698da463e3f8182eda029a7' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\home\\index.html',
-      1 => 1520929556,
+      1 => 1521008978,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5aa78c0b1e3321_60127153 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa8c1553d4792_57768063 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -123,6 +123,8 @@ goods/index">
 											<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money']['buyer'])) {?>
 											<div class="col-md-2 "><a class="btn" href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
 money/buyer">处理</a></div>
+											<?php } else { ?>
+											<div class="col-md-2 "><a class="btn" href="#">&nbsp;&nbsp;</a></div>
 											<?php }?>
 										</li>
 									</ul>
@@ -145,7 +147,10 @@ money/buyer">处理</a></div>
 											<div class="col-md-10 pt5">{{item.create_time*1000|date:'yyyy-MM-dd HH:mm'}}&nbsp;&nbsp;{{item.username}}申请提现{{item.money}}元</div>
 											<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money']['buyer'])) {?>
 											<div class="col-md-2 "><a class="btn" href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-money/buyer">处理</a></div>                                 <?php }?>
+money/buyer">处理</a></div>
+											<?php } else { ?>
+											<div class="col-md-2 "><a class="btn" href="#">&nbsp;&nbsp;</a></div>
+											<?php }?>
 										</li>
 									</ul>
 								</div>

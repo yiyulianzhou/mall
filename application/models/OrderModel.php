@@ -49,8 +49,8 @@ class OrderModel extends MY_Model
 
     /**
      * @copyright 订单列表数据
-     * @param     [type]      $id [description]
-     * @return    [type]          [description]
+     * @param     [type]      $search   [description]
+     * @return    [type]                [description]
      */
 
     public function getOrderList($search)
@@ -106,8 +106,8 @@ class OrderModel extends MY_Model
 
     /**
      * @copyright 订单金额按日期统计
-     * @param     [type]      $id [description]
-     * @return    [type]          [description]
+     * @param     [type]      $search   [description]
+     * @return    [type]                [description]
      */
 
     public function getOrderData ($search)
@@ -218,7 +218,6 @@ class OrderModel extends MY_Model
 
             // 订单金额，查询的数据中如果有该日期的数据则赋值，没有则为0
             $res['mons'][] = isset($money[$i]) ? $money[$i] : 0;
-
 
             $i += 86400;
 

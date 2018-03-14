@@ -83,6 +83,8 @@
 											<div class="col-md-10 pt5">{{item.time*1000|date:'yyyy-MM-dd HH:mm'}}&nbsp;&nbsp;{{item.username}}申请提现{{item.body}}</div>
 											<{if isset($data['permission_tree']['money']['buyer'])}>
 											<div class="col-md-2 "><a class="btn" href="<{$base_url}>money/buyer">处理</a></div>
+											<{else}>
+											<div class="col-md-2 "><a class="btn" href="#">&nbsp;&nbsp;</a></div>
 											<{/if}>
 										</li>
 									</ul>
@@ -104,7 +106,10 @@
 										<li ng-repeat="item in applylist track by $index">
 											<div class="col-md-10 pt5">{{item.create_time*1000|date:'yyyy-MM-dd HH:mm'}}&nbsp;&nbsp;{{item.username}}申请提现{{item.money}}元</div>
 											<{if isset($data['permission_tree']['money']['buyer'])}>
-											<div class="col-md-2 "><a class="btn" href="<{$base_url}>money/buyer">处理</a></div>                                 <{/if}>
+											<div class="col-md-2 "><a class="btn" href="<{$base_url}>money/buyer">处理</a></div>
+											<{else}>
+											<div class="col-md-2 "><a class="btn" href="#">&nbsp;&nbsp;</a></div>
+											<{/if}>
 										</li>
 									</ul>
 								</div>

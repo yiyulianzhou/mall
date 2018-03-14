@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-13 17:57:02
+/* Smarty version 3.1.30, created on 2018-03-14 14:08:36
   from "D:\wamp64\www\mall_manage\application\views\user\create.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa7a06e728ec4_78339941',
+  'unifunc' => 'content_5aa8bc64f393a5_69719388',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2fc2d93ac45a39883fad2dded7096f7727e1a651' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\user\\create.html',
-      1 => 1520934784,
+      1 => 1520937376,
       2 => 'file',
     ),
   ),
@@ -23,7 +23,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5aa7a06e728ec4_78339941 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa8bc64f393a5_69719388 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -376,6 +376,9 @@ user" class="btn btn-primary">返回用户列表</a></div>
 													<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods'])) {?>
 													<li class="folder" id="20000">商品管理
 														<ul>
+															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['index'])) {?>
+															<li id="6">商品列表</li>
+															<?php }?>
 															<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['verify'])) {?>
 															<li id="8">商品详情</li>
 															<?php }?>

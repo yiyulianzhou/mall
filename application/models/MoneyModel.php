@@ -15,9 +15,8 @@ class MoneyModel extends MY_Model
 
     /**
      * @copyright 提现卖家列表
-     * @param     [type]      $username [description]
-     * @param     [type]      $page     [description]
-     * @return    [type]                [description]
+     * @param     [type]      $search 		[description]
+     * @return    [type]                	[description]
      */
 
 	public function sellerCash($search)

@@ -23,3 +23,15 @@ $config['url']['promote_money']               = $config['base']['module_url'].'p
 
 //活动详情
 $config['url']['promote_info']               = $config['base']['module_url'].'promoteInfo/';
+
+//新建活动
+$config['url']['create']               = $config['base']['module_url'].'create/';
+
+//新建活动
+$config['url']['index']               = $config['base']['module_url'].'index/';
+
+// 操作成功
+$config['base']['success'] = '成功';
+
+// 操作失败
+$config['base']['failure'] = '失败';
