@@ -391,6 +391,7 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
                                 {
                                     name:'消费金额',
                                     type:'bar',
+                                    barWidth : 30,//柱图宽度
                                     data : bb
                                 }
                             ]
@@ -455,6 +456,7 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
                                 {
                                     name:'订单数量',
                                     type:'bar',
+                                    barWidth : 30,//柱图宽度
                                     data : bb
                                 }
                             ]
