@@ -24,13 +24,13 @@
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">头像:</label>
                         <div class="col-sm-9 form-control-static">
-                            <img ng-src="{{fullData.pic}}" alt="图片链接已失效" onerror="this.style.display='none'" style="width:60px;height:60px;">
+                            <img ng-src="{{fullData.pic}}">
                             </div>
                     </div>
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">背景图:</label>
                         <div class="col-sm-9 form-control-static">
-                            <img ng-src="{{fullData.bg_img}}" alt="图片链接已失效" onerror="this.style.display='none'" style="width:60px;height:60px;">
+                            <img ng-src="{{fullData.bg_img}}">
                         </div>
                     </div>
                     <div class="form-group mn br-b">
@@ -42,22 +42,23 @@
                         <div class="col-sm-9 form-control-static">{{fullData.phone}}</div>
                     </div>
                     <div class="form-group mn br-b">
+
                         <label class="control-label col-sm-3">正面:</label>
                         <div class="col-sm-9 form-control-static">
-                            <img ng-src="<{$data.common.upload_images}>{{fullData.img1}}" alt="图片链接已失效"  style="width:60px;height:60px;">
+                            <img ng-click='zoom()' ng-class="{normal : n,big : b}" ng-src="<{$data.common.upload_images}>{{fullData.img1}}">
                         </div>
                     </div>
 
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">反面:</label>
                         <div class="col-sm-9 form-control-static">
-                            <img ng-src="<{$data.common.upload_images}>{{fullData.img2}}" alt="图片链接已失效"  style="width:60px;height:60px;">
+                            <img ng-click='zoom()' ng-class="{normal : n,big : b}" ng-src="<{$data.common.upload_images}>{{fullData.img2}}">
                         </div>
                     </div>
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">健康证:</label>
                         <div class="col-sm-9 form-control-static">
-                            <img ng-src="<{$data.common.upload_images}>{{fullData.img3}}" alt="图片链接已失效"  style="width:60px;height:60px;">
+                            <img ng-src="<{$data.common.upload_images}>{{fullData.img3}}" ng-click='zoom()' ng-class="{normal : n,big : b}" >
                         </div>
                     </div>
                     <div class="form-group mn br-b">
@@ -72,7 +73,6 @@
                             {{fullData.is_health | HealthDesc}}
                         </div>
                     </div>
-
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">账户余额:</label>
                         <div class="col-sm-9 form-control-static">{{fullData.money}}</div>
@@ -105,3 +105,4 @@
         </div>
     </div>
 </div>
+

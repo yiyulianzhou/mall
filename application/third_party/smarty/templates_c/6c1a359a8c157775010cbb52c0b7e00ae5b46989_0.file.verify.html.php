@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-07 14:11:25
+/* Smarty version 3.1.30, created on 2018-03-15 14:12:35
   from "D:\wamp64\www\mall_manage\application\views\goods\verify.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a9f828de442e7_25768232',
+  'unifunc' => 'content_5aaa0ed39b31c8_50085341',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6c1a359a8c157775010cbb52c0b7e00ae5b46989' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\goods\\verify.html',
-      1 => 1520403077,
+      1 => 1521094351,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a9f828de442e7_25768232 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aaa0ed39b31c8_50085341 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div id="verify_modal" class="modal fade">
     <div class="modal-dialog  modal-lg">
@@ -56,7 +56,7 @@ function content_5a9f828de442e7_25768232 (Smarty_Internal_Template $_smarty_tpl)
 
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">是否产地直销</label>
-                        <div class="col-sm-9 form-control-static">{{fullData.direct_sales | salesTypeDesc}}</div>
+                        <div class="col-sm-9 form-control-static">{{fullData.direct_sales | direct_salesDesc}}</div>
                     </div>
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">配送方式</label>
@@ -75,7 +75,6 @@ function content_5a9f828de442e7_25768232 (Smarty_Internal_Template $_smarty_tpl)
                         <label class="control-label col-sm-3">审核备注</label>
                         <div class="col-sm-9">
                             <textarea class="form-control" name="verify_remark" ng-model="verify_remark" style="height:80px"></textarea>
-                            <span class="text-danger">必填项</span>
                         </div>
                     </div>
                     <div class="form-group mn pv10 br-b">

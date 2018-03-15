@@ -1,4 +1,18 @@
-
+/*
+  卖家店铺实名和健康照片
+*/
+.modal-body img{
+  width:100px;
+  height:100px;
+}
+img.normal{
+  width:100px!important;
+  height:auto!important;
+}
+img.big{
+  width:420px!important;
+  height:auto!important;
+}
 /*******************************************************
 Slider B
 *******************************************************/

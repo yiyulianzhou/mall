@@ -113,8 +113,7 @@ class OrderModel extends MY_Model
     public function getOrderData ($search)
 
     {
-
-        $this->db->select('a.money,a.create_time');
+        $this->db->select('a.money,a.create_time,b.category');
         $this->db->from('order a');
 
         //订单状态为已完成或待发货

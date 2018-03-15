@@ -18,29 +18,35 @@ class HomeModel extends MY_Model
     public function getData()
     {
         $count = array('new_seller'=>0,'new_buyer'=>0,'new_order'=>0,'new_goods'=>0);
+
+        // 新增买家
+        $this->db->select('count(id) as buyers');
+        $this->db->from('user');
+
+        $today = strtotime(date('Y-m-d'));
+
+        $this->db->where('create_time >= ', $today);
+        $this->db->where('id >',10);
+        $tmp = $this->db->get()->row_array();
+        $count['new_buyer'] = $tmp['buyers'];
+        $tmp = [];
+        $this->db->reset_query();
+
     	// 新增卖家
     	$this->db->select('count(id) as sellers');
-        $this->db->from('user');
-        //用户类型为卖家
-        $this->db->where('is_sellers = ',1);
+        $this->db->from('user_shop');
+
         $today = strtotime(date('Y-m-d'));
+
         $this->db->where('create_time >= ', $today);
+        //10以内系统用户
+        $this->db->where('uid >',10);
         $tmp = $this->db->get()->row_array();
         $count['new_seller'] = $tmp['sellers'];
         $tmp = [];
         $this->db->reset_query();
 
-        // 新增买家
-        $this->db->select('count(id) as buyers');
-        $this->db->from('user');
-        //用户类型为卖家
-        $this->db->where('is_sellers = ',0);
-        $today = strtotime(date('Y-m-d'));
-        $this->db->where('create_time >= ', $today);
-        $tmp = $this->db->get()->row_array();
-        $count['new_seller'] = $tmp['buyers'];
-        $tmp = [];
-        $this->db->reset_query();
+
 
         //新增订单
         $this->db->select('count(id) as orders');

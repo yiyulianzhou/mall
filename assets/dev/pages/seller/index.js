@@ -106,7 +106,6 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
                 $scope.lock = 1;
             }
         var formData = {};
-        console.log($scope.id);
         formData.lock = $scope.lock;
         formData.id = $scope.id;
         $http({
@@ -234,7 +233,20 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
         // 请求结束
 
     };
-
+    var i =0;
+    $scope.n = true;
+    $scope.b = false;
+    $scope.zoom = function(event){
+        if( i%2 == 0){
+            $scope.n = false;
+            $scope.b = true;
+            i++;
+        }else{
+            $scope.n = true;
+            $scope.b = false;
+            i--;
+        }
+    }
 
     // Echat 设置，配置Echats相关文件路径
     // ------------------------------

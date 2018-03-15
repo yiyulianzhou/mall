@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-15 09:07:56
+/* Smarty version 3.1.30, created on 2018-03-15 12:52:19
   from "D:\wamp64\www\mall_manage\application\views\seller\info.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa9c76c423e58_36366910',
+  'unifunc' => 'content_5aa9fc03d6e661_87671313',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4aad1f000fcd4e25fc7fff06bf5eab4116179491' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\seller\\info.html',
-      1 => 1521025396,
+      1 => 1521089481,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aa9c76c423e58_36366910 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa9fc03d6e661_87671313 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div id="info_modal" class="modal fade">
     <div class="modal-dialog  modal-lg">
@@ -48,13 +48,13 @@ function content_5aa9c76c423e58_36366910 (Smarty_Internal_Template $_smarty_tpl)
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">头像:</label>
                         <div class="col-sm-9 form-control-static">
-                            <img ng-src="{{fullData.pic}}" alt="图片链接已失效" onerror="this.style.display='none'" style="width:60px;height:60px;">
+                            <img ng-src="{{fullData.pic}}">
                             </div>
                     </div>
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">背景图:</label>
                         <div class="col-sm-9 form-control-static">
-                            <img ng-src="{{fullData.bg_img}}" alt="图片链接已失效" onerror="this.style.display='none'" style="width:60px;height:60px;">
+                            <img ng-src="{{fullData.bg_img}}">
                         </div>
                     </div>
                     <div class="form-group mn br-b">
@@ -66,25 +66,26 @@ function content_5aa9c76c423e58_36366910 (Smarty_Internal_Template $_smarty_tpl)
                         <div class="col-sm-9 form-control-static">{{fullData.phone}}</div>
                     </div>
                     <div class="form-group mn br-b">
+
                         <label class="control-label col-sm-3">正面:</label>
                         <div class="col-sm-9 form-control-static">
-                            <img ng-src="<?php echo $_smarty_tpl->tpl_vars['data']->value['common']['upload_images'];?>
-{{fullData.img1}}" alt="图片链接已失效"  style="width:60px;height:60px;">
+                            <img ng-click='zoom()' ng-class="{normal : n,big : b}" ng-src="<?php echo $_smarty_tpl->tpl_vars['data']->value['common']['upload_images'];?>
+{{fullData.img1}}">
                         </div>
                     </div>
 
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">反面:</label>
                         <div class="col-sm-9 form-control-static">
-                            <img ng-src="<?php echo $_smarty_tpl->tpl_vars['data']->value['common']['upload_images'];?>
-{{fullData.img2}}" alt="图片链接已失效"  style="width:60px;height:60px;">
+                            <img ng-click='zoom()' ng-class="{normal : n,big : b}" ng-src="<?php echo $_smarty_tpl->tpl_vars['data']->value['common']['upload_images'];?>
+{{fullData.img2}}">
                         </div>
                     </div>
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">健康证:</label>
                         <div class="col-sm-9 form-control-static">
                             <img ng-src="<?php echo $_smarty_tpl->tpl_vars['data']->value['common']['upload_images'];?>
-{{fullData.img3}}" alt="图片链接已失效"  style="width:60px;height:60px;">
+{{fullData.img3}}" ng-click='zoom()' ng-class="{normal : n,big : b}" >
                         </div>
                     </div>
                     <div class="form-group mn br-b">
@@ -99,7 +100,6 @@ function content_5aa9c76c423e58_36366910 (Smarty_Internal_Template $_smarty_tpl)
                             {{fullData.is_health | HealthDesc}}
                         </div>
                     </div>
-
                     <div class="form-group mn br-b">
                         <label class="control-label col-sm-3">账户余额:</label>
                         <div class="col-sm-9 form-control-static">{{fullData.money}}</div>
@@ -132,5 +132,6 @@ function content_5aa9c76c423e58_36366910 (Smarty_Internal_Template $_smarty_tpl)
         </div>
     </div>
 </div>
+
 <?php }
 }
