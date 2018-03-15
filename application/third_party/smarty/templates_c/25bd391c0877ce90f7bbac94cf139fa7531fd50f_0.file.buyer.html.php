@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-06 13:51:36
+/* Smarty version 3.1.30, created on 2018-03-14 18:02:45
   from "D:\wamp64\www\mall_manage\application\views\money\buyer.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a9e2c686932a7_72688519',
+  'unifunc' => 'content_5aa8f3456176d6_56912669',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '25bd391c0877ce90f7bbac94cf139fa7531fd50f' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\money\\buyer.html',
-      1 => 1520315489,
+      1 => 1521021762,
       2 => 'file',
     ),
   ),
@@ -26,7 +26,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5a9e2c686932a7_72688519 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa8f3456176d6_56912669 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -159,7 +159,7 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
                   <button  class='col-md-2 ml20 ' ng-click="filterList('verify')" ng-class="verify ? 'btn btn-success' : 'btn'">待审批</button>
                   <button  class='col-md-2 ml20 ' ng-click="filterList('pay')" ng-class="pay ? 'btn btn-success' : 'btn'">待付款</button>
                   <button  class='col-md-2 ml20 ' ng-click="filterList('done')" ng-class="done ? 'btn btn-success' : 'btn'">已付款</button>
-                  <button  class='col-md-3 ml20' ng-click="filterList('fail')" ng-class="fail ? 'btn btn-success' : 'btn'">审核未通过</button>
+                  <button  class='col-md-2 ml20' ng-click="filterList('fail')" ng-class="fail ? 'btn btn-success' : 'btn'">审核未通过</button>
                 </div>
 
               </div>

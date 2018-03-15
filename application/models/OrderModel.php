@@ -138,17 +138,19 @@ class OrderModel extends MY_Model
             switch ($day) {
                 //今日
                 case 'day':
-                    $today = strtotime(date('Y-m-d'),time());
-                    $start = $today - 86400;
+                    $today = strtotime(date('Y-m-d H:i:s'),time());
+                    //昨天0点
+                    $start = strtotime(date('Y-m-d'.'00:00:00',time()-3600*24));
                     break;
                 //本周
                 case 'week':
-                    $today = strtotime(date('Y-m-d'),time());
-                    $start = $today - (6*86400);
+                    $today = strtotime(date('Y-m-d H:i:s'),time());
+                    //本周第一天
+                    $start = strtotime(date('Y-m-d', strtotime("this week Monday", time())));
                     break;
                 //本月
                 case 'month':
-                    $today = strtotime(date('Y-m-d'),time());
+                    $today = strtotime(date('Y-m-d H:i:s'),time());
                     //本月第一天
                     $start = strtotime(date('Y-m-01'));
                     break;
@@ -234,7 +236,7 @@ class OrderModel extends MY_Model
     public function getOrderInfo($id)
     {
 
-        $this->db->select( 'a.pay_type,a.money,a.money_other,a.money_redbag,a.amount,a.create_time,a.send_time,a.cont,a.order_id,a.logi,a.status,b.username,d.name gname,d.sales_price,e.name goods_name,f.shop,g.name receiver,h.address,g.phone,og.gid,og.geid,og.amount ogamout,og.money ogmoney' );
+        $this->db->select( 'a.pay_type,a.money,a.money_other,a.money_redbag,a.amount,a.create_time,a.send_time,a.cont,a.order_id,a.trade_no,a.logi,a.status,b.username,d.name gname,d.sales_price,e.name goods_name,f.shop,g.name receiver,h.address,g.phone,og.gid,og.geid,og.amount ogamout,og.money ogmoney' );
 
         $this->db->from( 'order a' );
         $this->db->join('order_goods og','og.order_id = a.id');

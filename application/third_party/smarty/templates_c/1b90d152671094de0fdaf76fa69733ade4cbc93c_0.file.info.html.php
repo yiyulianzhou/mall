@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-02-22 11:26:24
+/* Smarty version 3.1.30, created on 2018-03-14 18:30:59
   from "D:\wamp64\www\mall_manage\application\views\money\info.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a8e3860c43690_67624679',
+  'unifunc' => 'content_5aa8f9e320bc97_59003922',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1b90d152671094de0fdaf76fa69733ade4cbc93c' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\money\\info.html',
-      1 => 1519269982,
+      1 => 1521023452,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5a8e3860c43690_67624679 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa8f9e320bc97_59003922 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -89,20 +89,6 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
                     <label class="col-sm-2 control-label">充值时间:</label>
                     <div class="col-sm-10">
                     <input type="text" class="form-control" readonly="readonly" placeholder="" value="<?php echo date('Y-m-d H:i:s',$_smarty_tpl->tpl_vars['detail']->value['create_time']);?>
-">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label">账号类型:</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" readonly="readonly" placeholder="" value="<?php echo $_smarty_tpl->tpl_vars['detail']->value['accountType'] == 1 ? '微信' : ($_smarty_tpl->tpl_vars['detail']->value['accountType'] == '2' ? '支付宝' : '银行卡');?>
-">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label">账号:</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" readonly="readonly" placeholder="" value="<?php echo $_smarty_tpl->tpl_vars['detail']->value['account'];?>
 ">
                     </div>
                   </div>

@@ -211,8 +211,10 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
             //订单号
             $scope.fullData.order_id = response.item[0].order_id;
 
-            //商品名称
+            //微信订单号
+            $scope.fullData.trade_no = response.item[0].trade_no;
 
+            //商品名称
             $scope.fullData.goods_name = response.item[0].goods_name;
 
             //红包
