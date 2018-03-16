@@ -410,6 +410,9 @@
 													<{if isset($data['permission_tree']['bulletin'])}>
 													<li class="folder" id="70000">公告管理
 														<ul>
+															<{if isset($data['permission_tree']['bulletin']['index'])}>
+															<li id="25">新增公告</li>
+															<{/if}>
 															<{if isset($data['permission_tree']['bulletin']['create'])}>
 															<li id="27">新增公告</li>
 															<{/if}>

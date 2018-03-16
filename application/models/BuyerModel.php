@@ -160,7 +160,7 @@ class BuyerModel extends MY_Model
 
         $this->db->group_by('a.buyer_id');
         $this->db->order_by('mon','DESC');
-        $this->db->limit(10);
+        $this->db->limit(5);
         $res = $this->db->get()->result_array();
         $res['mons'] = array_column($res,'mon');
         $res['names'] = array_column($res,'username');

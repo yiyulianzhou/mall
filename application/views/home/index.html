@@ -24,6 +24,7 @@
 							</div>
 							<div class="container-fluid">
 								<div class="row">
+									<{if isset($data['permission_tree']['seller'])}>
 									<a href="<{$base_url}>buyer/index">
 										<div class="col-md-3">
 											<div class="panel bg-teal-400">
@@ -34,6 +35,8 @@
 											</div>
 										</div>
 									</a>
+									<{/if}>
+									<{if isset($data['permission_tree']['buyer'])}>
 									<a href="<{$base_url}>seller/index">
 										<div class="col-md-3">
 											<div class="panel bg-pink-400 ">
@@ -44,6 +47,8 @@
 											</div>
 										</div>
 									</a>
+									<{/if}>
+									<{if isset($data['permission_tree']['order'])}>
 									<a href="<{$base_url}>order/index">
 										<div class="col-md-3">
 											<div class="panel bg-blue-400">
@@ -54,6 +59,8 @@
 											</div>
 										</div>
 									</a>
+									<{/if}>
+									<{if isset($data['permission_tree']['goods'])}>
 									<a href="<{$base_url}>goods/index">
 										<div class="col-md-3">
 											<div class="panel bg-brown-400">
@@ -64,6 +71,7 @@
 											</div>
 										</div>
 									</a>
+									<{/if}>
 								</div>
 							</div>
 

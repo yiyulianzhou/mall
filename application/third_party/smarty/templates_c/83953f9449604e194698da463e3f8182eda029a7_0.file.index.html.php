@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-14 14:29:41
+/* Smarty version 3.1.30, created on 2018-03-15 18:12:12
   from "D:\wamp64\www\mall_manage\application\views\home\index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa8c1553d4792_57768063',
+  'unifunc' => 'content_5aaa46fc2f9982_03724941',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '83953f9449604e194698da463e3f8182eda029a7' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\home\\index.html',
-      1 => 1521008978,
+      1 => 1521108729,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5aa8c1553d4792_57768063 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aaa46fc2f9982_03724941 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -59,6 +59,7 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
 							</div>
 							<div class="container-fluid">
 								<div class="row">
+									<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['seller'])) {?>
 									<a href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
 buyer/index">
 										<div class="col-md-3">
@@ -70,6 +71,8 @@ buyer/index">
 											</div>
 										</div>
 									</a>
+									<?php }?>
+									<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['buyer'])) {?>
 									<a href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
 seller/index">
 										<div class="col-md-3">
@@ -81,6 +84,8 @@ seller/index">
 											</div>
 										</div>
 									</a>
+									<?php }?>
+									<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['order'])) {?>
 									<a href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
 order/index">
 										<div class="col-md-3">
@@ -92,6 +97,8 @@ order/index">
 											</div>
 										</div>
 									</a>
+									<?php }?>
+									<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods'])) {?>
 									<a href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
 goods/index">
 										<div class="col-md-3">
@@ -103,6 +110,7 @@ goods/index">
 											</div>
 										</div>
 									</a>
+									<?php }?>
 								</div>
 							</div>
 
