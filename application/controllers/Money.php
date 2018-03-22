@@ -8,7 +8,7 @@ class money extends MY_Controller
     {
         parent::__construct();
     }
-	
+
     /**
      * @copyright 卖家提现
      * 

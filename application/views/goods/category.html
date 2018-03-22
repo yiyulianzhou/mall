@@ -17,9 +17,7 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <button  class='col-md-2 ml10' ng-click="filterList('all')" ng-class="all ? 'btn btn-success' : 'btn'">全部</button>
-                                    <button  class='col-md-2 ml20' ng-click="filterList('open')" ng-class="open ? 'btn btn-success' : 'btn'">开放</button>
-                                    <button  class='col-md-2 ml20' ng-click="filterList('off')" ng-class="off ? 'btn btn-success' : 'btn'">关闭</button>
-                                    <button  class='col-md-offset-3 col-md-2 btn btn-warning' href="#cate_modal" data-toggle="modal" data-target="#cate_modal" ng-click="addCate()">新增商品分类</button>
+                                    <button  class='col-md-offset-5 col-md-2 btn btn-warning' href="#cate_modal" data-toggle="modal" data-target="#cate_modal" ng-click="addCate()">新增商品分类</button>
                                 </div>
                             </div>
                             <div class="panel-body">
@@ -29,8 +27,6 @@
                                         <th>商品类型</th>
                                         <th>介绍</th>
                                         <th>商品数</th>
-                                        <th>商铺数</th>
-                                        <th>开放状态</th>
                                         <{if isset($data['permission_tree']['goods']['cateDetail'])}>
                                         <th>操作</th>
                                         <{/if}>
@@ -41,8 +37,6 @@
                                         <td>{{item.name}}</td>
                                         <td>{{item.info}}</td>
                                         <td>{{item.goods_num}}</td>
-                                        <td>{{item.shop_num}}</td>
-                                        <td>{{item.state | StateDesc}}</td>
                                         <{if isset($data['permission_tree']['goods']['cateDetail'])}>
                                         <td>
                                             <a href="#CateInfo_modal" data-toggle="modal" data-target="#CateInfo_modal" ng-click="getData(item.id)"><i class="icon-task"></i> 详情</a>

@@ -36,21 +36,7 @@ class GoodsModel extends MY_Model
     }
 
     /**
-     * @copyright 商品下架
-     * @param     [type]      $id [description]
-     * @return    [type]          [description]
-     */
-    public function goodsNosales( $id )
-    {
-        $res = $this->db->update( 'goods',array('state'=>'2'),array('id'=>$id) );
-        if($res){
-            return true;
-        }
-    }
-
-
-    /**
-     * @copyright 顶部统计信息
+     * @copyright 商品顶部统计信息
      * @param     [type]      $id [description]
      * @return    [type]          [description]
      */
@@ -411,7 +397,7 @@ class GoodsModel extends MY_Model
 
     public function getCategoryList($search)
     {
-        $this->db->select('a.id,a.uid,a.name,a.info,a.state,count(b.goods_id) as goods_num,count(c.id) shop_num');
+        $this->db->select('a.id,a.uid,a.name,a.info,a.state,count(b.goods_id) as goods_num');
         $this->db->from('category a');
 
         //按状态进行筛选
@@ -422,7 +408,6 @@ class GoodsModel extends MY_Model
         //计算总记录条数
         $total_rows = $this->db->count_all_results('',false);
         $this->db->join('category_goods b','b.cate_id = a.id','left');
-        $this->db->join('user_shop c','c.uid = a.uid','left');
 
         // 翻页设置
         $per_page   = isset($this->data['base']['per_page']) ? $this->data['base']['per_page'] : $this->data['common']['per_page'];
@@ -433,6 +418,8 @@ class GoodsModel extends MY_Model
         $start_page  = ($curpage && is_numeric($curpage) && $curpage > 1) ? ($curpage - 1) * $per_page : 0;
 
         $this->db->group_by('a.id');
+
+        $this->db->order_by('a.id','DESC');
 
         $this->db->limit($per_page, $start_page);
 
@@ -461,10 +448,9 @@ class GoodsModel extends MY_Model
      */
     public function getCateItem($id)
     {
-        $this->db->select('a.id,a.uid,a.name,a.info,a.state,count(b.goods_id) as goods_num,count(c.id) shop_num');
+        $this->db->select('a.id,a.uid,a.name,a.info,a.state,count(b.goods_id) as goods_num');
         $this->db->from('category a');
         $this->db->join('category_goods b','b.cate_id = a.id','left');
-        $this->db->join('user_shop c','c.uid = a.uid','left');
         $this->db->where('a.id = ',$id);
         $data = $this->db->get()->row_array();
         return $data;

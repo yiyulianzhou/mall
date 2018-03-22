@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-06 14:05:21
+/* Smarty version 3.1.30, created on 2018-03-20 14:02:33
   from "D:\wamp64\www\mall_manage\application\views\goods\category.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a9e2fa101b8d4_53184585',
+  'unifunc' => 'content_5ab0a3f9e75095_11768322',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e866e1ac5476cfa8840cea9a30d759a7b77915de' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\goods\\category.html',
-      1 => 1520316318,
+      1 => 1521525751,
       2 => 'file',
     ),
   ),
@@ -28,7 +28,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5a9e2fa101b8d4_53184585 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab0a3f9e75095_11768322 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -54,9 +54,7 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
                             <div class="panel-heading">
                                 <div class="row">
                                     <button  class='col-md-2 ml10' ng-click="filterList('all')" ng-class="all ? 'btn btn-success' : 'btn'">全部</button>
-                                    <button  class='col-md-2 ml20' ng-click="filterList('open')" ng-class="open ? 'btn btn-success' : 'btn'">开放</button>
-                                    <button  class='col-md-2 ml20' ng-click="filterList('off')" ng-class="off ? 'btn btn-success' : 'btn'">关闭</button>
-                                    <button  class='col-md-offset-3 col-md-2 btn btn-warning' href="#cate_modal" data-toggle="modal" data-target="#cate_modal" ng-click="addCate()">新增商品分类</button>
+                                    <button  class='col-md-offset-5 col-md-2 btn btn-warning' href="#cate_modal" data-toggle="modal" data-target="#cate_modal" ng-click="addCate()">新增商品分类</button>
                                 </div>
                             </div>
                             <div class="panel-body">
@@ -66,8 +64,6 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
                                         <th>商品类型</th>
                                         <th>介绍</th>
                                         <th>商品数</th>
-                                        <th>商铺数</th>
-                                        <th>开放状态</th>
                                         <?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['cateDetail'])) {?>
                                         <th>操作</th>
                                         <?php }?>
@@ -78,8 +74,6 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
                                         <td>{{item.name}}</td>
                                         <td>{{item.info}}</td>
                                         <td>{{item.goods_num}}</td>
-                                        <td>{{item.shop_num}}</td>
-                                        <td>{{item.state | StateDesc}}</td>
                                         <?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['goods']['cateDetail'])) {?>
                                         <td>
                                             <a href="#CateInfo_modal" data-toggle="modal" data-target="#CateInfo_modal" ng-click="getData(item.id)"><i class="icon-task"></i> 详情</a>

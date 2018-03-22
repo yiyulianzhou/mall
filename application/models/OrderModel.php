@@ -117,9 +117,7 @@ class OrderModel extends MY_Model
         $this->db->from('order a');
 
         //订单状态为已完成或待发货
-        $where ='a.status =7 or a.status=9';
-
-        $this->db->where($where);
+        $this->db->where('a.status =',8);
 
         $this->db->join('goods b','b.id = a.gid','left');
         //自选时间

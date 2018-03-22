@@ -53,18 +53,18 @@
 
 					<{if isset($data['permission_tree']['promote'])}>
 					<li<{if $data.base.class_name eq 'promote'}> class="active"<{/if}>>
-					<a href="<{$base_url}>promote"><i class="icon-clipboard5"></i> <span>活动管理</span></a>
+					<a href="<{$base_url}>promote"><i class="icon-clapboard-play"></i> <span>活动管理</span></a>
 					</li>
 					<{/if}>
 
 					<{if isset($data['permission_tree']['bulletin'])}>
 					<li<{if $data.base.class_name eq 'bulletin'}> class="active"<{/if}>>
-						<a href="<{$base_url}>bulletin"><i class="icon-clipboard5"></i> <span>公告管理</span></a>
+						<a href="<{$base_url}>bulletin"><i class="icon-dice"></i> <span>公告管理</span></a>
 					</li>
 					<{/if}>
 
 					<{if isset($data['permission_tree']['money'])}>
-					<li> <a href="javascript:void(0);"><i class="icon-price-tags"></i> <span>财务管理</span></a>
+					<li> <a href="javascript:void(0);"><i class="icon-barcode2"></i> <span>财务管理</span></a>
 						<ul>
 							<{if isset($data['permission_tree']['money']['seller'])}>
 							<li<{if $data.base.class_name eq 'money' && $data.base.method_name eq 'seller' || $data.base.method_name eq 'detail' }> class="active"<{/if}>>

@@ -143,6 +143,17 @@ class MoneyModel extends MY_Model
 				return true;
 			}
     	}else{
+            if(strpos(BASEURL, 'testadmin')!==false)
+            {
+                $data['pay_user'] = $this->user_session['uid'];
+                $data['pay_time'] = time();
+                $data['status']   = 13;
+                $data['order_id'] = 'testadmin';
+                $data['trade_no'] = 'testadmin';
+                $data['pay_code'] = 'SUCCESS';
+                $this->db->update('user_money', $data, ['id'=>$id]);
+                return true;
+            }
 			$this->db->select('a.money,a.user_type,a.name as buyer_name,a.account as buyer_account,a.pay_code,a.order_id,b.bank_id,b.account,c.name,d.openId');
 			$this->db->from('user_money a');
 			$this->db->join('user_account b','b.id = a.account_id','left');
@@ -151,7 +162,7 @@ class MoneyModel extends MY_Model
 			$this->db->where('a.id', $id);
 			$this->db->where('a.status', 12);
 			$tmp = $this->db->get()->row_array();
-			
+
 			// 此条记录有效
 			if(!empty($tmp))
 			{
@@ -166,7 +177,7 @@ class MoneyModel extends MY_Model
 						// 微信
 						if($tmp['bank_id'] == 0)
 						{
-							return self::payToWx($id, $tmp['openId'], $tmp['money'], $tmp['name']);						
+							return self::payToWx($id, $tmp['openId'], $tmp['money'], $tmp['name']);
 						}
 						// 银行卡
 						else{
@@ -174,7 +185,7 @@ class MoneyModel extends MY_Model
 						}
 					}
 				}
-				elseif($tmp['pay_code'] == 'SYSTEMERROR'){					
+				elseif($tmp['pay_code'] == 'SYSTEMERROR'){
 					//网络繁忙重新支付
 					if($tmp['user_type'] == 1)
 					{
@@ -187,7 +198,7 @@ class MoneyModel extends MY_Model
     	}
     }
 
-	
+
 	/*
 	 *	打款到微信
 	 */
@@ -195,7 +206,7 @@ class MoneyModel extends MY_Model
 	{
 		$this->load->config('common/wx_pay');
 		$wx_config = $this->config->item('wx');
-		
+
 		$order_id = empty($order_id) ? self::createOrderId() : $order_id;
 		$post['amount'] = $money * 100;
 		$post['check_name'] = 'FORCE_CHECK';
@@ -220,7 +231,7 @@ class MoneyModel extends MY_Model
 		$sign_string .= "key={$wx_config['key']}";
 		$sign = strtoupper(md5($sign_string));
 		$xml .= "<sign>{$sign}</sign></xml>";
-		
+
         $url = 'https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers';
 
         $dataxml = self::http_post($url, $xml);
@@ -230,7 +241,7 @@ class MoneyModel extends MY_Model
             if($objectxml['return_code'] == 'SUCCESS')
             {
 				$data['pay_user'] = $this->user_session['uid'];
-				$data['pay_time'] = time();						
+				$data['pay_time'] = time();
 				$data['status']   = 13;
 				$data['order_id'] = $post['partner_trade_no'];
 				$data['trade_no'] = $objectxml['payment_no'];
@@ -247,7 +258,7 @@ class MoneyModel extends MY_Model
         }
         return false;
 	}
-	
+
 	/*
 	 *	打款到银行卡
 	 */
@@ -261,7 +272,7 @@ class MoneyModel extends MY_Model
 
 		$this->load->config('common/wx_pay');
 		$wx_config = $this->config->item('wx');
-		
+
 		$order_id = self::createOrderId();
 
 		$post['amount'] = $money * 100;
@@ -283,7 +294,7 @@ class MoneyModel extends MY_Model
 		$sign_string .= "key={$wx_config['key']}";
 		$sign = strtoupper(md5($sign_string));
 		$xml .= "<sign>{$sign}</sign></xml>";
-		
+
         $url = 'https://api.mch.weixin.qq.com/mmpaysptrans/pay_bank';
 
         $dataxml = self::http_post($url, $xml);
@@ -293,7 +304,7 @@ class MoneyModel extends MY_Model
             if($objectxml['return_code'] == 'SUCCESS')
             {
 				$data['pay_user'] = $this->user_session['uid'];
-				$data['pay_time'] = time();						
+				$data['pay_time'] = time();
 				$data['status']   = 13;
 				$data['order_id'] = $post['partner_trade_no'];
 				$data['trade_no'] = $objectxml['payment_no'];
@@ -310,18 +321,18 @@ class MoneyModel extends MY_Model
         }
         return false;
 	}
-	
+
 	/*
 	 *	银行卡号和真实姓名加密
 	 */
-	private function encrypt($data)  
+	private function encrypt($data)
     {
 		$pubKey = file_get_contents(self::$rsa_file);
         openssl_public_encrypt($data, $result, $pubKey, OPENSSL_PKCS1_OAEP_PADDING);
         $ret = base64_encode($result);
-        return $ret;  
+        return $ret;
     }
-	
+
 	/*
 	 *	获取RSA公钥
 	 */
@@ -331,13 +342,13 @@ class MoneyModel extends MY_Model
 
 		$this->load->config('common/wx_pay');
 		$wx_config = $this->config->item('wx');
-		
+
 		$order_id = self::createOrderId();
 		$nonce_str = md5($order_id);
 
 		$sign_string = "mch_id={$wx_config['mchid']}&nonce_str={$nonce_str}&sign_type=MD5&key={$wx_config['key']}";
 		$sign = strtoupper(md5($sign_string));
-		
+
 		$xml = "<xml><mch_id>{$wx_config['mchid']}</mch_id><nonce_str>{$nonce_str}</nonce_str><sign>{$sign}</sign><sign_type>MD5</sign_type></xml>";
 
 		$dataxml = self::http_post($url, $xml);
@@ -360,7 +371,7 @@ class MoneyModel extends MY_Model
 			}
 		}
 	}
-	
+
 	/*
 	 *	订单号
 	 */
@@ -384,7 +395,7 @@ class MoneyModel extends MY_Model
         $order_id = $order_id_main . str_pad((100 - $order_id_sum % 100) % 100,2,'0',STR_PAD_LEFT);
         return $order_id;
     }
-		
+
 	/*
 	 *	发送请求
 	 */
@@ -410,8 +421,8 @@ class MoneyModel extends MY_Model
             curl_close($ch);
             return false;
         }
-    }	
-	
+    }
+
 	/*
 	 *	当前用户客户端IP地址
 	 */
@@ -453,7 +464,9 @@ class MoneyModel extends MY_Model
 		$this->db->join('user b','b.id=a.uid','left');
 
 		//充值
-		$this->db->where('a.type','2');
+		$this->db->where('a.type = ','2');
+		//充值成功
+		$this->db->where('a.status = ','13');
 
 		$this->db->order_by('a.create_time', 'DESC');
 
@@ -516,7 +529,11 @@ class MoneyModel extends MY_Model
 		$this->db->from('user_money');
 
 		$this->db->where('user_type = ',2);
+
 		$this->db->where('type = ',1);
+
+		//提现完成
+		$this->db->where('status = ',13);
 
 		if (!empty($search['s_start_time']) && !empty($search['s_end_time'])) {
 			$search['s_day'] = '';
@@ -551,7 +568,7 @@ class MoneyModel extends MY_Model
 
 		//计算提现金额
 		$result = $this->db->get()->result_array();
-		
+
 		foreach($result as $key=>$val) {
 			$result[$key]['create_time'] = strtotime(date('Y-m-d',$val['create_time']));
 		}
@@ -600,6 +617,9 @@ class MoneyModel extends MY_Model
 		$this->db->where('user_type = ',1);
 		//操作为提现
 		$this->db->where('type = ',1);
+
+		//提现完成
+		$this->db->where('status = ',13);
 
 		if (!empty($search['s_start_time']) && !empty($search['s_end_time'])) {
 			$search['s_day'] = '';
@@ -695,7 +715,7 @@ class MoneyModel extends MY_Model
 	}
 
 	/**
-	 * @copyright 提现卖家详情数据
+	 * @copyright 提现卖家数据图表
 	 * @param     [type]       		[description]
 	 * @return    [type]        	[description]
 	 */
@@ -710,6 +730,8 @@ class MoneyModel extends MY_Model
 		$this->db->where('user_type = ',2);
 		//方式为提现
 		$this->db->where('type = ',1);
+		//提现完成
+		$this->db->where('a.status = ',13);
 
 		if (!empty($search['s_start_time2']) && !empty($search['s_end_time2'])) {
 			$search['s_day2'] = '';
@@ -725,17 +747,19 @@ class MoneyModel extends MY_Model
 			switch ($day) {
 				//今日
 				case 'day2':
-					$today = strtotime(date('Y-m-d'),time());
-					$start = $today - 86400;
+					$today = strtotime(date('Y-m-d H:i:s'),time());
+					//昨天0点
+					$start = strtotime(date('Y-m-d'.'00:00:00',time()-3600*24));
 					break;
 				//本周
 				case 'week2':
-					$today = strtotime(date('Y-m-d'),time());
-					$start = $today - (6*86400);
+					$today = strtotime(date('Y-m-d H:i:s'),time());
+					//本周第一天
+					$start = strtotime(date('Y-m-d', strtotime("this week Monday", time())));
 					break;
 				//本月
 				case 'month2':
-					$today = strtotime(date('Y-m-d'),time());
+					$today = strtotime(date('Y-m-d H:i:s'),time());
 					//本月第一天
 					$start = strtotime(date('Y-m-01'));
 					break;
@@ -758,7 +782,7 @@ class MoneyModel extends MY_Model
 	}
 
 	/**
-	 * @copyright 提现买家详情数据
+	 * @copyright 提现买家数据图表
 	 * @param     [type]       		[description]
 	 * @return    [type]        	[description]
 	 */
@@ -772,6 +796,9 @@ class MoneyModel extends MY_Model
 		$this->db->where('user_type = ',1);
 		//提现
 		$this->db->where('type = ',1);
+
+		//提现完成
+		$this->db->where('a.status = ',13);
 
 		if (!empty($search['s_start_time2']) && !empty($search['s_end_time2'])) {
 			$search['s_day2'] = '';
@@ -824,7 +851,7 @@ class MoneyModel extends MY_Model
 
 	public function getBuyerRecharge($search)
 	{
-		//提现金额统计
+		//充值金额统计
 		$this->db->select('money,create_time',FALSE);
 
 		$this->db->from('user_money');
@@ -833,6 +860,9 @@ class MoneyModel extends MY_Model
 		$this->db->where('user_type = ',1);
 		//充值
 		$this->db->where('type = ',2);
+
+		//充值成功
+		$this->db->where('status = ','13');
 
 		if (!empty($search['s_start_time']) && !empty($search['s_end_time'])) {
 			$search['s_day'] = '';
@@ -899,8 +929,12 @@ class MoneyModel extends MY_Model
 
 		//用户类型为买家
 		$this->db->where('a.user_type = ',1);
+
 		//充值
 		$this->db->where('a.type = ',2);
+
+		//充值成功
+		$this->db->where('a.status = ','13');
 
 		if (!empty($search['s_start_time2']) && !empty($search['s_end_time2'])) {
 			$search['s_day2'] = '';
@@ -1120,10 +1154,14 @@ class MoneyModel extends MY_Model
 
 		//1.统计买家提现的总金额
 		$this->db->select('sum(money) as mon',FALSE);
+
 		$this->db->from('user_money');
 
 		//操作类型为充值
 		$this->db->where('type = ' ,2);
+
+		//充值状态为成功
+		$this->db->where('status = ' ,13);
 
 		//用户类型为买家
 		$this->db->where('user_type = ',1);
@@ -1143,7 +1181,7 @@ class MoneyModel extends MY_Model
 
 		$tmp = [];
 
-		//2.统计卖家提现的总次数
+		//2.统计买家充值的总次数
 		$this->db->select('count(*) as times',FALSE);
 
 		$this->db->from('user_money');
@@ -1153,6 +1191,9 @@ class MoneyModel extends MY_Model
 		//用户类型为买家
 		$this->db->where('user_type = ',1);
 
+		//充值状态为成功
+		$this->db->where('status = ' ,13);
+
 		//今日数据
 		$this->db->where('create_time >= ',$today);
 
@@ -1161,15 +1202,15 @@ class MoneyModel extends MY_Model
 		$data['totalTimes'] = $tmp['times'];
 		$tmp = [];
 
-		//3.统计买家提现的总人数
+		//3.统计买家充值的总人数
 		$this->db->select('id',FALSE);
 		$this->db->from('user_money');
 
 		//操作类型为充值
 		$this->db->where('type = ' ,2);
 
-		//用户类型为买家
-		$this->db->where('user_type = ',1);
+		//充值状态为成功
+		$this->db->where('status = ' ,13);
 
 		//今日数据
 		$this->db->where('create_time >= ',$today);
@@ -1183,5 +1224,5 @@ class MoneyModel extends MY_Model
 		return $data;
 	}
 
-	
+
 }

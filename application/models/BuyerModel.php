@@ -178,8 +178,8 @@ class BuyerModel extends MY_Model
     {
         $this->db->select('count(a.id) num, b.username');
         $this->db->from('order a');
-        $this->db->where('a.id >',10);
-
+        //买家Id小于10是系统用户
+        $this->db->where('a.buyer_id >',10);
         $this->db->join('user b','b.id = a.buyer_id','left');
 
         //自选时间
@@ -199,12 +199,14 @@ class BuyerModel extends MY_Model
                 //今日
                 case 'day2':
                     $today = strtotime(date('Y-m-d H:i:s'), time());
-                    $start = $today - 86400;
+                    //昨天0点
+                    $start = strtotime(date('Y-m-d'.'00:00:00',time()-3600*24));
                     break;
                 //本周
                 case 'week2':
                     $today = strtotime(date('Y-m-d H:i:s'), time());
-                    $start = $today - (6 * 86400);
+                    //本周第一天
+                    $start = strtotime(date('Y-m-d', strtotime("this week Monday", time())));
                     break;
                 //本月
                 case 'month2':

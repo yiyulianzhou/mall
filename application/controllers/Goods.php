@@ -41,7 +41,6 @@ class goods extends MY_Controller
 			$input['id'] = $id;
 			$input['verify_time']   = time();
 			$input['verify_user'] = $this->user_session['uid'];
-
 			// 更新商品信息
 			$res = $this->model->update($input);
 			if ($res){
@@ -51,21 +50,6 @@ class goods extends MY_Controller
 		}
 		$this->returnResponse();
 	}
-    /**
-     * @copyright 商品下架
-     * @return    [state]      [description]
-     */
-    public function nosales()
-    {
-    	$categoryId = $this->input->get( 'categoryId' );
-    	$sales_type = $this->input->get( 'sales_type' );
-    	$orderBy = $this->input->get( 'orderBy' );
-    	$name = $this->input->get( 'name' );
-    	$id = $this->input->get( 'id' );
-    	$page = $this->input->get( 'per_page' );
-    	$res = $this->model->goodsNosales( $id );
-    	redirect("goods/index?per_page=$page&categoryId=$categoryId&sales_type=$sales_type&orderBy=$orderBy&name=$name");
-    }
 
 	/**
 	 * @copyright 商品顶部统计信息
@@ -220,9 +204,13 @@ class goods extends MY_Controller
 	{
 		$data = $this->input->post();
 
-		$this->response = $this->model->addCatedata($data);
-		if ($this->response){
-
+		$id = $this->model->addCatedata($data);
+		if ($id){
+			$this->response['msg_type']='success';
+			$this->response['message'] = '添加分类成功';
+		} else{
+			$this->response['msg_type']='failure';
+			$this->response['message'] = '添加分类失败';
 		}
 		$this->returnResponse();
 	}

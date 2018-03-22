@@ -134,7 +134,11 @@ class SellerModel extends MY_Model
 
         $this->db->from('order a');
 
-        $this->db->join('user_shop b','b.uid = a.sellers_id');
+        //订单状态为已完成
+
+        $this->db->where('a.status =',8);
+
+        $this->db->join('user_shop b','b.uid = a.sellers_id','left');
         //自选时间
         if (isset($search['s_start_time']) && isset($search['s_end_time']) && !empty($search['s_start_time']) && !empty($search['s_end_time'])){
             $search['s_day'] = '';
@@ -168,16 +172,19 @@ class SellerModel extends MY_Model
             }
 
         }
+
         //时间
         $this->db->where('a.create_time >=',$start);
         $this->db->where('a.create_time <=',$today);
 
         //订单金额按卖家分组
         $this->db->group_by('a.sellers_id');
+
         $this->db->order_by('mon','DESC');
         $this->db->limit(10);
 
         $res = $this->db->get()->result_array();
+
         $res['names'] = array_column($res,'realname');
         $res['mons'] = array_column($res,'mon');
 

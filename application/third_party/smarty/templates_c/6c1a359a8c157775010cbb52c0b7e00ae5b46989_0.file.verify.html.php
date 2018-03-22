@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-15 14:12:35
+/* Smarty version 3.1.30, created on 2018-03-19 16:30:57
   from "D:\wamp64\www\mall_manage\application\views\goods\verify.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aaa0ed39b31c8_50085341',
+  'unifunc' => 'content_5aaf75415b0814_14601699',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6c1a359a8c157775010cbb52c0b7e00ae5b46989' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\goods\\verify.html',
-      1 => 1521094351,
+      1 => 1521448139,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aaa0ed39b31c8_50085341 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aaf75415b0814_14601699 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div id="verify_modal" class="modal fade">
     <div class="modal-dialog  modal-lg">
@@ -78,12 +78,12 @@ function content_5aaa0ed39b31c8_50085341 (Smarty_Internal_Template $_smarty_tpl)
                         </div>
                     </div>
                     <div class="form-group mn pv10 br-b">
-                        <label class="control-label col-sm-3">审核结果</label>
+                        <label class="control-label col-sm-3">审核结果1</label>
                         <div class="col-sm-9" style="padding-top:8px">
                             <div class="col-sm-4">
                                 <div class="radio">
                                     <label>
-                                        <input  type="radio"  ng-model="verify_state" value="{{fullData.verify_value}}" checked="checked"> 审核通过
+                                        <input  type="radio" ng-model="verify_state" value="{{fullData.verify_value}}"> 审核通过
                                     </label>
                                 </div>
                             </div>

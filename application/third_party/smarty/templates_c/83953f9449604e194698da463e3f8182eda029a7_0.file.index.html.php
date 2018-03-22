@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-15 18:12:12
+/* Smarty version 3.1.30, created on 2018-03-21 15:15:11
   from "D:\wamp64\www\mall_manage\application\views\home\index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aaa46fc2f9982_03724941',
+  'unifunc' => 'content_5ab2067fba4e59_21666587',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '83953f9449604e194698da463e3f8182eda029a7' => 
     array (
       0 => 'D:\\wamp64\\www\\mall_manage\\application\\views\\home\\index.html',
-      1 => 1521108729,
+      1 => 1521612923,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../public/footer.html' => 1,
   ),
 ),false)) {
-function content_5aaa46fc2f9982_03724941 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab2067fba4e59_21666587 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -51,7 +51,7 @@ $_smarty_tpl->_subTemplateRender("file:../public/header.html", $_smarty_tpl->cac
 			<!-- Content area -->
 			<div class="content">
 				<div class="row">
-					<div class=" col-md-12">
+					<div class="col-md-12">
 						<div class="panel panel-flat">
 							<div class="panel-heading">
 								<h6 class="panel-title">今日数据<span class="pull-right"><?php echo date('Y-m-d');?>
@@ -115,75 +115,77 @@ goods/index">
 							</div>
 
 						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="panel panel-primary col-md-6">
-						<div class="panel-heading">
-							<span class="panel-title">您有{{total_rows}}条用户反馈请及时处理</span>
-						</div>
-						<div class="panel-body ">
-							<div class="topRec_List">
-								<div class= "maquee">
-									<ul>
-										<li ng-repeat="item in list track by $index">
-											<div class="col-md-10 pt5">{{item.time*1000|date:'yyyy-MM-dd HH:mm'}}&nbsp;&nbsp;{{item.username}}申请提现{{item.body}}</div>
-											<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money']['buyer'])) {?>
-											<div class="col-md-2 "><a class="btn" href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-money/buyer">处理</a></div>
-											<?php } else { ?>
-											<div class="col-md-2 "><a class="btn" href="#">&nbsp;&nbsp;</a></div>
-											<?php }?>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="panel-footer">
-						</div>
-					</div>
 
-					<div class="panel panel-primary col-md-6">
-						<div class="panel-heading">
-							<span class="panel-title">您有{{total_rows2}}条提现申请请及时处理</span>
-						</div>
-						<div class="panel-body" >
-							<div class="topRec_List">
-								<div class= "maquee">
-									<ul>
-										<li ng-repeat="item in applylist track by $index">
-											<div class="col-md-10 pt5">{{item.create_time*1000|date:'yyyy-MM-dd HH:mm'}}&nbsp;&nbsp;{{item.username}}申请提现{{item.money}}元</div>
-											<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money']['buyer'])) {?>
-											<div class="col-md-2 "><a class="btn" href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
+
+							<div class='row col-md-12' ng-if="total_rows>0 || total_rows2>0">
+								<div class="panel panel-primary col-md-6" ng-if="total_rows>0">
+									<div class="panel-heading">
+										<span class="panel-title">您有{{total_rows}}条用户反馈请及时处理</span>
+									</div>
+									<div class="panel-body ">
+										<div class="topRec_List">
+											<div class= "maquee">
+												<ul>
+													<li ng-repeat="item in list track by $index">
+														<div class="col-md-10 pt5">{{item.time*1000|date:'yyyy-MM-dd HH:mm'}}&nbsp;&nbsp;{{item.username}}申请提现{{item.body}}</div>
+														<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money']['buyer'])) {?>
+														<div class="col-md-2 "><a class="btn" href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
 money/buyer">处理</a></div>
-											<?php } else { ?>
-											<div class="col-md-2 "><a class="btn" href="#">&nbsp;&nbsp;</a></div>
-											<?php }?>
-										</li>
-									</ul>
+														<?php } else { ?>
+														<div class="col-md-2 "><a class="btn" href="#">&nbsp;&nbsp;</a></div>
+														<?php }?>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="panel-footer">
+									</div>
 								</div>
-							</div>
-						</div>
-						<div class="panel-footer">
-						</div>
-					</div>
-					<?php echo '<script'; ?>
+
+								<div class="panel panel-primary col-md-6" ng-if="total_rows2>0">
+									<div class="panel-heading">
+										<span class="panel-title">您有{{total_rows2}}条提现申请请及时处理</span>
+									</div>
+									<div class="panel-body" >
+										<div class="topRec_List">
+											<div class= "maquee">
+												<ul>
+													<li ng-repeat="item in applylist track by $index">
+														<div class="col-md-10 pt5">{{item.create_time*1000|date:'yyyy-MM-dd HH:mm'}}&nbsp;&nbsp;{{item.username}}申请提现{{item.money}}元</div>
+														<?php if (isset($_smarty_tpl->tpl_vars['data']->value['permission_tree']['money']['seller'])) {?>
+														<div class="col-md-2 "><a class="btn" href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
+money/seller">处理</a></div>
+														<?php } else { ?>
+														<div class="col-md-2 "><a class="btn" href="#">&nbsp;&nbsp;</a></div>
+														<?php }?>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="panel-footer">
+									</div>
+								</div>
+								<?php echo '<script'; ?>
  type="text/javascript">
-						function autoScroll(obj){
-							$(obj).find("ul").animate({
-								marginTop : "-38px"
+									function autoScroll(obj){
+										$(obj).find("ul").animate({
+											marginTop : "-38px"
 
-							},500,function(){
-								$(this).css({marginTop : "0px"}).find("li:lt(2)").appendTo(this);
-							})
-						}
-						$(function(){
-							setInterval('autoScroll(".maquee")',3000);
-						})
-					<?php echo '</script'; ?>
+										},500,function(){
+											$(this).css({marginTop : "0px"}).find("li:lt(2)").appendTo(this);
+										})
+									}
+									$(function(){
+										setInterval('autoScroll(".maquee")',5000);
+									})
+								<?php echo '</script'; ?>
 >
-				</div>
-				<div class="row">
+
+							</div>
+
+
 					<div class="panel panel-danger col-md-6">
 
 						<div class="panel-heading">
@@ -206,8 +208,8 @@ money/buyer">处理</a></div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row">
+
+
 					<div class="panel panel-warning col-md-6">
 						<div class="panel-heading">
 							<span class="panel-title">商品Top5</span>
@@ -227,6 +229,7 @@ money/buyer">处理</a></div>
 								<div class="chart has-fixed-height" id="stacked4_lines"></div>
 							</div>
 						</div>
+					</div>
 					</div>
 				</div>
 				<!-- /content area -->

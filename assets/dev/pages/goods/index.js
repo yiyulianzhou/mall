@@ -217,8 +217,25 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
         // 更新的数据
         formData.verify_remark = $scope.verify_remark;
         formData.state = $scope.verify_state;
+
+
+
+
+
         // 请求更新数据开始
         appFactory.loadingToggle(1);
+        sweetAlert({
+            title: "审核商品",
+            text: "确认审核吗",
+            type: "info",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        }, function() {
+            if (formData.state==undefined){
+                formData.state = $scope.fullData.sales_type==1 ? 5 : 90;
+            }
+
         $http({
             url: common.verifys_url + $scope.id,
             method: 'POST',
@@ -239,8 +256,10 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
             appFactory.loadingToggle(0);
         });
         // 请求结束
+        });
 
     };
+
 
     // Echat 设置，配置Echats相关文件路径
     // ------------------------------

@@ -130,9 +130,6 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
             //商品数量
             $scope.fullData.goods_num = response.item.goods_num;
 
-            //商铺数量
-            $scope.fullData.shop_num = response.item.shop_num;
-
             //分类状态
             $scope.fullData.state = response.item.state;
 
@@ -144,8 +141,9 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
     };
 
     /*
-     * 添加数据
+     * 添加分类
      */
+
     $scope.save = function() {
         var formData = {};
         //添加的数据
@@ -155,28 +153,50 @@ app.controller('appCtrl', ['$scope', '$http','appService', 'appFactory','common'
         formData.info = $scope.info;
         //是否开放
         formData.state = $scope.state;
-
-        // 请求添加数据开始
-        appFactory.loadingToggle(1);
-        $http({
-            url: common.addCate_url,
-            method: 'POST',
-            data: $.param(formData),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        }).success(function(response) {
-            // 信息弹出框
-            appFactory.simpleAlert(response);
-
-            // 添加成功需更新list中的数据
-            if (response.msg_type == 'success') {
-                // 隐藏模态框
-                $('#cate_modal').modal('hide');
-                $('#cateInfo_modal').modal('hide');
-                $scope.changePager($scope.curpage, '');
-            }
-            appFactory.loadingToggle(0);
+        sweetAlert({
+            title: "新增活动",
+            text: "确定要新增活动吗",
+            type: "info",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        }, function() {
+            $http({
+                url: common.addCate_url,
+                method: 'POST',
+                data: $.param(formData),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).success(function(response) {
+                // 新增成功
+                if (response.msg_type == 'success') {
+                    // 初始化不要放到sweetAlert中执行
+                    formInit();
+                    sweetAlert({
+                        title: "新增成功",
+                        text: "继续新增分类还是返回列表",
+                        type: "success",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "继续新增",
+                        cancelButtonText: "返回列表",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    }, function(isConfirm) {
+                        // 是否新增用户
+                        if (isConfirm) {
+                            // 跳转到编辑用户
+                            window.location.href = common.cate;
+                        }else{
+                            // 跳转到列表
+                            window.location.href = common.cate;
+                        }
+                    });
+                } else {
+                    // 信息弹出框
+                    appFactory.simpleAlert(response);
+                }
+            });
         });
-        // 请求结束
     };
 
 }]);
